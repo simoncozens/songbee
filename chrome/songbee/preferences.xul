@@ -1,0 +1,51 @@
+<?xml version="1.0"?> 
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+<?xml-stylesheet href="chrome://songbee/content/css/fileinput.css" type="text/css"?>
+<!DOCTYPE window [
+<!ENTITY % SongbeeDTD SYSTEM "chrome://songbee/locale/songbee.dtd" >
+%SongbeeDTD;
+<!ENTITY % findBarDTD SYSTEM "chrome://songbee/locale/findbar.dtd" >
+%findBarDTD;
+<!ENTITY % PreferencesDTD SYSTEM "chrome://songbee/locale/preferences.dtd" >
+%PreferencesDTD;
+]>
+
+<window id="preferences" title="Preferences"
+  xmlns:html="http://www.w3.org/1999/xhtml"
+  minheight="800" minwidth="600"
+  xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+  onload="fillFontMenu(document.getElementById('.line.font-family'));addUserStylesheet(document.getElementById('preview').contentDocument);slowlyfillvalues();">
+<script src="chrome://songbee/content/dom-css.js"/>
+<script src="chrome://songbee/content/songbee-sql.js"/>
+<script src="chrome://songbee/content/preferences.js"/>
+<keyset>
+  <key id="close_cmd" keycode="VK_ESCAPE" oncommand="window.close();"/>
+</keyset>
+    <hbox flex="1">
+        <vbox flex="1">
+            <html:h2> Background </html:h2>
+            <label control="body.background-color">Color</label> <colorpicker id="body.background-color" type="button"/>
+            <hbox>
+            <label>Image</label> 
+            <box class="fileinput" onchange="setbackground(this)" id="filebox"/>
+            <textbox id="body.background-image" hidden="true"/>
+            <button label="Clear" oncommand="setbackground(null)"/>
+            </hbox>
+            <html:h2> Text </html:h2>
+            <label control=".line.font-family">Font</label> <menulist id=".line.font-family"/>
+            <label control=".line.font-size">Size</label> <textbox id=".line.font-size"/>
+            <label control=".line.font-family">Line Height</label> <textbox id=".line.line-height"/>
+            <label control=".line.color">Color</label> <colorpicker id=".line.color" type="button"/>
+            <spacer flex="1"/>
+        <hbox>
+            <button label="&songbee.cancel;" oncommand="window.close();"/>
+            <spacer flex="1"/>
+            <button label="Reset" oncommand="if(window.confirm('Really reset?')) reset();"/>
+            <spacer flex="1"/>
+            <button label="&songbee.save;" oncommand="savechanges();"/>
+        </hbox>
+    </vbox>
+        <splitter/>
+        <iframe id="preview" name="preview" src="chrome://songbee/content/prefs-test.html" flex="1"/>
+    </hbox>
+</window>

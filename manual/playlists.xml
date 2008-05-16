@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.2//EN"
+          "/sw/share/xml/dtd/docbookx/4.2.0/docbookx.dtd">
+<chapter>
+  <title>Managing Playlists</title>
+  <para>
+    A <firstterm>playlist</firstterm> is a collection of songs to be
+    played in a worship session. Songbee currently assumes that the
+    list of songs is known before the worship begins. Using Songbee
+    has two phases: creating and editing the playlist before worship,
+    and moving between the songs during the worship time.
+  </para>
+  <sect1>
+    <title>The playlist interface</title>
+    <para>
+    When Songbee starts, you will see a window like this:
+    </para>
+    <figure>
+      <title>Playlist list</title>
+      <mediaobject>
+	<imageobject>
+	  <imagedata width="200" fileref="images/playlist-list.png"/>
+	</imageobject>
+      </mediaobject>
+    </figure>
+    <para>
+    This shows all the playlists in your library, together with the
+songs in each playlist. At the top of the window are three toolbuttons:
+    </para>
+    <variablelist>
+      <varlistentry>
+	<term><command>Add Playlist</command></term>
+	<listitem>
+	  <para>
+            This creates a new playlist, prompts you for a name, and
+            takes you to the <link linkend="playlist.editor">playlist
+            editor</link>.
+          </para>
+	</listitem>
+      </varlistentry>
+      <varlistentry>
+	<term><command>Add Song</command></term>
+	<listitem>
+	  <para>
+            This creates a new song, and takes you to the <link
+            linkend="song.editor">song editor.</link>
+</para>
+	</listitem>
+      </varlistentry>
+      <varlistentry>
+	<term><command>Import songs</command></term>
+	<listitem>
+	  <para>
+            This allows you to import songs from a Songbee song
+            library file; that is to say, if you have a file
+            containing additional songs in Songbee format, this option
+            will add them to your database.
+</para>
+	</listitem>
+      </varlistentry>
+    </variablelist>
+    <para>
+      Alongside each playlist's title are three buttons:
+      <command>Go</command> will take you to the main "live"
+      screen; <command>Edit</command> will take you to the playlist
+      editor for this playlist; <command>Delete</command> will delete
+      the playlist from the system. It does not delete the songs from
+      the database, just the running order for an occasion.
+    </para>
+  </sect1>
+  <sect1 id="playlist.editor">
+    <title>Playlist Editor</title>
+    <para>
+      The playlist editor is where you put together the list of songs
+      that are going to be used in the worship time. The playlist
+      editor shows the current songs in the playlist, and the avaiable
+      songs, like this:
+    </para>
+    <figure>
+      <title>Playlist editor</title>
+      <mediaobject>
+	<imageobject>
+	  <imagedata width="200" fileref="images/playlist-edit.png"/>
+	</imageobject>
+      </mediaobject>
+    </figure>
+    <para>
+     The playlist editor consists of the following features: the
+current playlist, on the left; the list of available songs, on the
+right; the preview pane, displaying the currently chosen song, below
+the song list; at the bottom, the search bar.
+    </para>
+    <sect2>
+      <title>Creating a playlist</title>
+    <para>
+      To construct the playlist, find the song you want in the song
+list. You'll see a preview of the currently selected song in the song list.
+To add the song to your playlist, double-click on the song in the song list.
+    </para>
+      <para>
+      You can re-order your playlist by dragging songs up and down the
+list. To remove a song from the playlist, click on it to select it,
+and press the <keycap>Delete</keycap> key.
+      </para>
+    </sect2>
+    <sect2>
+      <title>Searching for a song</title>
+      <para>
+       To find a song in the song list, you may either scroll through,
+       or use the search interface at the bottom of the window. To use
+       this, type in part of the song you are looking for, and Songbee
+       will narrow down the song list to only include songs that match
+your search. Songbee uses the following strategies to find your song:
+</para>
+      <itemizedlist>
+	<listitem>
+	  <para>First, it looks for songs with your search text in the
+title.</para>
+	</listitem>
+	<listitem>
+	  <para>If no songs match, then it looks for songs with your
+search text in the first line.</para>
+	</listitem>
+	<listitem>
+	  <para>Finally, it searches for songs which contain the
+search text anywhere in their lyrics</para>
+	</listitem>
+      </itemizedlist>
+      <para>
+       Songbee's search function generally does what you want, so if
+you cannot find the song you are looking for, keep typing in words
+until it appears in the song list.
+</para>
+    </sect2>
+  </sect1>
+</chapter>

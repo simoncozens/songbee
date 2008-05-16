@@ -1,0 +1,39 @@
+    <song>
+        <head>
+            <title>The Solid Rock</title>
+            <copyright>
+                <author>William Mote</author>
+            </copyright>
+            <key>D</key>
+        </head>
+        <lyrics>
+            <verse>
+            <line>My <sup text="C">hope</sup> is built on nothing less</line>
+            <line>Than Jesus' blood and righteousness,</line>
+            <line>No merit of my own I claim, </line>
+            <line>but wholly trust in Jesus' name,</line>
+            </verse>
+            <chorus>
+                <line>On Christ the solid rock I stand,</line>
+                <line>All other ground is sinking sand.</line>
+            </chorus>
+            <verse>
+            <line>When weary in this earthly race,</line>
+            <line>I rest on his unchanging grace,</line>
+            <line>Through every wild and stormy gale, </line>
+            <line>My anchor holds and will not fail</line>
+            </verse>
+            <verse>
+            <line>His vow, his covenant and blood</line>
+            <line>Are my defence against the flood,</line>
+            <line>When earthly hopes are swept away,</line>
+            <line>He will uphold me on that day</line>
+            </verse>
+            <verse>
+                <line>When the last trumpet's call shall sound,</line>
+                <line>Oh may I then in Him be found, </line>
+                <line>Clothed in His righteousness alone, </line>
+                <line>Faultless to stand before His throne. </line>
+            </verse>
+        </lyrics>
+    </song>

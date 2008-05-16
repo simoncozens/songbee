@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.2//EN"
+          "/sw/share/xml/dtd/docbookx/4.2.0/docbookx.dtd">
+<chapter>
+  <title>The Live Interface</title>
+  <para>
+    When you click <command>Go</command> on a playlist, you are
+    taken to Songbee's "live" interface. This consists of two
+    windows. The first window should appear on your projector.
+  </para>
+  <note>
+    <para>It <emphasis>should</emphasis> appear on your projector. At
+    the moment, it won't, and you have to drag it there
+    manually. We're working on this.
+    </para>
+  </note>
+  <para>
+   The second window is the <firstterm>live console</firstterm>. It
+looks like this:
+  </para>
+  <figure>
+    <title>The live console</title>
+    <mediaobject>
+      <imageobject>
+	<imagedata width="200" fileref="images/live-console.png"/>
+      </imageobject>
+    </mediaobject>
+  </figure>
+  <para>
+    On the left you see the current song. The portion in blue is
+    currently visible on the projector. Usually this covers an entire
+    verse, but when the verse is longer than one screenful, as in the
+    example above, only the visible lines are highlighted.
+</para>
+  <para>
+    The next song in the playlist is displayed on the right, and under
+    that, the current playlist. At the bottom of the window are the
+    buttons for controlling Songbee with the mouse.
+  </para>
+  <sect1>
+    <title>Navigating with keystrokes</title>
+    <para>
+     However, the recommended way of controlling Songbee is with the
+keyboard. Even if you are used to using your mouse to control your
+computer, you will find that using the keyboard allows you to move to
+the right portion of the right song much more quickly in reaction to
+things that your worship leader may unexpectedly do!
+    </para>
+    <para>
+     Here are the keys used to control Songbee:
+    </para>
+    <variablelist>
+      <varlistentry>
+	<term><keycap>&#x2190;</keycap></term>
+	<listitem>
+	  <para>Go to the previous song in the playlist.</para>
+	</listitem>
+      </varlistentry>
+      <varlistentry>
+	<term><keycap>&#x2192;</keycap></term>
+	<listitem>
+	  <para>Go to the next song in the playlist.</para>
+	</listitem>
+      </varlistentry>
+      <varlistentry>
+	<term><keycap>&#x2191;</keycap></term>
+	<listitem>
+	  <para>This will return to the previous verse, chorus or
+bridge within the current song.</para>
+	</listitem>
+      </varlistentry>
+      <varlistentry>
+	<term><keycap>&#x2193;</keycap></term>
+	<listitem>
+	  <para>If, as in the example above, only a portion of the
+	  lines of a verse can fit on the projector display, this key
+	  (cursor down) will scroll down the verse. Once the last line
+	  is displayed, or if the entire verse can fit on the display
+	  at once, then this key will jump to the next portion of the
+	  song shown in the left-hand pane.</para>
+	</listitem>
+      </varlistentry>
+      <varlistentry>
+	<term><keycap>PgDn</keycap></term>
+	<listitem>
+	  <para>Page down will jump, rather than scroll, to the next
+portion of the verse to be displayed.</para>
+	</listitem>
+      </varlistentry>
+      <varlistentry>
+	<term><keycap>1</keycap>, <keycap>2</keycap>, <keycap>3</keycap>, etc.</term>
+	<listitem>
+	  <para>Jump to the corresponding verse of the current song.</para>
+	</listitem>
+      </varlistentry>
+      <varlistentry>
+	<term><keycap>v</keycap>, <keycap>c</keycap>, <keycap>b</keycap></term>
+	<listitem>
+	  <para>Jump to the next verse, chorus or bridge. A <firstterm>chorus</firstterm> is displayed in the console in a slightly narrower margins than a verse; a <firstterm>bridge</firstterm> is displayed in italics.</para>
+	</listitem>
+      </varlistentry>
+      <varlistentry>
+	<term><keycap>Esc</keycap></term>
+	<listitem>
+	  <para>The escape key "pauses" the display, removing the text
+	  from the projector. The highlight in the current song pane
+	  turns from blue to yellow to remind you that the display is
+	  paused. Pressing escape again will unpause the display; you
+	  may change to a difference verse or a different song while
+	  the display is paused.</para>
+	</listitem>
+      </varlistentry>
+    </variablelist>
+  </sect1>
+  <sect1>
+    <title>Navigating with the mouse</title>
+    <para>
+      If you must navigate with the mouse, you can use the left and
+      right buttons at the bottom of the screen to change songs; you
+      may also click on a song in the song list to jump to that song
+      directly. Clicking on a portion of a song in the left-hand
+      window will cause Songbee to display that portion.
+    </para>
+  </sect1>
+</chapter>

@@ -1,0 +1,9 @@
+<!ENTITY playlistList.addPlaylist    "Add Playlist">
+<!ENTITY playlistList.addSong   "Add Song">
+<!ENTITY playlistList.deleteSong "Delete Song">
+
+<!ENTITY playlistList.worship "Go">
+<!ENTITY playlistList.newPlaylistName    "New playlist name?">
+
+<!ENTITY playlistList.deletePlaylist "Delete this playlist?">
+<!ENTITY playlistList.permanentDelete "Are you SURE you want to remove this playlist permanently from the database?">

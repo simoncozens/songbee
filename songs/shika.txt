@@ -1,0 +1,17 @@
+<song>
+<head>
+<title>鹿のように</title>
+</head>
+<lyrics>
+<verse>
+<line><sup text="たに">谷</sup><sup text="がわ">川</sup>の<sup text="なが">流</sup>れを<sup text="した">慕う</sup><sup text="しか">鹿M</sup>のように</line>
+<line><sup text="しゅう">主</sup>よ<sup text="わ">我</sup>がたましいあなたを<sup text="した">慕う</sup></line>
+</verse>
+<chorus>
+<line>あなたこそ<sup text="わ">我</sup>が<sup text="たて">楯</sup></line>
+<line>あなたこそ<sup text="わ">我</sup>が<sup text="ちから">力</sup></line> 
+<line>あなたこそ<sup text="わ">我</sup>が<sup text="のぞみ">望み</sup></line>
+<line>我れは<sup text="しゅう">主</sup>を<sup text="あお">仰</sup>ぐ</line>
+</chorus>
+</lyrics>
+</song>

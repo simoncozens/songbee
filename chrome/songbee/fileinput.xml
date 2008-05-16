@@ -1,0 +1,115 @@
+<?xml version="1.0"?>
+<bindings xmlns="http://www.mozilla.org/xbl" xmlns:xul="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+ <binding id="fileinput">
+   <content>
+     <xul:textbox flex="1" readonly="true"/>
+     <xul:button label="Browse..."/>
+   </content>
+   
+   <implementation>
+     <constructor><![CDATA[
+         var textbox = document.getAnonymousNodes(this)[0];
+         var button = document.getAnonymousNodes(this)[1];
+         textbox.thefile = null;
+         var fileinput = this;
+
+         var pickFunc = function pickFile() {
+           netscape.security.PrivilegeManager.enablePrivilege("UniversalXPConnect");
+           var nsIFilePicker = Components.interfaces.nsIFilePicker;
+           var fp = Components.classes["@mozilla.org/filepicker;1"].createInstance(nsIFilePicker);
+           fp.init(window, "Select a File", nsIFilePicker.modeOpen);
+           fp.appendFilters( nsIFilePicker.filterAll );
+           var res = fp.show();
+           if (res == nsIFilePicker.returnOK) {
+             textbox.thefile = fp.file;
+             textbox.value = textbox.thefile.path;
+             fileinput._fireEvent(fileinput, "change");
+           } else {
+             textbox.thefile = null;
+             textbox.value = "";
+           }
+         }
+         button.addEventListener("command", pickFunc, false);
+     ]]></constructor>
+
+        <method name="clear">
+        <body>
+        <![CDATA[
+         var textbox = document.getAnonymousNodes(this)[0];
+         textbox.value = "";
+         textbox.thefile = null;
+        ]]>
+        </body>
+        </method>
+
+        <method name="_fireEvent">
+          <parameter name="aTarget"/>
+          <parameter name="aEventName"/>
+          <body>
+          <![CDATA[      
+            try {
+              var event = document.createEvent("Events");
+              event.initEvent(aEventName, false, true);
+              var cancel = !aTarget.dispatchEvent(event);
+              if (aTarget.hasAttribute("on" + aEventName)) {
+
+               var fn = new Function ("event", aTarget.getAttribute("on" + aEventName));
+                var rv = fn.call(aTarget, event);
+
+                if (rv == false)
+                  cancel = true;
+
+              }
+
+              return !cancel;  
+            }
+            catch (e) { 
+              dump(e);
+
+            }
+
+            return false;
+          ]]>
+          </body>
+
+        </method>
+
+     <property name="fileName" readonly="true">
+       <getter><![CDATA[
+           var textbox = document.getAnonymousNodes(this)[0];
+           return textbox.thefile;
+       ]]></getter>
+     </property>
+     <property name="inputText" readonly="true">
+       <getter><![CDATA[
+           var textbox = document.getAnonymousNodes(this)[0];
+           if (textbox.thefile != null) {
+             netscape.security.PrivilegeManager.enablePrivilege("UniversalXPConnect");
+             var is = Components.classes["@mozilla.org/network/file-input-stream;1"]
+               .createInstance( Components.interfaces.nsIFileInputStream );
+             var sstream = Components.classes["@mozilla.org/scriptableinputstream;1"]
+                .createInstance(Components.interfaces.nsIScriptableInputStream);
+
+             is.init( textbox.thefile, 0x01, 00004, null);
+             sstream.init(is);
+
+             var data = "";
+             var count = 0;
+
+             while (sstream.available() > 0) {
+               count = sstream.available();
+               if (count > 2048) {
+                 count = 2048;
+               }
+               data += sstream.read(count);
+             }
+             return data;
+           } else {
+             return "";
+           }
+       ]]></getter>
+     </property>
+   </implementation>
+ </binding>
+</bindings>
+

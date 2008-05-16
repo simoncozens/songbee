@@ -1,0 +1,143 @@
+<chapter>
+  <title>Introduction to Songbee</title>
+  <para>
+      Songbee is an application designed to be used in churches for
+      the projection of worship song lyrics. Instead of using hymn
+      books, churches can use a data projector and a computer running
+      Songbee to display the words to hymns and songs.
+  </para>
+  <para>
+      Songbee is particularly designed for the Japanese church. It
+      handles Japanese text, and particularly the display of
+      <foreignphrase>furigana</foreignphrase>, in ways that other
+      similar applications (Easislides, openlp.org, Opensong and
+      Lyricue) do not.
+  </para>
+  <sect1>
+    <title>Requirements</title>
+    <para>
+      In order to use Songbee, you will need to have a dual-monitor
+      set up. That is to say, your computer must be able to send video
+      to two different monitors: one will be your ordinary
+      workstation, and the second will be a projector or
+      closed-circuit television system to display the lyrics to your
+      congregation. 
+    </para>
+    <para>
+      If you have a laptop, you normally have the ability to plug in
+      an external monitor - plug your projector into the monitor
+      output. If you have a desktop PC, you may need to install a
+      second video card. Once you have done this and plugged the
+      projector into the second output, you will need to configure
+      your operating system to display in multi-monitor mode. 
+    </para>
+    <variablelist>
+      <varlistentry>
+	<term>Windows</term>
+	<listitem>
+	  <para>For Windows computers, follow these steps to turn on
+multiple monitor support:</para>
+	  <orderedlist>
+	    <listitem>
+	      <para>Right-click on the desktop.</para>
+	    </listitem>
+	    <listitem>
+	      <para>Click the <command>Settings</command> tab.</para>
+	    </listitem>
+	    <listitem>
+	      <para>Click the <command>Display</command> list and
+select the second monitor.</para>
+	    </listitem>
+	    <listitem>
+	      <para>Select <command>Extend my Windows desktop onto
+this monitor</command> and click <command>OK</command>.</para>
+	    </listitem>
+	  </orderedlist>
+          <para>Note that on some brands of laptop the above
+            instructions do not work and you will need to use the
+            software that comes with the laptop.</para>
+	</listitem>
+      </varlistentry>
+      <varlistentry>
+	<term>Mac OS X</term>
+	<listitem>
+	  <para>On a Macintosh:</para>
+	  <orderedlist>
+	    <listitem>
+	      <para>Open <application>System
+Preferences</application>.</para>
+	    </listitem>
+	    <listitem>
+	      <para>Click on the <command>Displays</command>
+icon.</para>
+	    </listitem>
+            <listitem>
+	      <para>Click the <command>Detect Displays</command> button</para>
+	    </listitem>
+	    <listitem>
+	      <para>Turn off display mirroring.</para>
+	    </listitem>
+	  </orderedlist>
+	</listitem>
+      </varlistentry>
+    </variablelist>
+  </sect1>
+  <sect1>
+    <title>Features</title>
+    <itemizedlist>
+      <listitem>
+	<para>Compilation of custom playlists</para>
+      </listitem>
+      <listitem>
+	<para>Easy to set up, and available on many platforms</para>
+      </listitem>
+      <listitem>
+	<para>Ability to create and edit songs</para>
+      </listitem>
+      <listitem>
+	<para>Ability to import and export databases of songs</para>
+      </listitem>
+    </itemizedlist>
+  </sect1>
+  <sect1>
+    <title>Future Features</title>
+    <para>
+      While Songbee does not intend to compete with some of the more
+established projects mentioned above, the following features are
+anticipated in future releases:
+</para>
+    <itemizedlist>
+      <listitem>
+	<para>Ability to select alternative song databases</para>
+      </listitem>
+      <listitem>
+	<para>Customization of the main worship display</para>
+      </listitem>
+      <listitem>
+	<para>Export song lyrics as Microsoft Word document</para>
+      </listitem>
+      <listitem>
+	<para>Drag-and-drop interface to adding songs to the playlist</para>
+      </listitem>
+    </itemizedlist>
+    <para>
+      It is unlikely that Songbee will support display of Powerpoint or
+      multimedia files, but Powerpoint can be run at the same time as
+      songbee, and if you start a powerpoint show it will open over the top
+      of songbee's output.
+    </para>
+  </sect1>
+  <sect1>
+    <title>Technical details</title>
+    <para>
+      Songbee is implemented in XUL and Javascript using the Mozilla
+      platform, the same platform used by Firefox and Thunderbird, and
+      so would run on any operating system supported by Mozilla. The
+      database of songs and playlists are stored in an SQLite database
+      using the <classname>storage</classname> extension; once a user
+      runs Songbee for the first time, Songbee creates a profile
+      directory for them and copies in a SQLite database
+      file. Individual songs are stored in a custom XML format.
+    </para>
+  </sect1>
+</chapter>

@@ -1,0 +1,71 @@
+<chapter>
+  <title>Managing Song Databases</title>
+  <para>
+  </para>
+  <sect1 id="song.editor">
+    <title>Adding and editing songs</title>
+    <para>
+      To add a new song, click on the "add song" toolbutton at the top
+      of the main playlist window. You can edit an existing song by
+right-clicking<footnote>
+	<para>
+(Mac: <keycap>Ctrl</keycap>-clicking.
+</para>
+      </footnote>
+      on the song name while editing a playlist:
+    </para>
+    <figure>
+      <title>Editing an existing song</title>
+      <mediaobject>
+	<imageobject>
+	  <imagedata width="200" fileref="images/edit-popup.png"/>
+	</imageobject>
+      </mediaobject>
+    </figure>
+    <para>
+     Once you have selected a song to edit, or chosen "Add Song", you
+     will be taken to the song editor window. The song editor window
+     looks like this:
+    </para>
+    <figure>
+      <title>Editing an existing song</title>
+      <mediaobject>
+	<imageobject>
+	  <imagedata width="350" fileref="images/edit-song.png"/>
+	</imageobject>
+      </mediaobject>
+    </figure>
+    <para>
+     This consists of two parts; the right hand part is an
+automatically-generated preview. The left part is where you enter all
+the details of the current song: its title, key, year, and so on. The
+box at the bottom is where you enter the lyrics. The lyrics are
+entered using a couple of conventions:
+    </para>
+    <itemizedlist>
+      <listitem>
+	<para> Verses, choruses and bridges are entered as paragraphs,
+with a blank line separating them. Lines breaks are preserved inside a
+verse. To begin a chorus or bridge, the first line should be
+"<userinput>Chorus:</userinput>" or "<userinput>Bridge:</userinput>"
+respectively, with the text of the chorus/bridge immediately following
+and with no blank line in between.
+        </para>
+      </listitem>
+      <listitem>
+	<para>When entering Japanese furigana, do so like this:
+<userinput>(&#x6F22;|&#x304B;&#x3093;)</userinput>. That is to say, place
+the expression in brackets; put the main text first, then a pipe sign
+(|), and then the furigana. The furigana will be displayed above the
+main text. You should be able to see this on the preview.</para>
+      </listitem>
+    </itemizedlist>
+  </sect1>
+  <sect1>
+    <title>Importing and exporting songs</title>
+    <para>
+     This doesn't work yet, but when it does, I'll be sure to document
+it!
+    </para>
+  </sect1>
+</chapter>

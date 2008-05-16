@@ -1,0 +1,9 @@
+<!ENTITY playlistList.addPlaylist    "新しいプレイリスト">
+<!ENTITY playlistList.addSong   "新しい歌">
+<!ENTITY playlistList.deleteSong "歌を消す">
+
+<!ENTITY playlistList.worship "礼拝">
+<!ENTITY playlistList.newPlaylistName    "プレイリストの名">
+
+<!ENTITY playlistList.deletePlaylist "このプレイリストを消す?">
+<!ENTITY playlistList.permanentDelete "本当にデータベースから恒久不変で消す？">

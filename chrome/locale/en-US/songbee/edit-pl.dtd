@@ -1,0 +1,11 @@
+<!ENTITY editPlaylist.title      "Edit Playlist">
+<!ENTITY editPlaylist.addToPl    "Add To Playlist">
+<!ENTITY editPlaylist.editSong   "Edit Song">
+<!ENTITY editPlaylist.deleteSong "Delete Song">
+
+<!ENTITY editPlaylist.exitUnsaved "Exit with unsaved changes">
+<!ENTITY editPlaylist.loseChanges "If you exit now, you will lose your changes.">
+<!ENTITY editPlaylist.deleteSong "Delete this song?">
+<!ENTITY editPlaylist.permanentDelete "Are you SURE you want to remove this song permanently from the database?">
+
+<!ENTITY editPlaylist.save "Save as Word">

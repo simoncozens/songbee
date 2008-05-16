@@ -1,0 +1,23 @@
+<worshipml>
+<song>
+<head>
+<title>有一位  神</title>
+</head>
+<lyrics>
+<verse>
+
+<line>有一位  神，有權能創造宇宙萬物，也有溫柔雙手安慰受傷靈魂</line>
+<line>有一位  神，有權炳審判一切罪惡，也有慈悲體貼人的軟弱</line>
+</verse>
+
+<verse>
+<line>有一位  神，有權能創造宇宙萬物，也有溫柔雙手安慰受傷靈魂</line>
+<line>有一位  神，高坐在榮耀的寶坐，卻　死在十架挽救人墮落</line>
+</verse>
+<chorus>
+<line>有一位  神，我們的  神，唯一的  神，名叫耶和華；</line>
+<line>祂有權威榮光，祂有恩典慈愛，是昔在今在永在的  神。</line>
+</chorus>
+</lyrics>
+</song>
+</worshipml>

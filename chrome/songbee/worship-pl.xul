@@ -1,0 +1,78 @@
+<?xml version="1.0"?> 
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+<?xml-stylesheet href="chrome://songbee/content/css/findBar.css" type="text/css"?>
+<!DOCTYPE window [
+<!ENTITY % SongbeeDTD SYSTEM "chrome://songbee/locale/songbee.dtd" >
+%SongbeeDTD;
+<!ENTITY % consoleDTD SYSTEM "chrome://songbee/locale/worship-pl.dtd" >
+%consoleDTD;
+<!ENTITY % findBarDTD SYSTEM "chrome://songbee/locale/findbar.dtd" >
+%findBarDTD;
+]>
+
+<window id="edit-pl" title="&console.title;"
+    minwidth="800"
+    minheight="600"
+    xmlns:html="http://www.w3.org/1999/xhtml"
+    onload="my_onload()"
+    xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+<script src="chrome://songbee/content/songbee-sql.js"/>
+<script src="chrome://songbee/content/xslt.js"/>
+<script src="chrome://songbee/content/songtreeview.js"/>
+<script src="chrome://songbee/content/findBar.js"/>
+<script src="chrome://songbee/content/dom-css.js"/>
+<script src="chrome://songbee/content/preferences.js"/>
+<script src="chrome://songbee/content/songbee.js"/>
+<script src="chrome://songbee/content/scroll.js"/>
+<vbox flex="1">
+    <hbox flex="1">
+        <vbox flex="1" id="thissong">
+            <iframe id="thissong-body" flex="1" name="thissong-body"
+                src="chrome://songbee/content/blank-song.html"/>
+        </vbox>
+        <splitter/>
+        <vbox flex="1" id="rhs">
+            <vbox flex="1" id="nextsong">
+                <iframe id="nextsong-body" flex="1" name="nextsong-body"
+                    src="chrome://songbee/content/blank-song.html"/>
+            </vbox>
+            <vbox flex="0">
+                <html:ul id="playlist"/>
+            </vbox>
+        </vbox>
+        <vbox flex="1" collapsed="1" style="visibility:collapse" id="searchrhs">
+        <!-- it would be lovely to turn this into XBL, but it hurts my head -->
+            <tree id="songlist" minwidth="200" flex="1" seltype="single"
+            onclick="updatePreview()" ondblclick="doTreeDoubleClick()"
+            minheight="200">
+                <treecols>
+                    <treecol id="title" label="&songbee.title;" flex="1"/>
+                    <treecol id="first_line" label="&songbee.firstLine;" flex="2"/>
+                    <treecol id="id" label="" hidden="true" ignoreincolumnpicker="true"/>
+                </treecols>
+                <treechildren context="songpopup"/>
+            </tree>
+            <splitter/>
+            <iframe id="preview" flex="1" name="preview" src="chrome://songbee/content/blank-song.html"/>
+        </vbox>
+    </hbox>
+    <toolbar id="FindToolbar" hidden="false" align="center" fullscreentoolbar="true">
+      <label control="find-field" id="find-label" class="find-fast"/>
+        <textbox id="find-field" 
+        oninput="gFindBar.find(this.value);"
+                onkeypress="gFindBar.onFindBarKeyPress(event);"
+                onblur="gFindBar.onFindBarBlur();"
+                oncompositionstart="gFindBar.onFindBarCompositionStart(event);"                oncompositionend="gFindBar.onFindBarCompositionEnd(event);"/>
+      <spacer flex="1"/>
+    <button label="&console.prev;" oncommand="switchSong(state.currentSongIndex-1);" style="list-style-image: none"/>
+    <button label="||" oncommand="togglePaused()" style="list-style-image: none"/>
+    <button label="&console.next;" oncommand="switchSong(state.currentSongIndex+1)" style="list-style-image: none"/>
+    <button label="&console.done;" oncommand="windows.projector.close(); window.close()" style="list-style-image: none"/>
+    </toolbar>
+</vbox>
+<script>
+    var ff = document.getElementById("find-field");
+    var tree = document.getElementById("songlist");
+    tree.view = new songTreeView();
+</script>
+</window>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.2//EN"
+          "/sw/share/xml/dtd/docbookx/4.2.0/docbookx.dtd"
+[
+<!ENTITY ch00 SYSTEM "ch00.xml">
+<!ENTITY ch01 SYSTEM "ch01.xml">
+<!ENTITY ch02 SYSTEM "ch02.xml">
+<!ENTITY ch03 SYSTEM "ch03.xml">
+]>
+
+<book>
+  <title>The Songbee Song Projection System</title>
+  <bookinfo>
+    <authorgroup>
+      <author>
+	<firstname>Simon</firstname>
+	<surname>Cozens</surname>
+      </author>
+    </authorgroup>
+    <edition>Draft</edition>
+    <copyright>
+      <!-- obviously this will change in the final version -->
+      <year>2006-2007</year>
+      <holder>Simon Cozens</holder>
+    </copyright>
+    <edition>1st</edition>
+  </bookinfo>
+
+&ch00;
+&ch01;
+&ch02;
+&ch03;
+</book>

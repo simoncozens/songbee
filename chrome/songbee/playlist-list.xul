@@ -1,0 +1,143 @@
+<?xml version="1.0"?>
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+<!DOCTYPE window [
+<!ENTITY % SongbeeDTD SYSTEM "chrome://songbee/locale/songbee.dtd" >
+%SongbeeDTD;
+<!ENTITY % playlistListDTD SYSTEM "chrome://songbee/locale/playlist-list.dtd" >
+%playlistListDTD;
+]>
+<window id="playlist-list" title="&songbee.appname;"
+        xmlns:html="http://www.w3.org/1999/xhtml"
+        xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+        minwidth="500"
+        minheight="300">
+<script src="chrome://songbee/content/songbee-sql.js"/>
+<script src="chrome://songbee/content/export.js"/>
+<toolbox>
+    <toolbar id="add-toolbar">
+        <toolbarbutton label="&playlistList.addPlaylist;" oncommand="create_pl()"/>
+        <toolbarbutton label="&playlistList.addSong;" oncommand="add_song()"/>
+        <toolbarbutton label="Import songs" oncommand="import_songs()"/>
+        <toolbarbutton label="Export songs" oncommand="export_songs()"/>
+        <toolbarbutton label="Preferences" oncommand="preferences()"/>
+    </toolbar>
+</toolbox>
+<vbox flex="1" style="overflow: auto; padding-right:15px" minheight="400">
+    <html:ul id="playlist-list-ul"/>
+</vbox>
+
+<script>
+    var hns = "http://www.w3.org/1999/xhtml";
+    var target = document.getElementById("playlist-list-ul");
+    function playlistLI (pl) {
+        var li = document.createElementNS(hns, "html:li");
+        li.setAttribute("id", "playlist"+pl.id());
+        var label = document.createElement("label");
+        label.setAttribute("value", pl.name());
+
+        li.appendChild(label);
+
+        var worship = document.createElement("button");
+        worship.setAttribute("id", "worship"+pl.id());
+        worship.setAttribute("oncommand", "worship("+pl.id()+")");
+        worship.setAttribute("label", "&playlistList.worship;");
+        li.appendChild(worship);
+
+        var edit = document.createElement("button");
+        edit.setAttribute("id", "edit"+pl.id());
+        edit.setAttribute("oncommand", "edit_pl("+pl.id()+")");
+        edit.setAttribute("label", "&songbee.edit;");
+        li.appendChild(edit);
+
+        var delbut = document.createElement("button");
+        delbut.setAttribute("id", "delete"+pl.id());
+        delbut.setAttribute("oncommand", "delete_pl("+pl.id()+")");
+        delbut.setAttribute("label", "&songbee.delete;");
+        li.appendChild(delbut);
+
+        return li;
+    }
+
+    function describe_playlist(playlist) {
+        var pldesc = document.getElementById("pl"+playlist.id()+"desc");
+        var mod = 0;
+        while (pldesc.hasChildNodes())
+            pldesc.removeChild(pldesc.firstChild());
+        var description = "";
+        playlist.songs(
+            function (song) {
+                description += song.title() + " | ";
+            }
+        );
+        description = description.replace(/ \| $/, "");
+        pldesc.appendChild(document.createTextNode(description));
+    }
+
+    var playlists;
+    window.setup = function () {
+        while (target.firstChild) { target.removeChild(target.firstChild); }
+        playlists = Playlist.retrieveAll(
+        function (playlist) { 
+            target.appendChild( playlistLI( playlist ));
+            var pldesc = document.createElementNS(hns,"html:p");
+            pldesc.setAttribute("id", "pl"+playlist.id()+"desc");
+            pldesc.setAttribute("flex", "1");
+            pldesc.setAttribute("style", "border:1px solid black; background: #eee; padding: 5px;");
+            target.appendChild(pldesc);
+            describe_playlist(playlist);
+        }
+        );
+    };
+    window.setup();
+
+    function create_pl () {
+        //var name = document.getElementById("new-pl-name").value;
+        var name = prompt("&playlistList.newPlaylistName;");
+        var playlist = Playlist.create(["name", name]);
+        // Age the songs:
+        Song.ageAll();
+        target.appendChild( playlistLI( playlist ));
+        edit_pl(playlist.id());
+    }
+    var promptService =
+    Components.classes["@mozilla.org/embedcomp/prompt-service;1"]
+                        .getService(Components.interfaces.nsIPromptService);
+
+
+    function delete_pl (id) {
+        var pl = document.getElementById("playlist"+id);
+        var pldesc = document.getElementById("pl"+id+"desc");
+        if (promptService.confirm(window, "&playlistList.deletePlaylist;", "&playlistList.permanentDelete;")) {
+            target.removeChild(pl);
+            target.removeChild(pldesc);
+            var pl = Playlist.retrieve(id);
+            pl.drop();
+        }
+    }
+
+
+   function worship (id) {
+        window.openDialog("chrome://songbee/content/worship-pl.xul",
+        "worship-pl", "chrome, dialog, resizable", id);
+   }
+   function edit_pl (id) {
+        window.openDialog("chrome://songbee/content/edit-pl.xul",
+        "edit-pl", "chrome, resizable", id, window);
+   }
+
+   function add_song() {
+        window.openDialog("chrome://songbee/content/add-song.xul",
+        "add-song", "chrome, dialog, resizable");
+   }
+
+   function import_songs() {
+        window.openDialog("chrome://songbee/content/import.xul",
+        "add-song", "chrome, dialog");
+   }
+
+   function preferences() {
+        window.openDialog("chrome://songbee/content/preferences.xul",
+        "preferences", "chrome, dialog");
+   }
+</script>
+</window>

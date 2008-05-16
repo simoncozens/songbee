@@ -1,0 +1,15 @@
+<!ENTITY songbee.appname "Songbee">
+
+<!ENTITY songbee.playlist "Playlist">
+
+<!ENTITY songbee.title "Title">
+<!ENTITY songbee.key "Key">
+<!ENTITY songbee.author "Author">
+<!ENTITY songbee.year "Year">
+<!ENTITY songbee.copyright "Copyright holder">
+<!ENTITY songbee.firstLine "First Line">
+
+<!ENTITY songbee.edit "Edit">
+<!ENTITY songbee.delete "Delete">
+<!ENTITY songbee.save "Save">
+<!ENTITY songbee.cancel "Cancel">

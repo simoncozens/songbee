@@ -1,0 +1,15 @@
+<!ENTITY songbee.appname "ソングビー">
+
+<!ENTITY songbee.playlist "プレーリスト">
+
+<!ENTITY songbee.title "曲名">
+<!ENTITY songbee.key "調号">
+<!ENTITY songbee.author "作曲家">
+<!ENTITY songbee.year "年">
+<!ENTITY songbee.copyright "著作権所有者">
+<!ENTITY songbee.firstLine "一行">
+
+<!ENTITY songbee.edit "編集">
+<!ENTITY songbee.delete "消す">
+<!ENTITY songbee.save "余す">
+<!ENTITY songbee.cancel "キャンセル">

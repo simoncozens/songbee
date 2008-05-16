@@ -1,0 +1,70 @@
+<?xml version="1.0"?>
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+<!DOCTYPE window [
+<!ENTITY % SongbeeDTD SYSTEM "chrome://songbee/locale/songbee.dtd" >
+%SongbeeDTD;
+<!ENTITY % addSongDTD SYSTEM "chrome://songbee/locale/add-song.dtd" >
+%addSongDTD;
+]>
+<window id="edit-pl" title="&addSong.title;"
+          xmlns:html="http://www.w3.org/1999/xhtml"
+          minheight="300"
+          minwidth="500"
+          onload="onloadstuff()"
+  xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+<script src="chrome://songbee/content/songbee-sql.js"/>
+<script src="chrome://songbee/content/xslt.js"/>
+<script src="chrome://songbee/content/add-song.js"/>
+<vbox flex="1">
+    <hbox flex="1">
+        <vbox>
+            <hbox>
+                <label control="song-title">&songbee.title;</label> <textbox id="song-title"/>
+                <label control="song-key">&songbee.key;</label> <textbox id="song-key"/>
+            </hbox>
+            <hbox>
+                <label control="author">&songbee.author;</label> <textbox id="author"/>
+                <label control="year">&songbee.year;</label> <textbox id="year"/>
+            </hbox>
+            <hbox>
+                <label control="copyright">&songbee.copyright;</label> <textbox id="copyright"/>
+            </hbox>
+            <textbox multiline="true" id="lyrics" flex="1" oninput="update_preview()"/>
+        </vbox>
+        <iframe id="preview" flex="1" name="preview" src="chrome://songbee/content/blank-song.html"/>
+    </hbox>
+    
+    <vbox flex="0" maxheight="50">
+        <hbox>
+            <button label="&songbee.cancel;" oncommand="window.close();"/>
+            <spacer flex="1"/>
+            <button label="&songbee.save;" oncommand="savechanges();"/>
+        </hbox>
+    </vbox>
+</vbox>
+<script>
+var song;
+var sid;
+var ischanged = 0;
+
+function savechanges() {
+    var s = new SongPrototype();
+    if(!s.title) {
+        alert("&addSong.needsTitle;"); return;
+    }
+
+    if (!song) { song = Song.create(["title", s.title]) }
+    song.title(s.title);
+    var xml = from_text();
+    var xmlDOM = (new DOMParser()).parseFromString(xml, "text/xml");
+
+    song.xml(xml);
+    song.song_key(s.key);
+    window.close();
+    var lines = xmlDOM.evaluate("//line", xmlDOM, null, XPathResult.ANY_TYPE,null); 
+    var firstLine = lines.iterateNext().firstChild;
+    song.first_line(firstLine.textContent);
+}
+</script>
+</window>
+

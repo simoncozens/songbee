@@ -1,0 +1,79 @@
+BUILDING THE RELEASE
+--------------------
+
+OS X
+
+    The plan is this: package up Songbee.app with PackageMaker. Create a
+    metapackage with the PackageMaker to bundle Songbee.app and the XUL
+    framework together.
+
+    Step 1:
+
+    * rm -rf ~/songbee/dist/
+    * mkdir -p ~/songbee/dist/Applications/
+    * ditto Songbee.app ~/songbee/dist/Applications/Songbee.app
+    * Check svn status in it, delete anything unnecessary (PackageMaker
+      will take care of the .svn directories)
+      * rm -rf songs
+      * rm -rf manual (until we have Songbee display its own manual)
+      * rm -rf release-manager-tools (!)
+    * Run PackageMaker on songbee.pmgproj
+    * Update the build number, and hit build! - this creates songbee.pkg
+
+    Step 2:
+
+    * Put xulrunner.pkg and songbee.pkg into 
+      release-manager-tools/Songbee.mpkg/Contents/Packages
+      * They need to have those exact names
+      * Steal the xulrunner package from Mozilla's .dmg and rename it
+    * Run "sh build-dmg.sh songbee-0.1alpha Songbee" to produce a .dmg file
+
+Windows
+
+    Windows is slightly different. We're going to create all the stuff
+    in a dist directory, which is going to become Program Files/Songbee
+    on the client. To get it to there, we need to create an installer
+    with NSIS. We need NSIS installed, and Win32::Exe.
+
+    Step 1:
+
+    * Clean out your dist directory and prep it as before from SVN
+        * rm -rf Songbee.icns release-manager-tools **/svn-commit* **/.svn songs manual load.pl
+    * Change into dist/
+    * wget http://ftp.mozilla.org/pub/mozilla.org/xulrunner/nightly/latest-trunk/xulrunner-1.9a2pre.en-US.win32.zip
+    * unzip it
+    * rm xulrunner-1.9a2pre.en-US.win32.zip 
+    * mv xulrunner/xulrunner-stub.exe songbee.exe
+    * convert ~/songbee.png songbee.ico
+    * exe_update.pl --icon songbee.ico songbee.exe
+
+    dist should be around 20M at this point.
+
+    Step 2:
+    * Update the SetOutPath and File declarations in songbee.nsi:
+    perl -MFile::Find -e'find({no_chdir => 1,wanted => sub { $a=$_;s/..//; s/\//\\/g;print -d $a ? "SetOutPath \"\$INSTDIR\\" : "File \""; print "$_\"\n"; }}, ".");'
+    * Update Delete and RMDir declarations:
+         find . -type f | sed 's/..//;s/\//\\/g;s/^/\ Delete "$INSTDIR\\/; s/$/"/' ; find . -type d | sed 's/..//;s/\//\\/g;s/^/ RMDir "$INSTDIR\\/; s/$/\\"/'
+    * Run NSIS on the .nsi file.
+
+Linux/Unix
+
+    * Create a dist as with windows, but without the xulrunner binary
+    * zip up the dist (but call it songbee):
+      * cd dist
+      * zip -r songbee.zip *
+    * Update the README
+    * Check the required xulrunner version in install.sh 
+    * tar up the README, songbee.zip, manual.pdf and install.sh
+
+UPDATING THE WEB SITE
+---------------------
+
+* Update the manual:
+  % make htmlbook
+  % cd html
+  % perl -pi -e 's/width="\d+"//g' *
+  % scp -r * hosted.simon-cozens.org:/web/songbee.simon-cozens.org/manual/
+
+REGRESSION TESTS
+----------------

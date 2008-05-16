@@ -1,0 +1,5 @@
+content songbee file:songbee/
+# content branding file:branding/
+# skin global classic/1.0 file:skin/classic/global/
+locale songbee en-US locale/en-US/songbee/
+locale songbee ja-JP locale/ja-JP/songbee/

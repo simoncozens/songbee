@@ -1,0 +1,10 @@
+<!ENTITY editPlaylist.title      "プレーリストを編集する">
+<!ENTITY editPlaylist.addToPl    "プレーリストに入る">
+<!ENTITY editPlaylist.editSong   "歌を編集する">
+<!ENTITY editPlaylist.deleteSong "歌を消す">
+
+<!ENTITY editPlaylist.exitUnsaved "Exit with unsaved changes">
+<!ENTITY editPlaylist.loseChanges "If you exit now, you will lose your changes.">
+<!ENTITY editPlaylist.deleteSong "この歌を消す？">
+<!ENTITY editPlaylist.permanentDelete "Are you SURE you want to remove this song permanently from the database?">
+<!ENTITY editPlaylist.save "Word DOCとして保存">

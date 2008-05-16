@@ -1,0 +1,252 @@
+<?xml version="1.0"?> 
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+<?xml-stylesheet href="chrome://songbee/content/css/findBar.css" type="text/css"?>
+<!DOCTYPE window [
+<!ENTITY % SongbeeDTD SYSTEM "chrome://songbee/locale/songbee.dtd" >
+%SongbeeDTD;
+<!ENTITY % findBarDTD SYSTEM "chrome://songbee/locale/findbar.dtd" >
+%findBarDTD;
+<!ENTITY % editPlaylistDTD SYSTEM "chrome://songbee/locale/edit-pl.dtd" >
+%editPlaylistDTD;
+]>
+
+<window id="edit-pl" title="&editPlaylist.title;"
+  xmlns:html="http://www.w3.org/1999/xhtml"
+onmouseup="endDrag()"
+  minheight="200" minwidth="500"
+  xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+<script src="chrome://songbee/content/songbee-sql.js"/>
+<script src="chrome://songbee/content/xslt.js"/>
+<script src="chrome://songbee/content/songtreeview.js"/>
+<script src="chrome://songbee/content/findBar.js"/>
+<script src="chrome://songbee/content/export.js"/>
+<script src="xul-drag.js"/> 
+<keyset>
+  <key id="close_cmd" keycode="VK_ESCAPE" oncommand="escapeOut();"/>
+</keyset>
+<toolbox>
+    <toolbar id="add-toolbar">
+        <toolbarbutton label="&editPlaylist.save;" oncommand="saveDOC()"/>
+    </toolbar>
+</toolbox>
+
+<popupset>
+    <popup id="songpopup">
+        <menuitem label="&editPlaylist.addToPl;" oncommand="doTreeDoubleClick()"/>
+        <menuitem label="&editPlaylist.editSong;" oncommand="editSong()"/>
+        <menuitem label="&editPlaylist.deleteSong;" oncommand="deleteSong()"/>
+    </popup>
+</popupset>
+
+<style type="text/css">
+#playlistlist {
+    position: absolute;
+    left: 10px;
+    top: 10px;
+    maxwidth:100px;
+    width:100px;
+}
+
+</style>
+<vbox flex="1">
+    <hbox flex="1">
+        <vbox flex="1" label="&songbee.playlist;">
+        <stack onmousemove="if(dragging) { doMove(event) }">
+        <listbox id="playlistlist" onkeypress="if (event.keyCode == 8) { deleteHighlighted() }" flex="1" minheight="400"/>
+        </stack>
+        </vbox>
+        <splitter/>
+        <vbox flex="1">
+        <tree id="songlist" minwidth="200" flex="1" seltype="single"
+        minheight="200"
+        context="treepopup"
+        onclick="updatePreview()" ondblclick="doTreeDoubleClick()">
+            <treecols>
+                <treecol id="title" label="&songbee.title;" flex="1"/>
+                <treecol id="first_line" label="&songbee.firstLine;" flex="2"/>
+                <treecol id="id" label="" hidden="true" ignoreincolumnpicker="true"/>
+            </treecols>
+            <treechildren context="songpopup"/>
+        </tree>
+        <splitter/>
+        <iframe id="preview" flex="1" name="preview" src="chrome://songbee/content/blank-song.html"/>
+        </vbox>
+    </hbox>
+
+    <iframe id="save" collapsed="1" name="save" src="chrome://songbee/content/blank-word.html" style="visibility:collapse"/>
+
+    <toolbar id="FindToolbar" hidden="false" align="center" fullscreentoolbar="true">
+      <label control="find-field" id="find-label" class="find-fast"/>
+        <textbox id="find-field" 
+        oninput="gFindBar.find(this.value);"
+                onkeypress="gFindBar.onFindBarKeyPress(event);"
+                onblur="gFindBar.onFindBarBlur();"
+                oncompositionstart="gFindBar.onFindBarCompositionStart(event);"                oncompositionend="gFindBar.onFindBarCompositionEnd(event);"/>
+      <spacer flex="1"/>
+      <button id="save-changes" label="&songbee.save;" oncommand="savechanges(); window.close()" style="list-style-image: none"/>
+    </toolbar>
+    </vbox>
+<script>
+    var pl = Playlist.retrieve(window.arguments[0]);
+    var target = document.getElementById("playlistlist");
+    var tree = document.getElementById("songlist");
+    var ff = document.getElementById("find-field");
+    var initial_order = new Array;
+
+    pl.songs(function (s) {
+        var li = document.createElement("listitem");
+        li.setAttribute("onmousedown", "myDragAndDrop.startDrag(event,liObserver);");
+        li.setAttribute("label", s.title());
+        li.songId = s.id();
+        target.appendChild(li);
+        initial_order.push(li.songId);
+    });
+
+    tree.view = new songTreeView();
+var dragging = 0;
+var dragSetup = 0;
+
+function jsdump(str)
+{
+  Components.classes['@mozilla.org/consoleservice;1']
+            .getService(Components.interfaces.nsIConsoleService)
+            .logStringMessage(str);
+}
+
+function beginToDrag (t) {
+        var list = t.parentNode;
+        var canvas = list.parentNode;
+        list.removeChild(t);
+        canvas.insertBefore(t, canvas.firstChild);
+        window.setCursor("grabbing");
+        dragSetup = 1;
+        //doMove(evt);
+}
+
+var liObserver = {
+    onDragStart: function (evt,session) {
+        var t = evt.target;
+        dragging = t;
+    } 
+}; 
+
+function doTreeDoubleClick() {
+    addToPlaylist("", selectedSong());
+}
+
+function addToPlaylist(item, song) {
+    // Convert to listitem
+    if (!item &amp;&amp; !song) { return }
+    var s = Song.retrieve(song ? song : item.songId); 
+    if (!s) { return }
+    var li = document.createElement("listitem");
+    li.setAttribute("onmousedown", "myDragAndDrop.startDrag(event,liObserver);");
+    li.setAttribute("label", s.title());
+    li.songId = s.id();
+
+    target.appendChild(li);
+}
+
+function doMove(e) {
+    //dragging.style["position"] = "absolute";
+    if (!dragSetup) { beginToDrag(dragging) }
+    //dragging.setAttribute("left", e.clientX);
+    dragging.setAttribute("top", e.clientY);
+    dragging.setAttribute("ordinal", 3);
+}
+
+function endDrag() { if (!dragging) return;
+    window.setCursor("auto");
+    var newElem = document.createElement("listitem");
+    newElem.setAttribute("label", dragging.label);
+    newElem.songId = dragging.songId;
+    newElem.setAttribute("onmousedown", "myDragAndDrop.startDrag(event,liObserver);");
+    dragSetup = 0;
+    // Where to put it?
+    var top = dragging.boxObject.screenY;
+    var list = document.getElementById("playlistlist");
+    var items = list.getElementsByTagName( "listitem" );
+    for (var i =0; i &lt; items.length; i++) {
+        var off= items[i].boxObject.screenY;
+        if (top &lt;= off) {
+            dragging.parentNode.removeChild(dragging);
+            list.insertBefore(newElem , items[i]);
+            list.selectItem(newElem);
+            list.currentItem = newElem;
+            dragging = 0; 
+            return;
+        }
+    }
+    dragging.parentNode.removeChild(dragging);
+    list.appendChild(newElem);
+    list.selectItem(newElem);
+    list.currentItem = newElem;
+    dragging = 0;
+}
+    function deleteHighlighted() { 
+        if (target.selectedItem) target.removeChild(target.selectedItem);
+    }
+
+function isChanged(children) {
+    if (children.length != initial_order.length) return 1;
+    for (var i =0; i &lt; children.length; i++) {
+        if (children[i].songId != initial_order[i]) return 1;
+    }
+    return 0;
+}
+
+var promptService =
+Components.classes["@mozilla.org/embedcomp/prompt-service;1"]
+                    .getService(Components.interfaces.nsIPromptService);
+
+function escapeOut() {
+    if (isChanged(target.childNodes))
+        if (!promptService.confirm(window, "&editPlaylist.exitUnsaved;", "&editPlaylist.loseChanges;"))
+            return;
+    window.close();
+}
+    
+function savechanges() {
+    // First, do we need to?
+    if (!isChanged(target.childNodes))
+        return;
+    pl.tidy_up();
+    for (var i =0; i &lt; target.childNodes.length; i++) {
+        var song = target.childNodes[i].songId;
+        pl.add_item(song, i+1);
+        window.arguments[1].setup();
+    }
+}
+
+function deleteSong() {
+    var song = selectedSong();
+    if (!song) return;
+    if (!promptService.confirm(window, "&editPlaylist.deleteSong;", "&editPlaylist.permanentDelete;"))
+        return;
+    Song.retrieve(song).drop();
+    // Start again
+    tree.view = new songTreeView();
+    tree.boxObject.invalidate();
+}
+
+function editSong() {
+    var song = selectedSong();
+    if (!song) return;
+    window.openDialog("chrome://songbee/content/add-song.xul", "add-song", "chrome, dialog, resizable", song);    
+    tree.view = new songTreeView();
+    tree.boxObject.invalidate();
+}
+
+function update_search() {
+    var v = new songTreeView();
+    v.searchColumn = "title";
+    v.searchText = ff.value;
+    tree.view = v;
+    v.recalculateRows();
+    tree.boxObject.invalidate();
+}
+
+
+
+</script>
+</window>
