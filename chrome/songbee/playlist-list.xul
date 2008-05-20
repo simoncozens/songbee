@@ -69,7 +69,7 @@
                 description += song.title() + " | ";
             }
         );
-        description = description.replace(/ \| $/, "");
+        description.replace(/ \| $/, "");
         pldesc.appendChild(document.createTextNode(description));
     }
 
