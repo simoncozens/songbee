@@ -44,7 +44,7 @@ italic }
 .line { font-size: 40pt; font-weight: bold; margin-right: 20px;
 FONT-FAMILY: Arial; color: #007;
 padding:10px;line-height:150% }
-.sup { font-size: 16pt; position:absolute;top:-40pt; 
+.sup { font-size: 40%; position:absolute;top:-1em; 
 text-align: center; display:block;
 FONT-FAMILY: Optima, "Lucida Grande",Sans-serif;
 }
