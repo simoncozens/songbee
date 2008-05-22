@@ -1,33 +1,19 @@
-HTML {
-    padding:0; margin:0;
-    overflow: hidden;
-}
+HTML { overflow: hidden; }
 BODY {
     BACKGROUND-COLOR: #ffffff;
     background-attachment: fixed;
     background-position: bottom right;
     background-repeat: no-repeat;
-
-}
-.content {
-    PADDING: 12px;
-    MARGIN-TOP: 1px;  MARGIN-BOTTOM:0px;
-    MARGIN-LEFT: 15px; MARGIN-RIGHT: 15px;
-    BORDER-COLOR: #000000;
-    BORDER-TOP: 0px;
-    BORDER-BOTTOM: 0px;
-    BORDER-LEFT: 1px;
-    BORDER-RIGHT: 1px;
 }
 
-.chorusdiv { position: absolute; margin: auto; display:table }
-.verse { position: absolute;  margin: 0px auto; display:table; }
-.bridge { position: absolute; margin: 0px auto; font-style:
-italic }
+.content { padding: 40pt; }
+.chorusdiv,.verse,.bridge { position:absolute; }
+.bridge { font-style: italic }
+
 .line { font-size: 40pt; font-weight: bold; margin-right: 20px;
 FONT-FAMILY: Arial; color: #007;
 padding:10px;line-height:150% }
-.sup { font-size: 40%; position:absolute;top:-1em; 
+.sup { font-size: 40%; position:absolute;top:-2em; 
 text-align: center; display:block;
 FONT-FAMILY: Optima, "Lucida Grande",Sans-serif;
 }
