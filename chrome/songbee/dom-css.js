@@ -10,9 +10,11 @@ function forEachStyle(callback, which) {
     var rules = obj.cssRules;
     for (var i=0; i < rules.length; i++) {
         var rule = rules[i];
-        for (var j=0; j < rule.style.length; j++) {
-            var thing = rule.style[j];
-            callback(rule, thing);
+        if (rule.style) { // @import is a rule with no styles
+            for (var j=0; j < rule.style.length; j++) {
+                var thing = rule.style[j];
+                callback(rule, thing);
+            }
         }
     }
 }
