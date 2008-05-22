@@ -1,9 +1,8 @@
 HTML {
-    PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-TOP: 0px;
+    padding:0; margin:0;
     overflow: hidden;
 }
 BODY {
-    PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-TOP: 0px;
     BACKGROUND-COLOR: #ffffff;
     background-attachment: fixed;
     background-position: bottom right;
@@ -20,22 +19,6 @@ BODY {
     BORDER-LEFT: 1px;
     BORDER-RIGHT: 1px;
 }
-
-H1 {
-    FONT-SIZE: 30pt; MARGIN: 0px;
-    FONT-FAMILY: Optima, "Lucida Grande",Sans-serif;
-    TEXT-ALIGN: center;
-    PADDING-BOTTOM: 1em;
-}
-H2 {
-    PADDING-RIGHT: 0.25em; PADDING-LEFT: 0.25em; FONT-SIZE: 16pt;
-    PADDING-BOTTOM: 0.5em; MARGIN: 0px; PADDING-TOP: 0.1em;
-FONT-FAMILY: Optima, "Lucida Grande",Sans-serif;
-    TEXT-ALIGN: center;
-}
-
-A { text-decoration: none; color:#225 }
-A:hover { text-decoration: underline; color:#222 }
 
 .chorusdiv { position: absolute; margin: auto; display:table }
 .verse { position: absolute;  margin: 0px auto; display:table; }
