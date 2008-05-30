@@ -13,8 +13,8 @@ ruby { border: 1px solid red; }
 .line { font-size: 40pt; font-weight: bold; margin-right: 20px;
 FONT-FAMILY: Arial; color: #007;
 padding:10px;line-height:150% }
-.sup { font-size: 40%; top:-2em; position:absolute;
-text-align: center; 
+.sup { font-size: 40%; position:absolute;top:-2.1em; left:-0px; width:100%;
+text-align: center;
 FONT-FAMILY: Optima, "Lucida Grande",Sans-serif;
 }
 .partnum { visibility: hidden }
