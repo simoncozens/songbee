@@ -38,16 +38,6 @@ onmouseup="endDrag()"
     </popup>
 </popupset>
 
-<style type="text/css">
-#playlistlist {
-    position: absolute;
-    left: 10px;
-    top: 10px;
-    maxwidth:100px;
-    width:100px;
-}
-
-</style>
 <vbox flex="1">
     <hbox flex="1">
         <vbox flex="1" label="&songbee.playlist;">
