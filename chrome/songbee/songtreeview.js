@@ -2,8 +2,8 @@ function songTreeView()
 {
 
     this.columns = ["title", "first_line", "id"];
-    this.orderColumn = this.columns[0];
-    this.orderDirection = 1;
+    this.orderColumn = "playcount/age";
+    this.orderDirection = 0;
     this.searchText = "";
     this.searchColumn = "";
 
