@@ -1,7 +1,7 @@
 VERSION = 1.1
-SCRATCHDIR = /Users/simon/songbee/dist
-PRISTINE = /Users/simon/songbee/pristine
-RELEASEDIR = /Users/simon/songbee/releases
+SCRATCHDIR = /tmp/songbee-dist/
+PRISTINE = /tmp/songbee-pristine/
+RELEASEDIR = /tmp/songbee-releases/
 
 checklist:
 	@echo "Have you updated the version in this Makefile?"
@@ -46,15 +46,15 @@ get-xulrunner:
 	wget http://ftp.mozilla.org/pub/mozilla.org/xulrunner/nightly/latest-trunk/xulrunner-1.9pre.en-US.win32.zip
 	unzip xulrunner-1.9pre.en-US.win32.zip
 	rm xulrunner-1.9a2pre.en-US.win32.zip 
-    mv xulrunner/xulrunner-stub.exe songbee.exe
+	mv xulrunner/xulrunner-stub.exe songbee.exe
 
 add-icon: 
 	cd $(SCRATCHDIR)
-    convert $(SCRATCHDIR)/chrome/songbee/songbee.png $(SCRATCHDIR)/songbee.ico
+	convert $(SCRATCHDIR)/chrome/songbee/songbee.png $(SCRATCHDIR)/songbee.ico
 	exe_update.pl --icon songbee.ico songbee.exe
 
 make-installer: 
 	cd $(SCRATCHDIR)
 	perl $(PRISTINE)/release-manager-tools/write-nsi.pl $(VERSION) > songbee.nsi
-	nsis songbee.nsi
+	makensis songbee.nsi
 	cp SongbeeSetup.exe $(RELEASEDIR)/SongbeeSetup-$(VERSION).exe
