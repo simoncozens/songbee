@@ -1,7 +1,7 @@
 VERSION = 1.1
-SCRATCHDIR = /tmp/songbee-dist/
-PRISTINE = /tmp/songbee-pristine/
-RELEASEDIR = /tmp/songbee-releases/
+SCRATCHDIR = /tmp/songbee-dist
+PRISTINE = /tmp/songbee-pristine
+RELEASEDIR = /tmp/songbee-releases
 
 checklist:
 	@echo "Have you updated the version in this Makefile?"
@@ -9,7 +9,7 @@ checklist:
 	@echo "Have you rebuilt the manual PDF? (And updated the manual!)"
 	@echo "Have you checked the xulrunner version in install.sh?"
 	@echo "Have you checked all your changes into SVN?"
-	cd ..; svn status
+	@cd ..; svn status
 	@echo "If so, then you can make release."
 
 release : release-osx release-win release-unix
@@ -27,34 +27,29 @@ release-unix : checkout-pristine create-clean-dist zip-dist
 
 checkout-pristine :
 	rm -rf $(PRISTINE)
-	cd $(PRISTINE)
-	svn co http://svn.simon-cozens.org/songbee 
-	mv songbee/* .
-	rm -rf songbee
+	mkdir $(PRISTINE)
+	svn co http://svn.simon-cozens.org/songbee $(PRISTINE)
 
 create-clean-dist:
 	rm -rf $(SCRATCHDIR)
 	cp -ar $(PRISTINE) $(SCRATCHDIR)
-	rm -rf Songbee.icns release-manager-tools **/svn-commit* **/.svn songs manual load.pl
+	cd $(SCRATCHDIR); rm -rf Songbee.icns release-manager-tools **/svn-commit* **/.svn songs manual load.pl
 
 zip-dist:
 	cd $(SCRATCHDIR)
 	zip -r songbee.zip *
 
 get-xulrunner:
-	cd $(SCRATCHDIR)
-	wget http://ftp.mozilla.org/pub/mozilla.org/xulrunner/nightly/latest-trunk/xulrunner-1.9pre.en-US.win32.zip
-	unzip xulrunner-1.9pre.en-US.win32.zip
-	rm xulrunner-1.9a2pre.en-US.win32.zip 
-	mv xulrunner/xulrunner-stub.exe songbee.exe
+	cd $(SCRATCHDIR);wget http://ftp.mozilla.org/pub/mozilla.org/xulrunner/nightly/latest-trunk/xulrunner-1.9pre.en-US.win32.zip
+	cd $(SCRATCHDIR);unzip xulrunner-*.en-US.win32.zip
+	rm $(SCRATCHDIR)/xulrunner-*.en-US.win32.zip 
+	mv $(SCRATCHDIR)/xulrunner/xulrunner-stub.exe $(SCRATCHDIR)/songbee.exe
 
 add-icon: 
-	cd $(SCRATCHDIR)
 	convert $(SCRATCHDIR)/chrome/songbee/songbee.png $(SCRATCHDIR)/songbee.ico
-	exe_update.pl --icon songbee.ico songbee.exe
+	exe_update.pl --icon $(SCRATCHDIR)/songbee.ico $(SCRATCHDIR)/songbee.exe
 
 make-installer: 
-	cd $(SCRATCHDIR)
-	perl $(PRISTINE)/release-manager-tools/write-nsi.pl $(VERSION) > songbee.nsi
-	makensis songbee.nsi
-	cp SongbeeSetup.exe $(RELEASEDIR)/SongbeeSetup-$(VERSION).exe
+	cd $(SCRATCHDIR); perl $(PRISTINE)/release-manager-tools/write-nsi.pl $(VERSION) > songbee.nsi
+	cd $(SCRATCHDIR); makensis songbee.nsi
+	cp $(SCRATCHDIR)/SongbeeSetup.exe $(RELEASEDIR)/SongbeeSetup-$(VERSION).exe
