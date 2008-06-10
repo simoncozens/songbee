@@ -48,7 +48,7 @@ songs in each playlist. At the top of the window are three toolbuttons:
 	</listitem>
       </varlistentry>
       <varlistentry>
-	<term><command>Import songs</command></term>
+	<term id="playlist.import"><command>Import songs</command></term>
 	<listitem>
 	  <para>
             This allows you to import songs from a Songbee song
