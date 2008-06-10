@@ -67,7 +67,7 @@
 }
 
 #find-field {
-  background: url("chrome://global/skin/icons/find-bar-background.png") no-repeat;
+  background: url("chrome://songbee/content/find-bar-background.png") no-repeat;
   -moz-appearance: none;
   height: 22px !important;
   width: 182px !important;
