@@ -57,18 +57,23 @@ and with no blank line in between.
       </listitem>
       <listitem>
 	<para>When entering Japanese furigana, do so like this:
-<userinput>(&#x6F22;|&#x304B;&#x3093;)</userinput>. That is to say, place
-the expression in brackets; put the main text first, then a pipe sign
-(|), and then the furigana. The furigana will be displayed above the
-main text. You should be able to see this on the preview.</para>
+	<userinput>(&#x6F22;|&#x304B;&#x3093;)</userinput>. That is to
+	say, place the expression in brackets; put the main text
+	first, then a pipe sign (|), and then the furigana. The
+	brackets and pipe sign must be entered in romaji. The furigana
+	will be displayed above the main text. You should be able to
+	see this on the preview.</para>
       </listitem>
     </itemizedlist>
   </sect1>
   <sect1>
     <title>Importing and exporting songs</title>
     <para>
-     This doesn't work yet, but when it does, I'll be sure to document
-it!
+     You may import and export song libraries to a special Songbee
+     library format. (For interested developers, it's not that
+     special, it's just ordinary XML and you'll be able to work out
+     how it goes by looking at it.) See <link
+     linkend="playlist.import">the playlist window menu</link>.
     </para>
   </sect1>
 </chapter>

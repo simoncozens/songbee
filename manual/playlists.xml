@@ -58,6 +58,23 @@ songs in each playlist. At the top of the window are three toolbuttons:
 </para>
 	</listitem>
       </varlistentry>
+      <varlistentry>
+	<term><command>Export songs</command></term>
+	<listitem>
+	  <para>
+            This will export your entire songs database as a Songbee
+            song library file. If you enter a lot of the songs you use
+            from week to week and then export your library and send
+            the resulting file to the Songbee maintainer, perhaps
+            together we can build up a good library of songs used by
+            the Japanese church. Hopefully we'll then include the
+            expanded library file in Songbee distributions in the
+            future, making Songbee more useful for everyone, at least
+            until the copyright police come to stop us worshipping
+            freely.
+</para>
+	</listitem>
+      </varlistentry>
     </variablelist>
     <para>
       Alongside each playlist's title are three buttons:
