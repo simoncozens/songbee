@@ -1,3 +1,5 @@
+var schemaVersion = 2;
+
 var dserv = Components.classes["@mozilla.org/file/directory_service;1"] 
                      .getService(Components.interfaces.nsIProperties);
 
@@ -16,6 +18,34 @@ var storageService = Components.classes["@mozilla.org/storage/service;1"]
                         .getService(Components.interfaces.mozIStorageService);
 
 var mDBConn = storageService.openDatabase(file);
+
+/* Songbee 2 SQLite Schema
+
+songbee_system : schema_version
+play_item : id, playlist, song, position, type, data
+playlist     : id, name, css
+song          : id, song_key, title, first_line, xml, age, playcount
+
+*/
+
+// Various functions to upgrade the schema on changes
+if (schema_version() < 2) {
+	alert("Upgrading Songbee database to version 2.0");
+	doSQLStatement("CREATE TABLE IF NOT EXISTS songbee_system (schema_version)");
+	doSQLStatement("INSERT INTO songbee_system (schema_version) VALUES (2.0)");
+	doSQLStatement("ALTER TABLE play_item ADD COLUMN type");
+	doSQLStatement("ALTER TABLE play_item ADD COLUMN data");
+	doSQLStatement("ALTER TABLE playlist ADD COLUMN css");
+	
+}
+
+function schema_version () { 
+	try {
+		var statement = mDBConn.createStatement("SELECT schema_version FROM songbee_system");
+		statement.executeStep();
+		return statement.getString(0);
+	} catch (e) { return 1 }
+}
 
 function jsdump(str)
 {
@@ -114,8 +144,8 @@ function auto_increment_value () {
     return statement.getInt32(0);
 }
 
-function Playlist () {}; databaseClass(Playlist, "playlist", [ "id", "name" ]);
-
+function Playlist () {}; databaseClass(Playlist, "playlist", [ "id", "name", "css" ]);
+function PlayItem () {}; databaseClass(PlayItem, "play_item", [ "id", "playlist", "song", "position", "type", "data" ]);
 function Song () {}; databaseClass(Song, "song", [ "id", "song_key", "title", "first_line", "xml", "age", "playcount" ]);
 
 Song.ageAll = function () {
