@@ -51,8 +51,7 @@ function addUserStylesheet (doc) {
     var linkel = doc.createElement("link");
     linkel.setAttribute("rel", "stylesheet");
     linkel.setAttribute("href", protocolhandler.getURLSpecFromFile(file));
-    // This is a bit brittle... XXX
-    doc.firstChild.nextSibling.firstChild.appendChild(linkel);
+    doc.getElementById("headElem").appendChild(linkel);
 }
 
 function reset() { 
