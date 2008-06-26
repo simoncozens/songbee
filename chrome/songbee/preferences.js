@@ -73,8 +73,8 @@ function savechanges(where) {
 		foStream.init(file, 0x02 | 0x08 | 0x20, 0666, 0);
 		foStream.write(css, css.length);
 		foStream.close;
-		window.close();
 	}
+    window.close();
 }
 
 var observerService = Components.classes["@mozilla.org/observer-service;1"]

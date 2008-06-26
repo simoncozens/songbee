@@ -67,7 +67,7 @@ function my_onload() {
     });
 	var css = plData.playlist.css();
 	if (css) {
-		var elem = doc.createElement("style");
+		var elem = windows.projector.document.createElement("style");
 		elem.innerHTML = css;
 		windows.projector.document.getElementById("headElem").appendChild(elem);
 	} else {
