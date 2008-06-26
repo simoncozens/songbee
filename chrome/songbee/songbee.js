@@ -65,7 +65,14 @@ function my_onload() {
         playlistLI.appendChild(li);
         c++;
     });
-    addUserStylesheet(windows.projector.document);
+	var css = plData.playlist.css();
+	if (css) {
+		var elem = doc.createElement("style");
+		elem.innerHTML = css;
+		windows.projector.document.getElementById("headElem").appendChild(elem);
+	} else {
+		addUserStylesheet(windows.projector.document);
+	}
     switchSong(0,1);
 }
 

@@ -27,6 +27,7 @@ onmouseup="endDrag()"
 <toolbox>
     <toolbar id="add-toolbar">
         <toolbarbutton label="&editPlaylist.save;" oncommand="saveDOC()"/>
+		<toolbarbutton label="Display Settings" oncommand="preferences()"/>
     </toolbar>
 </toolbox>
 
@@ -236,7 +237,10 @@ function update_search() {
     tree.boxObject.invalidate();
 }
 
-
+function preferences() {
+	window.openDialog("chrome://songbee/content/preferences.xul",
+	"preferences", "chrome, dialog", pl._id);
+}
 
 </script>
 </window>

@@ -62,15 +62,19 @@ function reset() {
     fillvalues(0);
 }
 
-function savechanges() { 
-    var file = userCSS();
-    var foStream = Components.classes["@mozilla.org/network/file-output-stream;1"] 
+function savechanges(where) { 
+	var css = dumpCSS();
+	if (where) { // Saving to database
+		Playlist.retrieve(where).css(css);
+	} else { // Global settings, saving to file.
+		var file = userCSS();
+		var foStream = Components.classes["@mozilla.org/network/file-output-stream;1"] 
                          .createInstance(Components.interfaces.nsIFileOutputStream);
-    foStream.init(file, 0x02 | 0x08 | 0x20, 0666, 0);
-    var css = dumpCSS();
-    foStream.write(css, css.length);
-    foStream.close;
-    window.close();
+		foStream.init(file, 0x02 | 0x08 | 0x20, 0666, 0);
+		foStream.write(css, css.length);
+		foStream.close;
+		window.close();
+	}
 }
 
 var observerService = Components.classes["@mozilla.org/observer-service;1"]
