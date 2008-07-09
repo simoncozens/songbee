@@ -26,11 +26,10 @@ function saveDOC() {
     var song_place = save.getElementById("song");
     var stylesheet = getXSLT();
 
-    pl.songs(function (s) {
-        var frag = transformDOM(s.xmlDOM(), stylesheet, save);
-        var head = save.createElement("h1"); head.innerHTML = s.title();
+    pl.items(function (i) {
+        var head = save.createElement("h1"); head.innerHTML = i.title();
         song_place.appendChild(head);
-        song_place.appendChild(frag);
+        song_place.appendChild(i.transformToHTML(stylesheet, save));
     });
     var serializer = new XMLSerializer();
     serializer.serializeToStream(save, foStream, ""); 

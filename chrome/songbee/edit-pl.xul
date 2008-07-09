@@ -84,25 +84,21 @@ onmouseup="endDrag()"
     var ff = document.getElementById("find-field");
     var initial_order = new Array;
 
-    pl.songs(function (s) {
+    pl.items(function (i) {
         var li = document.createElement("listitem");
         li.setAttribute("onmousedown", "myDragAndDrop.startDrag(event,liObserver);");
-        li.setAttribute("label", s.title());
-        li.songId = s.id();
+        li.setAttribute("label", i.title());
+        li.playitem = i;
+		li.piType = i.type();
+		li.piData = i.data();
+		li.piSong = i.song()._id;
         target.appendChild(li);
-        initial_order.push(li.songId);
+        initial_order.push(i._id);
     });
 
     tree.view = new songTreeView();
 var dragging = 0;
 var dragSetup = 0;
-
-function jsdump(str)
-{
-  Components.classes['@mozilla.org/consoleservice;1']
-            .getService(Components.interfaces.nsIConsoleService)
-            .logStringMessage(str);
-}
 
 function beginToDrag (t) {
         var list = t.parentNode;
@@ -122,19 +118,23 @@ var liObserver = {
 }; 
 
 function doTreeDoubleClick() {
-    addToPlaylist("", selectedSong());
+    addToPlaylist(selectedSong(), "song", "");
 }
 
-function addToPlaylist(item, song) {
+function addToPlaylist(song, type, data) {
     // Convert to listitem
-    if (!item &amp;&amp; !song) { return }
-    var s = Song.retrieve(song ? song : item.songId); 
-    if (!s) { return }
-    var li = document.createElement("listitem");
+	var li = document.createElement("listitem");
     li.setAttribute("onmousedown", "myDragAndDrop.startDrag(event,liObserver);");
-    li.setAttribute("label", s.title());
-    li.songId = s.id();
-
+	li.piType = type;
+	li.piData = data;
+	if (type == "song") {
+		var s = Song.retrieve(song); 
+		li.setAttribute("label", s.title());
+		if (!s) { alert("Bug: Couldn't get a song we've clicked on") }
+		li.piSong = s.id();
+	} else {
+		alert("Bug: Need to represent a non-song item in the playlist");
+	}
     target.appendChild(li);
 }
 
@@ -150,7 +150,7 @@ function endDrag() { if (!dragging) return;
     window.setCursor("auto");
     var newElem = document.createElement("listitem");
     newElem.setAttribute("label", dragging.label);
-    newElem.songId = dragging.songId;
+	for (var a in ["piSong", "piData", "piType"]) newElem[a] = dragging[a];
     newElem.setAttribute("onmousedown", "myDragAndDrop.startDrag(event,liObserver);");
     dragSetup = 0;
     // Where to put it?
@@ -181,7 +181,8 @@ function endDrag() { if (!dragging) return;
 function isChanged(children) {
     if (children.length != initial_order.length) return 1;
     for (var i =0; i &lt; children.length; i++) {
-        if (children[i].songId != initial_order[i]) return 1;
+        if (!children[i].playitem) return 1;
+		if (children[i].playitem._id != initial_order[i]) return 1;
     }
     return 0;
 }
@@ -203,10 +204,10 @@ function savechanges() {
         return;
     pl.tidy_up();
     for (var i =0; i &lt; target.childNodes.length; i++) {
-        var song = target.childNodes[i].songId;
-        pl.add_item(song, i+1);
-        window.arguments[1].setup();
+        var node = target.childNodes[i]
+        pl.add_item(node.piSong, i+1, node.piType, node.piData);
     }
+	window.arguments[1].setup(); // Redraw the main (playlist list) window
 }
 
 function deleteSong() {

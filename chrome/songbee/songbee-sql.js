@@ -34,6 +34,7 @@ if (schema_version() < 2) {
 	doSQLStatement("CREATE TABLE IF NOT EXISTS songbee_system (schema_version)");
 	doSQLStatement("INSERT INTO songbee_system (schema_version) VALUES (2.0)");
 	doSQLStatement("ALTER TABLE play_item ADD COLUMN type");
+	doSQLStatement("UPDATE play_item SET type='song'");
 	doSQLStatement("ALTER TABLE play_item ADD COLUMN data");
 	doSQLStatement("ALTER TABLE playlist ADD COLUMN css");
 	
@@ -130,7 +131,8 @@ function doSQL(sql, targetClass, callback, params) {
 }
 
 function doSQLStatement(sql, params) {
-    var statement = mDBConn.createStatement(sql)
+    var statement;
+	try	{ statement = mDBConn.createStatement(sql); } catch (e) { alert("SQL setup failed: "+sql); }
     if (params) {
         for (var i =0; i < params.length; i++) 
             statement.bindStringParameter(i, params[i]);
@@ -158,19 +160,48 @@ Song.prototype.played = function () {
     doSQLStatement("UPDATE song SET playcount = playcount + 1 WHERE id = "+this.id());
 }
 
-Playlist.prototype.songs = function (callback) {
-    return doSQL("SELECT song.id, song_key, title, first_line, xml FROM song, play_item WHERE play_item.playlist = "+this._id+" AND play_item.song = song.id ORDER BY play_item.position ", Song, callback);
+Song.prototype.xmlDOM = function () {
+    var parsed = (new DOMParser()).parseFromString(this.xml(), "text/xml");
+    return parsed;
+};
+
+Playlist.prototype.items = function (callback) {
+    return doSQL("SELECT id, playlist, song, position, type, data FROM play_item WHERE play_item.playlist = "+this._id+" ORDER BY position ", PlayItem, function (pi) { pi.specialize(); if (callback) callback(pi); });
 };
 
 Playlist.prototype.tidy_up = function () {
     doSQLStatement("DELETE FROM play_item WHERE playlist= (?1)", [this._id]);
 };
 
-Playlist.prototype.add_item = function(song, position) {
-    doSQLStatement("INSERT INTO play_item (playlist, song, position) VALUES ((?1), (?2), (?3))", [this._id, song, position]);
+Playlist.prototype.add_item = function(song, position, type, data) {
+	if (!type) type = "song";
+	if (!data) data = "";
+	if (type == "song" and !song) { alert("Bug: No song ID given for song item."); return; }
+    doSQLStatement("INSERT INTO play_item (playlist, song, position, type, data) VALUES ((?1), (?2), (?3),(?4),(?5))", [this._id, song, position, type, data]);
 };
 
-Song.prototype.xmlDOM = function () {
-    var parsed = (new DOMParser()).parseFromString(this.xml(), "text/xml");
-    return parsed;
+PlayItem.prototype.song = function() {
+	if (!this.type == "song") { alert("Bug: song called on playitem "+this._id+" which has type ["+this.type+"]"); }
+	var songlist = doSQL("SELECT song.id, song_key, title, first_line, xml FROM song  WHERE id = "+this._song, Song);
+	if (songlist.length < 1 )  { alert("Retrieving song not in database: has it been deleted?"); }
+	return songlist[0]
+}
+
+/* PlayItem function dispatchers. We are faking specialization here. */
+
+var PlayItemDispatchers = {
+	transformToHTML: {
+		song: function (stylesheet, doc) { return transformDOM(this.song().xmlDOM(), stylesheet, doc) },
+		fallback: function () { return "<p>[Don't know how to transform object of type "+this.type+"]</p>" }
+	},
+	title: {
+		song: function () { return this.song().title() },
+		fallback: function() { return "[PlayItem "+this._id+"/"+this.type()+"]" }
+	}
 };
+
+PlayItem.prototype.specialize = function () {
+	for (var handle in PlayItemDispatchers) {
+		this[handle] = PlayItemDispatchers[handle][this.type()] || PlayItemDispatchers[handle]["fallback"];
+	}
+}
