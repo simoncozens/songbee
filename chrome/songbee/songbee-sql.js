@@ -1,5 +1,4 @@
 var schemaVersion = 2;
-
 var dserv = Components.classes["@mozilla.org/file/directory_service;1"] 
                      .getService(Components.interfaces.nsIProperties);
 
@@ -176,7 +175,7 @@ Playlist.prototype.tidy_up = function () {
 Playlist.prototype.add_item = function(song, position, type, data) {
 	if (!type) type = "song";
 	if (!data) data = "";
-	if (type == "song" and !song) { alert("Bug: No song ID given for song item."); return; }
+	if (type == "song" && !song) { alert("Bug: No song ID given for song item."); return; }
     doSQLStatement("INSERT INTO play_item (playlist, song, position, type, data) VALUES ((?1), (?2), (?3),(?4),(?5))", [this._id, song, position, type, data]);
 };
 

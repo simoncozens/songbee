@@ -64,9 +64,9 @@
         while (pldesc.hasChildNodes())
             pldesc.removeChild(pldesc.firstChild());
         var description = "";
-        playlist.songs(
-            function (song) {
-                description += song.title() + " | ";
+        playlist.items(
+            function (item) {
+                description += item.title() + " | ";
             }
         );
         description.replace(/ \| $/, "");
