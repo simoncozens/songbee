@@ -9,7 +9,7 @@ var allowScrollBackUp = 0; // is a matter of taste
 
 var state = {
     paused: 0,
-    currentSongIndex: 0,
+    currentItemIndex: 0,
     currentSectionIndex: 0,
     consoleColor: exposedColor,
     highlightingIndividualLines: 0,
@@ -25,14 +25,14 @@ var windows = {
 
 // Utility functions
 
-function currentSong() {
-    if (state.currentSongIndex < 0) { state.currentSongIndex = 0 }
-    if (state.currentSongIndex > plData.songs.length - 1) { 
-        state.currentSongIndex = plData.songs.length - 1;
+function currentItem() {
+    if (state.currentItemIndex < 0) { state.currentItemIndex = 0 }
+    if (state.currentItemIndex > plData.items.length - 1) { 
+        state.currentItemIndex = plData.items.length - 1;
     }
-    return plData.songs[state.currentSongIndex];
+    return plData.items[state.currentItemIndex];
 }
-function nextSong() { return plData.songs[state.currentSongIndex+1] }
+function nextItem() { return plData.items[state.currentItemIndex+1] }
 function projectorSections() { return windows.projector.document.getElementById("song").getElementsByTagName("div") }
 function consoleSections()  {return windows.thisSong.contentDocument.getElementById("song").getElementsByTagName("div"); }
 function currentConsoleSection() { return ((consoleSections())[state.currentSectionIndex]) }
@@ -56,12 +56,12 @@ function my_onload() {
 
     windows.console.addEventListener("keypress", onKeyPress,  false);
     plData.playlist = Playlist.retrieve(window.arguments[0]);
-    plData.songs = plData.playlist.songs(function(s) {
+    plData.items = plData.playlist.items(function(s) {
         var li = document.createElementNS(htmlNS, "html:li");
         var label = document.createElement("label");
         label.setAttribute("value", s.title());
         li.appendChild(label);
-        li.setAttribute("onclick", "switchSong("+c+")");
+        li.setAttribute("onclick", "switchItem("+c+")");
         playlistLI.appendChild(li);
         c++;
     });
@@ -73,39 +73,40 @@ function my_onload() {
 	} else {
 		addUserStylesheet(windows.projector.document);
 	}
-    switchSong(0,1);
+    switchItem(0,1);
 }
 
-function switchSong(s, firstTime) {
-    state.currentSongIndex = s;
+function switchItem(s, firstTime) {
+    state.currentItemIndex = s;
     if (!firstTime)
         unhighlightSection();
-    displaySong(currentSong());
+    displayItem(currentItem());
 }
 
-function displaySong(song) { 
-    // Display song in browser windows
-    putSongInDoc(song, windows.projector.document);
+function displayItem(item) { 
+    // Display item in browser windows
+    putItemInDoc(item, windows.projector.document);
     cleanProjectorWindow(); // Do this as quickly as possible
-    putSongInDoc(song, windows.thisSong.contentDocument);
-    putSongInDoc(nextSong(), windows.nextSong.contentDocument);
+    putItemInDoc(item, windows.thisSong.contentDocument);
+    putItemInDoc(nextItem(), windows.nextSong.contentDocument);
 
-    // Increment the counter
-    song.played();
+    item.postDisplayHook();
 
-    // Set up data structure for easy access
-    state.verses = [];
-    var cs = consoleSections();
-    for (var i = 0; i < cs.length; i++) {
-        var section = cs[i];
-        section.addEventListener("click", mkChangeSection(i), true);
-        if (section.className == "verse") { state.verses.push(i) }
-    }
-    // Set up the "natural order"
-    state.naturalOrder = determineNaturalOrder(song);
-    if (state.naturalOrder.length && state.naturalOrder[0] == 0) { state.naturalOrder.shift() }
-    //jsdump("Natural order was: ");
-    //for (var i in state.naturalOrder) { jsdump(state.naturalOrder[i]) };
+	if (item.type() == "song") {
+	    // Set up data structure for easy access
+	    state.verses = [];
+	    var cs = consoleSections();
+	    for (var i = 0; i < cs.length; i++) {
+	        var section = cs[i];
+	        section.addEventListener("click", mkChangeSection(i), true);
+	        if (section.className == "verse") { state.verses.push(i) }
+	    }
+	    // Set up the "natural order"
+	    state.naturalOrder = determineNaturalOrder(item);
+	    if (state.naturalOrder.length && state.naturalOrder[0] == 0) { state.naturalOrder.shift() }
+	    //jsdump("Natural order was: ");
+	    //for (var i in state.naturalOrder) { jsdump(state.naturalOrder[i]) };		
+	}
 
     // Scroll things back to the beginnng
     state.currentSectionIndex = 0;
@@ -115,11 +116,11 @@ function displaySong(song) {
 
 function mkChangeSection(i) { return function () { changeSection(i) } }
 
-function putSongInDoc(song, doc) {
+function putItemInDoc(item, doc) {
     var song_place = doc.getElementById("song");
     song_place.innerHTML = "";
-    if (!song) { song_place.innerHTML="<p>End of playlist</p>"; return; }
-    var frag = transformDOM(song.xmlDOM(), stylesheet, doc);
+    if (!item) { song_place.innerHTML="<p>End of playlist</p>"; return; }
+    var frag = item.transformToHTML(stylesheet, doc);
     song_place.appendChild(frag);
 }
 
@@ -273,8 +274,8 @@ function onKeyPress(e) {
     switch (e.keyCode) {
         case e.DOM_VK_UP: handleUp(); return;
         case e.DOM_VK_DOWN: handleDown(); return;
-        case e.DOM_VK_LEFT: switchSong(state.currentSongIndex-1); return;
-        case e.DOM_VK_RIGHT: switchSong(state.currentSongIndex+1); return;
+        case e.DOM_VK_LEFT: switchItem(state.currentItemIndex-1); return;
+        case e.DOM_VK_RIGHT: switchItem(state.currentItemIndex+1); return;
         case e.DOM_VK_PAGE_DOWN: pageDown(); return;
         case e.DOM_VK_PAGE_UP: pageUp(); return;
         case e.DOM_VK_ESCAPE: togglePaused(); return;

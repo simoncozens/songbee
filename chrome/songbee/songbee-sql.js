@@ -180,7 +180,7 @@ Playlist.prototype.add_item = function(song, position, type, data) {
 };
 
 PlayItem.prototype.song = function() {
-	if (!this.type == "song") { alert("Bug: song called on playitem "+this._id+" which has type ["+this.type+"]"); }
+	if (this.type() != "song") { alert("Bug: song called on playitem "+this._id+" which has type ["+this.type+"]"); }
 	var songlist = doSQL("SELECT song.id, song_key, title, first_line, xml FROM song  WHERE id = "+this._song, Song);
 	if (songlist.length < 1 )  { alert("Retrieving song not in database: has it been deleted?"); }
 	return songlist[0]
@@ -192,6 +192,10 @@ var PlayItemDispatchers = {
 	transformToHTML: {
 		song: function (stylesheet, doc) { return transformDOM(this.song().xmlDOM(), stylesheet, doc) },
 		fallback: function () { return "<p>[Don't know how to transform object of type "+this.type+"]</p>" }
+	},
+	postDisplayHook: {
+//		song: function () { return this.song().played() },
+		fallback: function () {}
 	},
 	title: {
 		song: function () { return this.song().title() },
