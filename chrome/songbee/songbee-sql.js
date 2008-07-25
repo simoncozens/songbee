@@ -194,7 +194,7 @@ var PlayItemDispatchers = {
 		fallback: function () { return "<p>[Don't know how to transform object of type "+this.type+"]</p>" }
 	},
 	postDisplayHook: {
-//		song: function () { return this.song().played() },
+		song: function () { return this.song().played() },
 		fallback: function () {}
 	},
 	title: {
