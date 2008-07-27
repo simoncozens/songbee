@@ -142,7 +142,8 @@ function endDrag() { if (!dragging) return;
     window.setCursor("auto");
     var newElem = document.createElement("listitem");
     newElem.setAttribute("label", dragging.label);
-	for (var a in ["piSong", "piData", "piType"]) newElem[a] = dragging[a];
+	var toCopy = ["piSong", "piData", "piType"];
+	for (var a in toCopy) newElem[toCopy[a]] = dragging[toCopy[a]];
     newElem.setAttribute("onmousedown", "myDragAndDrop.startDrag(event,liObserver);");
     dragSetup = 0;
     // Where to put it?
