@@ -20,7 +20,6 @@ onmouseup="endDrag()"
 <script src="chrome://songbee/content/songtreeview.js"/>
 <script src="chrome://songbee/content/findBar.js"/>
 <script src="chrome://songbee/content/export.js"/>
-<script src="xul-drag.js"/> 
 <keyset>
   <key id="close_cmd" keycode="VK_ESCAPE" oncommand="escapeOut();"/>
 </keyset>
@@ -86,7 +85,7 @@ onmouseup="endDrag()"
 
     pl.items(function (i) {
         var li = document.createElement("listitem");
-        li.setAttribute("onmousedown", "myDragAndDrop.startDrag(event,liObserver);");
+        li.setAttribute("onmousedown", "dragging = event.target;");
         li.setAttribute("label", i.title());
         li.playitem = i;
 		li.piType = i.type();
@@ -110,13 +109,6 @@ function beginToDrag (t) {
         //doMove(evt);
 }
 
-var liObserver = {
-    onDragStart: function (evt,session) {
-        var t = evt.target;
-        dragging = t;
-    } 
-}; 
-
 function doTreeDoubleClick() {
     addToPlaylist(selectedSong(), "song", "");
 }
@@ -124,7 +116,7 @@ function doTreeDoubleClick() {
 function addToPlaylist(song, type, data) {
     // Convert to listitem
 	var li = document.createElement("listitem");
-    li.setAttribute("onmousedown", "myDragAndDrop.startDrag(event,liObserver);");
+    li.setAttribute("onmousedown", "dragging = event.target;");
 	li.piType = type;
 	li.piData = data;
 	if (type == "song") {
