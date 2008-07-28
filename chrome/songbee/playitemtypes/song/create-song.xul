@@ -14,7 +14,7 @@
   xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
 <script src="chrome://songbee/content/songbee-sql.js"/>
 <script src="chrome://songbee/content/xslt.js"/>
-<script src="chrome://songbee/content/add-song.js"/>
+<script src="chrome://songbee/content/playitemtypes/song/create-song.js"/>
 <vbox flex="1">
     <hbox flex="1">
         <vbox>
