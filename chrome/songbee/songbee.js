@@ -26,21 +26,21 @@ var windows = {
 // Utility functions
 
 function currentItem() {
-    if (state.currentItemIndex < 0) { state.currentItemIndex = 0 }
+    if (state.currentItemIndex < 0) { state.currentItemIndex = 0; }
     if (state.currentItemIndex > plData.items.length - 1) { 
         state.currentItemIndex = plData.items.length - 1;
     }
     return plData.items[state.currentItemIndex];
 }
-function nextItem() { return plData.items[state.currentItemIndex+1] }
-function projectorSections() { return windows.projector.document.getElementById("song").getElementsByTagName("div") }
+function nextItem() { return plData.items[state.currentItemIndex+1]; }
+function projectorSections() { return windows.projector.document.getElementById("song").getElementsByTagName("div"); }
 function consoleSections()  {return windows.thisSong.contentDocument.getElementById("song").getElementsByTagName("div"); }
-function currentConsoleSection() { return ((consoleSections())[state.currentSectionIndex]) }
-function currentProjectorSection() { return ((projectorSections())[state.currentSectionIndex]) }
+function currentConsoleSection() { return consoleSections()[state.currentSectionIndex]; }
+function currentProjectorSection() { return projectorSections()[state.currentSectionIndex]; }
 function projectorLines () { return currentProjectorSection().getElementsByTagName("p"); }
 function consoleLines () { return currentConsoleSection().getElementsByTagName("p"); }
 function topOf (elem) { return elem.ownerDocument.getBoxObjectFor(elem).y; }
-function bottomOf (elem) { return topOf(elem) + elem.offsetHeight }
+function bottomOf (elem) { return topOf(elem) + elem.offsetHeight; }
 
 // Now the meat of it...
 
@@ -48,8 +48,8 @@ function my_onload() {
     var c = 0;
 
     var playlistLI = windows.console.document.getElementById("playlist");
-    windows.thisSong = document.getElementById("thissong-body"),
-    windows.nextSong = document.getElementById("nextsong-body")
+    windows.thisSong = document.getElementById("thissong-body");
+    windows.nextSong = document.getElementById("nextsong-body");
 
     windows.projector.screenX = windows.projector.screen.width+1;
     windows.projector.fullScreen = true;
@@ -78,10 +78,11 @@ function my_onload() {
 
 function switchItem(s, firstTime) {
     state.currentItemIndex = s;
-    if (!firstTime)
-        unhighlightSection();
+    if (!firstTime) { unhighlightSection(); }
     displayItem(currentItem());
 }
+
+function mkChangeSection(i) { return function () { changeSection(i); }; }
 
 function displayItem(item) { 
     // Display item in browser windows
@@ -99,11 +100,11 @@ function displayItem(item) {
 	    for (var i = 0; i < cs.length; i++) {
 	        var section = cs[i];
 	        section.addEventListener("click", mkChangeSection(i), true);
-	        if (section.className == "verse") { state.verses.push(i) }
+	        if (section.className == "verse") { state.verses.push(i); }
 	    }
 	    // Set up the "natural order"
 	    state.naturalOrder = determineNaturalOrder(item);
-	    if (state.naturalOrder.length && state.naturalOrder[0] == 0) { state.naturalOrder.shift() }
+	    if (state.naturalOrder.length && state.naturalOrder[0] === 0) { state.naturalOrder.shift(); }
 	    //jsdump("Natural order was: ");
 	    //for (var i in state.naturalOrder) { jsdump(state.naturalOrder[i]) };		
 	}
@@ -113,8 +114,6 @@ function displayItem(item) {
     windows.thisSong.contentWindow.scrollTo(0,0);
     highlightSection();
 }
-
-function mkChangeSection(i) { return function () { changeSection(i) } }
 
 function putItemInDoc(item, doc) {
     var song_place = doc.getElementById("song");
@@ -141,13 +140,11 @@ function unhighlightSection() {
         }
         state.highlightingIndividualLines = 0;
     }
-    if (!state.paused)
-        currentProjectorSection().style.visibility = "hidden";
+    if (!state.paused) { currentProjectorSection().style.visibility = "hidden"; }
 }
 
 function highlightSection() {
-    if (!state.paused) 
-        currentProjectorSection().style.visibility = "visible";
+    if (!state.paused) { currentProjectorSection().style.visibility = "visible"; }
     var ccs = currentConsoleSection();
     if (!fitsOnOnePage()) {
         ccs.style.backgroundColor = blankColor;
@@ -164,7 +161,7 @@ function firstOffscreenLine() {
     var pl = projectorLines();
     for (var i = 0; i < pl.length; i++) {
         var middleOf = (topOf(pl[i]) + bottomOf(pl[i]))/2;
-        if (middleOf > screenBottom) return i;
+        if (middleOf > screenBottom) { return i; }
     }
     return -1;
 }
@@ -184,14 +181,16 @@ function highlightVisibleElements() {
     }
 }
 
-function findNext(class) {
+function findNext(searchClass) {
     var i;
     var cs = consoleSections();
     var maxItem = cs.length - 1;
-    for (i = state.currentSectionIndex + 1; i <= maxItem; i++)
-        if (cs[i].className == class) return i;
-    for (i = 0; i < state.currentSectionIndex; i++)
-        if (cs[i].className == class) return i;
+    for (i = state.currentSectionIndex + 1; i <= maxItem; i++) {
+        if (cs[i].className == searchClass) { return i; }
+	}
+    for (i = 0; i < state.currentSectionIndex; i++) {
+        if (cs[i].className == searchClass) { return i; }
+	}
     return -1;
 }
 
@@ -220,7 +219,7 @@ function scrollProjectorByLine(offset) {
     if (state.scrolledOffset <0) {
         state.scrolledOffset = 0;
     }
-    var line = (projectorLines())[state.scrolledOffset];
+    var line = projectorLines()[state.scrolledOffset];
     smooth_scroll(topOf(line));
 }
 
@@ -235,8 +234,8 @@ function changeSection(sectionIndex) {
 function handleUp () {
     // If we're paused, we're at the top of the current section, or we
     // do not allow scrolling up-screen, then we change sections
-    if (state.scrolledOffset == 0 || state.paused || !allowScrollBackUp) {
-        if (state.currentSectionIndex == 0) return;
+    if (state.scrolledOffset === 0 || state.paused || !allowScrollBackUp) {
+        if (state.currentSectionIndex === 0) { return; }
         changeSection(state.currentSectionIndex-1);
         return;
     }
@@ -247,7 +246,7 @@ function handleDown() {
     // If the current section fits on one screen, or we're paused, then
     // we change sections
     if (state.paused || fitsOnOnePage()) {
-        if (state.currentSectionIndex == consoleSections().length-1) return;
+        if (state.currentSectionIndex == consoleSections().length-1) { return; }
         changeSection(state.currentSectionIndex+1);
         return;
     }
@@ -255,12 +254,12 @@ function handleDown() {
 }
 
 function pageDown() {
-    if (fitsOnOnePage()) return;
+    if (fitsOnOnePage()) { return; }
     var l = firstOffscreenLine();
-    if (l == -1) return;
+    if (l == -1) { return; }
     // Jump, don't (smooth) scroll
     state.scrolledOffset = l;
-    var line = (projectorLines())[l];
+    var line = projectorLines()[l];
     windows.projector.scrollTo(0, topOf(line));
     highlightVisibleElements();
 }
@@ -269,7 +268,7 @@ function pageUp() {}
 // Key handler
 function onKeyPress(e) {
     var fe = document.commandDispatcher.focusedElement;
-    if (fe && fe.tagName == "html:input") return;
+    if (fe && fe.tagName == "html:input") { return; }
     e.preventDefault();
     switch (e.keyCode) {
         case e.DOM_VK_UP: handleUp(); return;
@@ -282,17 +281,17 @@ function onKeyPress(e) {
     }
     var newSection = -1;
     switch (e.charCode) {
-        case e.DOM_VK_1: if (state.verses.length) newSection = state.verses[0]; break;
-        case e.DOM_VK_2: if (state.verses[1]) newSection = state.verses[1]; break;
-        case e.DOM_VK_3: if (state.verses[2]) newSection = state.verses[2]; break;
-        case e.DOM_VK_4: if (state.verses[3]) newSection = state.verses[3]; break;
-        case e.DOM_VK_5: if (state.verses[4]) newSection = state.verses[4]; break;
+        case e.DOM_VK_1: if (state.verses.length) { newSection = state.verses[0]; } break; 
+        case e.DOM_VK_2: if (state.verses[1]) {newSection = state.verses[1];} break; 
+        case e.DOM_VK_3: if (state.verses[2]) {newSection = state.verses[2];} break; 
+        case e.DOM_VK_4: if (state.verses[3]) {newSection = state.verses[3];} break; 
+        case e.DOM_VK_5: if (state.verses[4]) {newSection = state.verses[4];} break; 
         case 118: newSection = findNext("verse"); break; // v
-        case 110: if (state.naturalOrder.length > 0) newSection = state.naturalOrder.shift(); break; // n
+        case 110: if (state.naturalOrder.length > 0) { newSection = state.naturalOrder.shift(); } break; // n
         case 99: newSection = findNext("chorusdiv"); break; // c 
         case 98: newSection = findNext("bridge"); break; // b
     }
-    if (newSection == -1) return;
+    if (newSection == -1) { return; }
     changeSection(newSection);
 } 
 
@@ -333,31 +332,30 @@ function determineNaturalOrder(song) {
     // If there's one defined in the database, use that.
     // XXX but right now there isn't.
     var cs = consoleSections();
-    var splitSections = new Object;
-    splitSections["chorusdiv"] = [];
-    splitSections["bridge"] = [];
-    splitSections["verse"] = [];
-    for (var i = 0; i < cs.length; i++)
+    var splitSections = {};
+    splitSections.chorusdiv = [];
+    splitSections.bridge = [];
+    splitSections.verse = [];
+	var i, v, order;
+    for (i = 0; i < cs.length; i++) {
         splitSections[cs[i].className].push(i);
+	}
     // No bridge, no chorus: return verses
-    if (splitSections["chorusdiv"].length == 0 
-        && splitSections["bridge"].length == 0) 
-        return splitSections["verse"];
+    if (splitSections.chorusdiv.length === 0 && splitSections.bridge.length === 0) { return splitSections.verse; }
 
     // No bridge, one chorus: interleave verse/chorus
-    if (splitSections["bridge"].length == 0 &&
-        splitSections["chorusdiv"].length == 1) {
-        var order = [];
-        for (v in splitSections["verse"])
+    if (splitSections.bridge.length === 0 && splitSections.chorusdiv.length == 1) {
+        order = [];
+        for (v in splitSections.verse) {
             order.push(splitSections["verse"][v], splitSections["chorusdiv"][0]);
+		}
         return order;
     }
 
     // One or two sections: in that order
     if (cs.length <= 2) {
-        var order = [];
-        for (var i = 0; i < cs.length; i++)
-            order.push(i);
+        order = [];
+        for (i = 0; i < cs.length; i++) { order.push(i); }
         return order; 
     }
     return [];
