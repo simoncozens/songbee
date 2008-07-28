@@ -43,7 +43,9 @@ function schema_version () {
 	try {
 		var statement = mDBConn.createStatement("SELECT schema_version FROM songbee_system");
 		statement.executeStep();
-		return statement.getString(0);
+        var ver = statement.getString(0);
+        statement.reset();
+		return ver; 
 	} catch (e) { return 1 }
 }
 
@@ -126,6 +128,7 @@ function doSQL(sql, targetClass, callback, params) {
             rv.push(thing)
         } else { rv.push(thisArray) } 
     }
+	statement.reset();
     return rv;
 }
 
@@ -137,13 +140,10 @@ function doSQLStatement(sql, params) {
             statement.bindStringParameter(i, params[i]);
     }
     statement.execute();
+	statement.reset();
 }
 
-function auto_increment_value () { 
-    var statement = mDBConn.createStatement("SELECT last_insert_rowid()");
-    statement.executeStep();
-    return statement.getInt32(0);
-}
+function auto_increment_value () { return mDBConn.lastInsertRowID; }
 
 function Playlist () {}; databaseClass(Playlist, "playlist", [ "id", "name", "css" ]);
 function PlayItem () {}; databaseClass(PlayItem, "play_item", [ "id", "playlist", "song", "position", "type", "data" ]);
