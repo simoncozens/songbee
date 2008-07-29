@@ -11,9 +11,10 @@
         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
         minwidth="500"
         minheight="300">
+
+<script src="chrome://songbee/content/playitemtypes/playitemtypes.js"/>
 <script src="chrome://songbee/content/songbee-sql.js"/>
 <script src="chrome://songbee/content/export.js"/>
-<script src="chrome://songbee/content/playitemtypes/playitemtypes.js"/>
 <toolbox flex="1">
 <menubar id="main-menu">
     <menu id="file-menu" label="File">
@@ -40,15 +41,6 @@
 <script>
     var hns = "http://www.w3.org/1999/xhtml";
     var target = document.getElementById("playlist-list-ul");
-
-    /* Set up the Create... menu */
-    var create = document.getElementById("create-popup");
-    for (var type in ItemTypeTable) {
-        var item = document.createElement("menuitem");
-        item.setAttribute("label", ItemTypeTable[type].label);
-        item.setAttribute("oncommand", "ItemTypeTable."+type+".create()" );
-        create.appendChild(item);
-    }
 
     function playlistLI (pl) {
         var li = document.createElementNS(hns, "html:li");

@@ -15,8 +15,8 @@
 onmouseup="endDrag()"
   minheight="200" minwidth="500"
   xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
-<script src="chrome://songbee/content/songbee-sql.js"/>
 <script src="chrome://songbee/content/playitemtypes/playitemtypes.js"/>
+<script src="chrome://songbee/content/songbee-sql.js"/>
 <script src="chrome://songbee/content/xslt.js"/>
 <script src="chrome://songbee/content/songtreeview.js"/>
 <script src="chrome://songbee/content/findBar.js"/>
@@ -25,10 +25,23 @@ onmouseup="endDrag()"
   <key id="close_cmd" keycode="VK_ESCAPE" oncommand="escapeOut();"/>
 </keyset>
 <toolbox>
-    <toolbar id="add-toolbar">
-        <toolbarbutton label="&editPlaylist.save;" oncommand="saveDOC()"/>
-		<toolbarbutton label="Display Settings" oncommand="preferences()"/>
-    </toolbar>
+	
+	<menubar id="main-menu">
+	    <menu id="file-menu" label="File">
+	        <menupopup id="file-popup">
+	            <menuitem label="&editPlaylist.save;" oncommand="saveDOC()"/>
+	            <menuitem label="Export songs" oncommand="export_songs()"/>
+	            <menuseparator/>
+	            <menuitem label="Preferences" oncommand="preferences()"/>
+	            <menuseparator/>
+	            <menuitem label="Close" oncommand="window.close()"/>
+	        </menupopup>
+	    </menu>
+	    <menu id="create-menu" label="Create...">
+	        <menupopup id="create-popup">
+	        </menupopup>
+	    </menu>
+	</menubar>
 </toolbox>
 
 <popupset>
@@ -81,6 +94,16 @@ onmouseup="endDrag()"
     var pl = Playlist.retrieve(window.arguments[0]);
     var target = document.getElementById("playlistlist");
     var tree = document.getElementById("songlist");
+
+    /* Set up the Create... menu */
+    var create = document.getElementById("create-popup");
+    for (var type in ItemTypeTable) {
+        var item = document.createElement("menuitem");
+        item.setAttribute("label", ItemTypeTable[type].label);
+        item.setAttribute("oncommand", "ItemTypeTable."+type+".create()" );
+        create.appendChild(item);
+    }
+
     var ff = document.getElementById("find-field");
     var initial_order = new Array;
 

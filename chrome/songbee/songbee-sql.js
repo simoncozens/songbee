@@ -49,13 +49,6 @@ function schema_version () {
 	} catch (e) { return 1 }
 }
 
-function jsdump(str)
-{
-  Components.classes['@mozilla.org/consoleservice;1']
-            .getService(Components.interfaces.nsIConsoleService)
-            .logStringMessage(str);
-}
-
 function databaseClass (where, table, cols) {
     where.prototype.init = function (values) {
         var that = this;
@@ -188,23 +181,14 @@ PlayItem.prototype.song = function() {
 
 /* PlayItem function dispatchers. We are faking specialization here. */
 
-var PlayItemDispatchers = {
-	transformToHTML: {
-		song: function (stylesheet, doc) { return transformDOM(this.song().xmlDOM(), stylesheet, doc) },
-		fallback: function () { return "<p>[Don't know how to transform object of type "+this.type+"]</p>" }
-	},
-	postDisplayHook: {
-		song: function () { return this.song().played() },
-		fallback: function () {}
-	},
-	title: {
-		song: function () { return this.song().title() },
-		fallback: function() { return "[PlayItem "+this._id+"/"+this.type()+"]" }
-	}
+var ActionFallbacks = {
+	transformToHTML: function () { return "<p>[Don't know how to transform object of type "+this.type+"]</p>" },
+	postDisplayHook: function () {},
+	title: function() { return "[PlayItem "+this._id+"/"+this.type()+"]" }
 };
 
 PlayItem.prototype.specialize = function () {
-	for (var handle in PlayItemDispatchers) {
-		this[handle] = PlayItemDispatchers[handle][this.type()] || PlayItemDispatchers[handle]["fallback"];
+	for (var handle in ActionFallbacks) {
+		this[handle] = ItemTypeTable[this.type()][handle] || ActionFallbacks[handle];
 	}
 }

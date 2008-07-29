@@ -3,6 +3,7 @@
 <?xml-stylesheet href="chrome://songbee/content/css/fileinput.css" type="text/css"?>
 <window
     xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+    <script src="chrome://songbee/content/playitemtypes/playitemtypes.js"/>
 <script src="chrome://songbee/content/songbee-sql.js"/>
 <script src="chrome://songbee/content/import.js"/>
     <vbox>

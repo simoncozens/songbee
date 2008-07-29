@@ -14,7 +14,6 @@ function setupType(typename) {
 	var jsText;
 	try { jsText = readJSFile("playitemtypes/"+typename+"/"+typename+".js"); } catch (e) {};
 	if (jsText) { eval(jsText); }
-	jsdump(jsText);
 }
 
 for (var a in supportedTypes) { setupType(supportedTypes[a]); }
