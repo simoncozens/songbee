@@ -1,6 +1,6 @@
 /* Watch me pull a rabbit from out of my... */
 var JSON;
-var supportedTypes = [ "song", "bible", "noticesheet" ];
+var supportedTypes = [ "song", "bible", "noticesheet", "webpage" ];
 var ItemTypeTable = {}; // Filled in by setupType
 
 function jsdump(str) {
