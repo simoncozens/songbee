@@ -21,7 +21,7 @@ function xmlimport()  {
                                           "text/xml");
     } catch (e) { alert("Could not parse file!"); return } 
     var data = doc.documentElement;
-    if (data.tagName != "worshipml") { alert("File is not a songbee library!");return }
+    if (data.tagName != "worshipml" && data.tagName != "songs" ) { alert("File is not a songbee library!");return }
 
     var songs = doc.getElementsByTagName("song");
     var progressmeter = document.getElementById("meter");
