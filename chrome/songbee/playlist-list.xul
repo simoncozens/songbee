@@ -15,7 +15,7 @@
 <script src="chrome://songbee/content/playitemtypes/playitemtypes.js"/>
 <script src="chrome://songbee/content/songbee-sql.js"/>
 <script src="chrome://songbee/content/export.js"/>
-<toolbox flex="1">
+<toolbox>
 <menubar id="main-menu">
     <menu id="file-menu" label="File">
         <menupopup id="file-popup">
