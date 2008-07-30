@@ -45,12 +45,12 @@ function export_songs () {
                  .createInstance(Components.interfaces.nsIFileOutputStream);
     foStream.init(thefile, 0x02 | 0x08 | 0x20, 0664, 0); 
 
-    foStream.write("<worshipml>\n", 12);
+    foStream.write("<songs>\n", 12);
     Song.retrieveAll(function(song) { 
         var ser = new XMLSerializer(); 
         ser.serializeToStream(song.xmlDOM(), foStream, "");
     });
-    foStream.write("\n</worshipml>\n", 14);
+    foStream.write("\n</songs>\n", 14);
     foStream.close();
     alert("Saved "+thefile.leafName);
 }
