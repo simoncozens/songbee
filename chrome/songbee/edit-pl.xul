@@ -100,7 +100,7 @@ onmouseup="endDrag()"
     for (var type in ItemTypeTable) {
         var item = document.createElement("menuitem");
         item.setAttribute("label", ItemTypeTable[type].label);
-        item.setAttribute("oncommand", "ItemTypeTable."+type+".create()" );
+        item.setAttribute("oncommand", "ItemTypeTable."+type+".create(pl)" );
         create.appendChild(item);
     }
 
@@ -114,7 +114,7 @@ onmouseup="endDrag()"
         li.playitem = i;
 		li.piType = i.type();
 		li.piData = i.data();
-		li.piSong = i.song()._id;
+        if (i.type()  == 'song') li.piSong = i.song()._id;
         target.appendChild(li);
         initial_order.push(i._id);
     });
@@ -137,7 +137,7 @@ function doTreeDoubleClick() {
     addToPlaylist(selectedSong(), "song", "");
 }
 
-function addToPlaylist(song, type, data) {
+function addToPlaylist(song, type, data, label) {
     // Convert to listitem
 	var li = document.createElement("listitem");
     li.setAttribute("onmousedown", "dragging = event.target;");
@@ -149,7 +149,7 @@ function addToPlaylist(song, type, data) {
 		if (!s) { alert("Bug: Couldn't get a song we've clicked on") }
 		li.piSong = s.id();
 	} else {
-		alert("Bug: Need to represent a non-song item in the playlist");
+        li.setAttribute("label", label);
 	}
     target.appendChild(li);
 }

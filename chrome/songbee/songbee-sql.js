@@ -168,12 +168,12 @@ Playlist.prototype.tidy_up = function () {
 Playlist.prototype.add_item = function(song, position, type, data) {
 	if (!type) type = "song";
 	if (!data) data = "";
-	if (type == "song" && !song) { alert("Bug: No song ID given for song item."); return; }
+	if (type == "song" && !song) { bug("No song ID given for song item."); return; }
     doSQLStatement("INSERT INTO play_item (playlist, song, position, type, data) VALUES ((?1), (?2), (?3),(?4),(?5))", [this._id, song, position, type, data]);
 };
 
 PlayItem.prototype.song = function() {
-	if (this.type() != "song") { alert("Bug: song called on playitem "+this._id+" which has type ["+this.type+"]"); }
+	if (this.type() != "song") { bug("song called on playitem "+this._id+" which has type ["+this.type()+"]"); }
 	var songlist = doSQL("SELECT song.id, song_key, title, first_line, xml FROM song  WHERE id = "+this._song, Song);
 	if (songlist.length < 1 )  { alert("Retrieving song not in database: has it been deleted?"); }
 	return songlist[0]
