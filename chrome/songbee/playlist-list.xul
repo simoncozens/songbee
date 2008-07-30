@@ -118,7 +118,7 @@
         var pldesc = document.getElementById("pl"+id+"desc");
         if (promptService.confirm(window, "&playlistList.deletePlaylist;", "&playlistList.permanentDelete;")) {
             target.removeChild(pl);
-            target.removeChild(pldesc);
+            if (pldesc) { target.removeChild(pldesc); }
             var pl = Playlist.retrieve(id);
             pl.drop();
         }
