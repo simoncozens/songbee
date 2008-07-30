@@ -150,7 +150,7 @@
     function opendebugger() { 
 const Cc = Components.classes;
 const Ci = Components.interfaces;
-Components.utils.import("resource://gre/modules/XPCOMUtils.jsm");
+//Components.utils.import("resource://gre/modules/XPCOMUtils.jsm");
         var wm = Cc["@mozilla.org/appshell/window-mediator;1"].
                  getService(Ci.nsIWindowMediator);
         var console = wm.getMostRecentWindow("global:console");
