@@ -87,7 +87,8 @@ function mkChangeSection(i) { return function () { changeSection(i); }; }
 function displayItem(item) { 
     // Display item in browser windows
     putItemInDoc(item, windows.projector.document);
-    cleanProjectorWindow(); // Do this as quickly as possible
+    if (item.type() == "song") 
+        cleanProjectorWindow(); // Do this as quickly as possible
     putItemInDoc(item, windows.thisSong.contentDocument);
     putItemInDoc(nextItem(), windows.nextSong.contentDocument);
 
