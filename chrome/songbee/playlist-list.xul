@@ -23,6 +23,7 @@
             <menuitem label="Export songs" oncommand="export_songs()"/>
             <menuseparator/>
             <menuitem label="Preferences" oncommand="preferences()"/>
+            <menuitem label="Debugger" oncommand="opendebugger()"/>
             <menuseparator/>
             <menuitem label="Exit" oncommand="window.close()"/>
         </menupopup>
@@ -142,6 +143,22 @@
    function preferences() {
         window.openDialog("chrome://songbee/content/preferences.xul",
         "preferences", "chrome, dialog");
-   }
+    }
+    function opendebugger() { 
+const Cc = Components.classes;
+const Ci = Components.interfaces;
+Components.utils.import("resource://gre/modules/XPCOMUtils.jsm");
+        var wm = Cc["@mozilla.org/appshell/window-mediator;1"].
+                 getService(Ci.nsIWindowMediator);
+        var console = wm.getMostRecentWindow("global:console");
+        if (!console) {
+          var wwatch = Cc["@mozilla.org/embedcomp/window-watcher;1"].
+                       getService(Ci.nsIWindowWatcher);
+          wwatch.openWindow(null, "chrome://global/content/console.xul", "_blank", "chrome,dialog=no,all", null);
+        } else {
+          console.focus(); // the Error console was already open
+        }
+
+    }
 </script>
 </window>
