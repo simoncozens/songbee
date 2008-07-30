@@ -88,18 +88,21 @@
     }
 
     var playlists;
-    while (target.firstChild) { target.removeChild(target.firstChild); }
-    playlists = Playlist.retrieveAll(
-    function (playlist) { 
-        target.appendChild( playlistLI( playlist ));
-        var pldesc = document.createElementNS(hns,"html:p");
-        pldesc.setAttribute("id", "pl"+playlist.id()+"desc");
-        pldesc.setAttribute("flex", "1");
-        pldesc.setAttribute("style", "border:1px solid black; background: #eee; padding: 5px;");
-        target.appendChild(pldesc);
-        describe_playlist(playlist);
-    }
-    );
+    window.setup = function () { 
+        while (target.firstChild) { target.removeChild(target.firstChild); }
+        playlists = Playlist.retrieveAll(
+        function (playlist) { 
+            target.appendChild( playlistLI( playlist ));
+            var pldesc = document.createElementNS(hns,"html:p");
+            pldesc.setAttribute("id", "pl"+playlist.id()+"desc");
+            pldesc.setAttribute("flex", "1");
+            pldesc.setAttribute("style", "border:1px solid black; background: #eee; padding: 5px;");
+            target.appendChild(pldesc);
+            describe_playlist(playlist);
+        }
+        );
+    };
+    window.setup(); // Not used elsewhere here, but used in edit-pl.xul
 
     function create_pl () {
         var name = prompt("&playlistList.newPlaylistName;");
