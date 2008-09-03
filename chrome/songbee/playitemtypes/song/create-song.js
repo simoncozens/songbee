@@ -23,21 +23,45 @@ function update_preview() {
 }
 
 function SongPrototype() {
+	var tc = document.getElementById("tc");
+    for (var i =0; i < tc.childNodes.length; i++) {
+		var node = tc.childNodes[i].firstChild.childNodes[1];
+		this[node.id] = node.getAttribute("label")
+	}
     this.lyrics = document.getElementById("lyrics").value;
-    this.title = document.getElementById("song-title").value;
-    this.author = document.getElementById("author").value;
-    this.owner = document.getElementById("copyright").value;
-    this.year = document.getElementById("year").value;
-    this.key = document.getElementById("song-key").value;
+    //this.title = document.getElementById("song-title").value;
 }
 
+function addTreeChild(id, label, value) {
+	var keyNode = document.createElement("treecell"); keyNode.setAttribute("label", label);
+	var valueNode = document.createElement("treecell"); valueNode.setAttribute("label", value);
+	valueNode.setAttribute("id", id);
+	
+	var row = document.createElement("treerow");
+	var item = document.createElement("treeitem");
+	row.appendChild(keyNode); row.appendChild(valueNode);
+	item.appendChild(row);
+	var	tc = document.getElementById("tc");
+	tc.appendChild(item);
+}
+	
 function seedFromSong(s) {
-    document.getElementById("song-title").value = s.title();
-    document.getElementById("song-key").value  = s.song_key();
-    var dom = s.xmlDOM();
+	var dom = s.xmlDOM();
     document.getElementById("lyrics").value = to_text(dom);
     putDomInPreview(dom);
-    // These need seeding from XPath...
+	
+	var metadata = dom.getElementsByTagName("head")[0].childNodes;
+	for (var i in metadata) { var datum = metadata[i];
+		if (!datum.tagName) continue;
+		var text = datum.textContent;
+		text = text.replace(/^\s+/, ""); 
+		text = text.replace(/\s+$/, "");
+		if (datum.tagName == "title") {
+			document.getElementById("title").setAttribute("label", text);
+		} else {
+			addTreeChild(datum.tagName, datum.tagName, text);
+		}
+	}
 }
 
 function to_text(dom) {
@@ -45,13 +69,17 @@ function to_text(dom) {
     var text = transformDOM(dom, xslt, dom);
     return text.textContent;
 }
+
+function Xesc(s) { return s.replace(/</g, "&lt;") }
+
 function from_text() {
-    var output = "<song>\n<head>\n<title>"
     var s = new SongPrototype();
-    output += s.title+"</title>\n";
-    output += "<copyright>\n\t<author>"+s.author+"</author>\n";
-    output += "\t<owner>"+s.owner+"</owner>\n</copyright>\n";
-    output += "<key>"+s.key+"</key>\n</head>\n\n";
+    var output = "<song>\n<head>\n";
+	for (var k in s) {
+		if (k == "lyrics") continue;
+		output += "<" + k + ">"+ Xesc(s[k]) + "</"+k+">\n";
+	}
+    output += "\n</head>\n\n";
     output += "<lyrics>";
 
     var lyr = s.lyrics.replace(/\r/g, "");

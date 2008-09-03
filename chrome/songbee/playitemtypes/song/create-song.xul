@@ -18,22 +18,22 @@
 <vbox flex="1">
     <hbox flex="1">
         <vbox>
-            <hbox>
-                <label control="song-title">&songbee.title;</label> <textbox id="song-title"/>
-                <label control="song-key">&songbee.key;</label> <textbox id="song-key"/>
-            </hbox>
-            <hbox>
-                <label control="author">&songbee.author;</label> <textbox id="author"/>
-                <label control="year">&songbee.year;</label> <textbox id="year"/>
-            </hbox>
-            <hbox>
-                <label control="copyright">&songbee.copyright;</label> <textbox id="copyright"/>
-            </hbox>
+			<tree flex="1" minwidth="200" editable="true" id="songmetadata">
+				<treecols>
+					<treecol id="key" flex="1"/>
+					<treecol id="value" flex="1" editable="true"/>
+				</treecols>
+				<treechildren id="tc">
+					<treeitem><treerow>
+						<treecell label="&songbee.title;"/> <treecell id="title" label=""/>
+					</treerow></treeitem>			
+				</treechildren>
+			</tree>
             <textbox multiline="true" id="lyrics" flex="1" oninput="update_preview()"/>
         </vbox>
+	    <splitter/>
         <iframe id="preview" flex="1" name="preview" src="chrome://songbee/content/blank-song.html"/>
     </hbox>
-    
     <vbox flex="0" maxheight="50">
         <hbox>
             <button label="&songbee.cancel;" oncommand="window.close();"/>

@@ -21,10 +21,11 @@ var mDBConn = storageService.openDatabase(file);
 /* Songbee 2 SQLite Schema
 
 songbee_system : schema_version
-play_item : id, playlist, song, position, type, data
+play_item : id, playlist, song, position, type, data 
 playlist     : id, name, css
 song          : id, song_key, title, first_line, xml, age, playcount
 
+WARNING : "song_key" is now redundant.
 */
 
 // Various functions to upgrade the schema on changes
