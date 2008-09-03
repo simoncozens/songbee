@@ -15,17 +15,22 @@
 <script src="chrome://songbee/content/songbee-sql.js"/>
 <script src="chrome://songbee/content/xslt.js"/>
 <script src="chrome://songbee/content/playitemtypes/song/create-song.js"/>
+<popupset>
+    <popup id="addmdpopup">
+        <menuitem label="Add metadata" oncommand="addTreeRow()"/>
+	</popup>
+</popupset>
 <vbox flex="1">
     <hbox flex="1">
         <vbox>
-			<tree flex="1" minwidth="200" editable="true" id="songmetadata">
+			<tree flex="1" minwidth="200" editable="true" id="songmetadata" context="addmdpopup">
 				<treecols>
-					<treecol id="key" flex="1"/>
+					<treecol id="key" flex="1" editable="false"/>
 					<treecol id="value" flex="1" editable="true"/>
 				</treecols>
 				<treechildren id="tc">
 					<treeitem><treerow>
-						<treecell label="&songbee.title;"/> <treecell id="title" label=""/>
+						<treecell label="&songbee.title;" editable="false"/> <treecell id="title" label=""/>
 					</treerow></treeitem>			
 				</treechildren>
 			</tree>

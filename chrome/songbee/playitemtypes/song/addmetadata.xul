@@ -1,0 +1,37 @@
+<?xml version="1.0"?> 
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+
+<dialog
+  xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+  id="AddMetadata"
+  title="Add Metadata"
+  ondialogaccept="return fixup();"
+>
+
+  
+  <grid>
+    <columns><column/><column/></columns>
+    <rows>
+      <row align="center"><label value="Name:"/>
+	  <menulist editable="true" id="type">
+		<menupopup>
+			<menuitem label="author" value="author"/>
+			<menuitem label="key" value="key"/>
+			<menuitem label="language" value="language"/>
+			<menuitem label="sambika" value="sambika"/>
+			<menuitem label="shinseika" value="shinseika"/>
+			<menuitem label="year" value="year"/>
+		</menupopup>
+	  </menulist>
+	  </row>
+      <row align="center"><label value="Value:"/><textbox id="value"/></row>
+    </rows>
+  </grid>
+  <script>
+	function fixup() {
+		window.arguments[0].type = document.getElementById("type").value;
+		window.arguments[0].value = document.getElementById("value").value;
+		return true;
+	}
+  </script>
+</dialog>

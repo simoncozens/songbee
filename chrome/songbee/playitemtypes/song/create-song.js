@@ -34,6 +34,7 @@ function SongPrototype() {
 
 function addTreeChild(id, label, value) {
 	var keyNode = document.createElement("treecell"); keyNode.setAttribute("label", label);
+	keyNode.setAttribute("editable", "false");
 	var valueNode = document.createElement("treecell"); valueNode.setAttribute("label", value);
 	valueNode.setAttribute("id", id);
 	
@@ -101,4 +102,12 @@ function from_text() {
     }
     output += "</lyrics>\n</song>";
     return output;
+}
+
+function addTreeRow() {
+	var result = {};
+	window.openDialog("chrome://songbee/content/playitemtypes/song/addmetadata.xul", "", "chrome, dialog, modal, resizable=no", result).focus();
+	if (result.type) {
+		addTreeChild(result.type, result.type, result.value);
+	}
 }
