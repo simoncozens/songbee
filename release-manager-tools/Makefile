@@ -17,13 +17,12 @@ release : release-osx release-win release-unix
 release-win : checkout-pristine create-clean-dist get-xulrunner add-icon make-installer
 
 release-unix : checkout-pristine create-clean-dist zip-dist
-	cd $(SCRATCHDIR)
-	mkdir songbee-$(VERSION)
-	mv songbee.zip songbee-$(VERSION)
-	cp $(PRISTINE)/release-manager-tools/README.unix songbee-$(VERSION)/README
-	cp $(PRISTINE)/manual/book.pdf songbee-$(VERSION)/manual.pdf
-	cp $(PRISTINE)/release-manager-tools/install.sh songbee-$(VERSION)
-	tar czvf $(RELEASEDIR)/songbee-$(VERSION).tar.gz songbee-$(VERSION)	
+	mkdir $(SCRATCHDIR)/songbee-$(VERSION)
+	mv $(SCRATCHDIR)/songbee.zip $(SCRATCHDIR)/songbee-$(VERSION)
+	cp $(PRISTINE)/release-manager-tools/README.unix $(SCRATCHDIR)/songbee-$(VERSION)/README
+	cp $(PRISTINE)/manual/book.pdf $(SCRATCHDIR)/songbee-$(VERSION)/manual.pdf
+	cp $(PRISTINE)/release-manager-tools/install.sh $(SCRATCHDIR)/songbee-$(VERSION)
+	tar czvf $(RELEASEDIR)/songbee-$(VERSION).tar.gz $(SCRATCHDIR)/songbee-$(VERSION)	
 
 checkout-pristine :
 	rm -rf $(PRISTINE)
@@ -34,13 +33,13 @@ create-clean-dist:
 	rm -rf $(SCRATCHDIR)
 	cp -ar $(PRISTINE) $(SCRATCHDIR)
 	cd $(SCRATCHDIR); rm -rf Songbee.icns release-manager-tools **/svn-commit* **/.svn songs manual load.pl
+	cd $(SCRATCHDIR); find . -name '.svn' -print0 | xargs -0 rm -rf
 
 zip-dist:
-	cd $(SCRATCHDIR)
-	zip -r songbee.zip *
+	cd $(SCRATCHDIR);zip -r songbee.zip *
 
 get-xulrunner:
-	cd $(SCRATCHDIR);wget http://ftp.mozilla.org/pub/mozilla.org/xulrunner/nightly/latest-trunk/xulrunner-1.9pre.en-US.win32.zip
+	cd $(SCRATCHDIR);wget http://ftp.mozilla.org/pub/mozilla.org/xulrunner/nightly/latest-trunk/xulrunner-1.9.0.2pre.en-US.win32.zip
 	cd $(SCRATCHDIR);unzip xulrunner-*.en-US.win32.zip
 	rm $(SCRATCHDIR)/xulrunner-*.en-US.win32.zip 
 	mv $(SCRATCHDIR)/xulrunner/xulrunner-stub.exe $(SCRATCHDIR)/songbee.exe
