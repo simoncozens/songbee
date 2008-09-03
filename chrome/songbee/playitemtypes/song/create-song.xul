@@ -67,7 +67,8 @@ function savechanges() {
     song.song_key(s.key);
     window.close();
     var lines = xmlDOM.evaluate("//line", xmlDOM, null, XPathResult.ANY_TYPE,null); 
-    var firstLine = lines.iterateNext().firstChild;
+	
+    var firstLine = lines.iterateNext();
     song.first_line(firstLine.textContent);
 }
 </script>
