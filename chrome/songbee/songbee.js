@@ -32,9 +32,12 @@ function currentItem() {
     }
     return plData.items[state.currentItemIndex];
 }
+function grep(func, list) { var out = new Array(); for (var i = 0; i < list.length; i++) { if (func(list[i])) { out.push(list[i]) } } return out; };
+
+function nonContainer (x) {return x.className != "container" }
 function nextItem() { return plData.items[state.currentItemIndex+1]; }
-function projectorSections() { return windows.projector.document.getElementById("song").getElementsByTagName("div"); }
-function consoleSections()  {return windows.thisSong.contentDocument.getElementById("song").getElementsByTagName("div"); }
+function projectorSections() { return grep(nonContainer,windows.projector.document.getElementById("song").getElementsByTagName("div")) }
+function consoleSections()  {return grep(nonContainer, windows.thisSong.contentDocument.getElementById("song").getElementsByTagName("div")) }
 function currentConsoleSection() { return consoleSections()[state.currentSectionIndex]; }
 function currentProjectorSection() { return projectorSections()[state.currentSectionIndex]; }
 function projectorLines () { return currentProjectorSection().getElementsByTagName("p"); }

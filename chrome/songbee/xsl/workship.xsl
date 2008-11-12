@@ -24,33 +24,39 @@
 <xsl:template match="verse">
   <div class="verse">
   <span class="partnum"> <xsl:value-of select="count(preceding-sibling::verse)+1"/></span>
+  <div class="container">
   <xsl:for-each select="line">
   <p class="line">
     <xsl:apply-templates/>
   </p>
   </xsl:for-each>
+  </div>
   </div>
 </xsl:template>
 
 <xsl:template match="chorus">
   <div class="chorusdiv">
   <span class="partnum"> C </span>
+  <div class="container">
   <xsl:for-each select="line">
   <p class="line">
     <xsl:apply-templates/>
   </p>
   </xsl:for-each>
   </div>
+  </div>
 </xsl:template>
 
 <xsl:template match="bridge">
   <div class="bridge">
   <span class="partnum"> B </span>
+  <div class="container">
   <xsl:for-each select="line">
   <p class="line">
     <xsl:apply-templates/>
   </p>
   </xsl:for-each>
+  </div>
   </div>
 </xsl:template>
 

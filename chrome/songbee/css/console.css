@@ -10,4 +10,6 @@
 .verse { position: static; background: #fff; padding: 0px; border-bottom: 1px dotted gray }
 BODY { BACKGROUND-COLOR: #ffffea }
 HTML { overflow: auto }
+.container { margin-left: 0; margin-right: 0;}
+
 

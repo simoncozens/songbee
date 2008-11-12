@@ -6,13 +6,17 @@ BODY {
     background-repeat: no-repeat;
 }
 
-.content { padding: 40pt; }
-.chorusdiv,.verse,.bridge { position:absolute; }
+.content { padding: 15pt; }
+.chorusdiv,.verse,.bridge { position:absolute; width:100% }
+.container { display: table; margin-left: auto; margin-right: auto;}
 .bridge { font-style: italic }
 /* ruby { border: 1px solid red; } */
-.line { font-size: 40pt; font-weight: bold; margin-right: 20px;
+.line { font-size: 40pt; font-weight: bold; 
 FONT-FAMILY: Arial; color: #007;
-padding:10px;line-height:150% }
+line-height:150%;
+margin:10px 20px;
+padding:0;
+}
 .sup { font-size: 40%; position:absolute;top:-2.1em; left:-0px; width:100%;
 text-align: center;
 FONT-FAMILY: Optima, "Lucida Grande",Sans-serif;
