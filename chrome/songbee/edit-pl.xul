@@ -53,12 +53,11 @@ onmouseup="endDrag()"
     </popup>
 </popupset>
 
+        <stack onmousemove="if(dragging) { doMove(event) }" id="canvas">
 <vbox flex="1">
     <hbox flex="1">
         <vbox flex="1" label="&songbee.playlist;">
-        <stack onmousemove="if(dragging) { doMove(event) }">
         <listbox id="playlistlist" onkeypress="if (event.keyCode == 8) { deleteHighlighted() }" flex="1" minheight="400"/>
-        </stack>
         </vbox>
         <splitter/>
         <vbox flex="1">
@@ -91,6 +90,7 @@ onmouseup="endDrag()"
       <button id="save-changes" label="&songbee.save;" oncommand="savechanges(); window.close()" style="list-style-image: none"/>
     </toolbar>
     </vbox>
+        </stack>
 <script>
     var pl = Playlist.retrieve(window.arguments[0]);
     var target = document.getElementById("playlistlist");
@@ -106,6 +106,7 @@ onmouseup="endDrag()"
     }
 
     var ff = document.getElementById("find-field");
+    var canvas = document.getElementById("canvas");
     var initial_order = new Array;
 
 function setup () {
@@ -129,7 +130,6 @@ var dragSetup = 0;
 
 function beginToDrag (t) {
         var list = t.parentNode;
-        var canvas = list.parentNode;
         list.removeChild(t);
         canvas.insertBefore(t, canvas.firstChild);
         window.setCursor("grabbing");
@@ -172,7 +172,7 @@ function endDrag() { if (!dragging) return;
     newElem.setAttribute("label", dragging.label);
 	var toCopy = ["piSong", "piData", "piType"];
 	for (var a in toCopy) newElem[toCopy[a]] = dragging[toCopy[a]];
-    newElem.setAttribute("onmousedown", "myDragAndDrop.startDrag(event,liObserver);");
+    newElem.setAttribute("onmousedown", "dragging = event.target;");
     dragSetup = 0;
     // Where to put it?
     var top = dragging.boxObject.screenY;
