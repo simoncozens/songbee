@@ -12,6 +12,7 @@
 
 <window id="edit-pl" title="&editPlaylist.title;"
   xmlns:html="http://www.w3.org/1999/xhtml"
+  onload="setup()"
 onmouseup="endDrag()"
   minheight="200" minwidth="500"
   xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
@@ -107,6 +108,7 @@ onmouseup="endDrag()"
     var ff = document.getElementById("find-field");
     var initial_order = new Array;
 
+function setup () {
     pl.items(function (i) {
         var li = document.createElement("listitem");
         li.setAttribute("onmousedown", "dragging = event.target;");
@@ -120,6 +122,8 @@ onmouseup="endDrag()"
     });
 
     tree.view = new songTreeView();
+}
+
 var dragging = 0;
 var dragSetup = 0;
 
