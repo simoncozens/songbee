@@ -70,7 +70,7 @@ onmouseup="endDrag()"
                 <treecol id="first_line" label="&songbee.firstLine;" flex="2"/>
                 <treecol id="id" label="" hidden="true" ignoreincolumnpicker="true"/>
             </treecols>
-            <treechildren context="songpopup" onmousedown="createFakeLI(event)"/>
+            <treechildren context="songpopup" onmousedown="createFakeLI(event)" onmouseup="endDrag()"/>
         </tree>
         <splitter/>
         <iframe id="preview" flex="1" name="preview" src="chrome://songbee/content/blank-song.html"/>
@@ -129,6 +129,7 @@ var dragging = 0;
 var dragSetup = 0;
 
 function beginToDrag (t) {
+    //jsdump("Begin to drag , dragging is "+dragging);
         var list = t.parentNode;
         if (list) list.removeChild(t);
         canvas.insertBefore(t, canvas.firstChild);
@@ -149,6 +150,7 @@ function setFlex(f) {
 }
 
 function createFakeLI(event) {
+    if (event.button != 0) return; // Only want left mouse click
     var row = tree.treeBoxObject.getRowAt(event.clientX, event.clientY);
     var song = tree.view.getCellText(row, tree.columns.getNamedColumn("id"));
     dragging = itemToListItem(song, "song", "");
@@ -193,39 +195,43 @@ function box (e) {
 function completelyOutside (item, container) {
     var iBox = box(item);
     var cBox = box(container);
-    jsdump("Item : L"+iBox.left+" T"+iBox.top+" R"+iBox.right+ " B"+iBox.bottom);
-    jsdump("Container : L"+cBox.left+" T"+cBox.top+" R"+cBox.right+ " B"+cBox.bottom);
+    //jsdump("Item : L"+iBox.left+" T"+iBox.top+" R"+iBox.right+ " B"+iBox.bottom);
+    //jsdump("Container : L"+cBox.left+" T"+cBox.top+" R"+cBox.right+ " B"+cBox.bottom);
     if (iBox.left   &gt; cBox.right  ) return 1;
     if (iBox.right  &lt; cBox.left   ) return 1;
     if (iBox.top    &gt; cBox.bottom ) return 1;
     if (iBox.bottom &lt; cBox.top    ) return 1;
-    jsdump("Falls inside");
+    //jsdump("Falls inside");
     return 0;
 }
-function endDrag() { if (!dragging) return;
+function endDrag() {
+    //jsdump("End drag called; dragging is "+dragging);
     setFlex(1);
     window.setCursor("auto");
+    var wasDragging = dragging;
     dragSetup = 0;
+    dragging = 0;
+    if (!wasDragging) return;
     var list = document.getElementById("playlistlist");
-    if ( completelyOutside(dragging, list) ) {
-        jsdump("Fell outside");
+    if ( completelyOutside(wasDragging, list) ) {
+        //jsdump("Fell outside");
         dragging.parentNode.removeChild(dragging);
-        dragging = 0; return;
+        return;
     }
     // Create the new element
     var newElem = document.createElement("listitem");
-    newElem.setAttribute("label", dragging.label);
+    newElem.setAttribute("label", wasDragging.label);
 	var toCopy = ["piSong", "piData", "piType"];
-	for (var a in toCopy) newElem[toCopy[a]] = dragging[toCopy[a]];
+	for (var a in toCopy) newElem[toCopy[a]] = wasDragging[toCopy[a]];
     newElem.setAttribute("onmousedown", "dragging = event.target;");
 
     // Where to put it?
-    var dragBox = box(dragging);
+    var dragBox = box(wasDragging);
     var items = list.getElementsByTagName( "listitem" );
     for (var i =0; i &lt; items.length; i++) {
         var off= items[i].boxObject.screenY;
         if (dragBox.top &lt;= off) {
-            dragging.parentNode.removeChild(dragging);
+            wasDragging.parentNode.removeChild(wasDragging);
             list.insertBefore(newElem , items[i]);
             list.selectItem(newElem);
             list.currentItem = newElem;
@@ -233,7 +239,7 @@ function endDrag() { if (!dragging) return;
             return;
         }
     }
-    dragging.parentNode.removeChild(dragging);
+    wasDragging.parentNode.removeChild(dragging);
     list.appendChild(newElem);
     list.selectItem(newElem);
     list.currentItem = newElem;
