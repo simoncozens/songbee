@@ -104,9 +104,24 @@ function from_text() {
     return output;
 }
 
-function addTreeRow() {
+function addTreeRow(type) {
 	var result = {};
+    if (type) { result.type = type }
 	window.openDialog("chrome://songbee/content/playitemtypes/song/addmetadata.xul", "", "chrome, dialog, modal, resizable=no", result).focus();
+	if (result.type) {
+		addTreeChild(result.type, result.type, result.value);
+	}
+}
+
+function markTranslation () {
+    var s = new SongPrototype();
+    if (!s.language) { 
+        alert("You must add a 'language' tag to this song first");
+        return addTreeRow("language");
+    }
+	var result = {};
+    alert("I haven't finished this yet. :(");
+	window.openDialog("chrome://songbee/content/playitemtypes/song/marktranslation.xul", "", "chrome, dialog, modal, resizable=no", result).focus();
 	if (result.type) {
 		addTreeChild(result.type, result.type, result.value);
 	}
