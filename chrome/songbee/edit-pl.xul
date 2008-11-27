@@ -54,8 +54,8 @@ onmouseup="endDrag()"
 </popupset>
 
         <stack onmousemove="if(dragging) { doMove(event) }" id="canvas">
-<vbox flex="1">
-    <hbox flex="1">
+<vbox flex="1" id="box1">
+    <hbox flex="1" id="box2">
         <vbox flex="1" label="&songbee.playlist;">
         <listbox id="playlistlist" onkeypress="if (event.keyCode == 8) { deleteHighlighted() }" flex="1" minheight="400"/>
         </vbox>
@@ -70,7 +70,7 @@ onmouseup="endDrag()"
                 <treecol id="first_line" label="&songbee.firstLine;" flex="2"/>
                 <treecol id="id" label="" hidden="true" ignoreincolumnpicker="true"/>
             </treecols>
-            <treechildren context="songpopup"/>
+            <treechildren context="songpopup" onmousedown="createFakeLI(event)"/>
         </tree>
         <splitter/>
         <iframe id="preview" flex="1" name="preview" src="chrome://songbee/content/blank-song.html"/>
@@ -130,18 +130,37 @@ var dragSetup = 0;
 
 function beginToDrag (t) {
         var list = t.parentNode;
-        list.removeChild(t);
+        if (list) list.removeChild(t);
         canvas.insertBefore(t, canvas.firstChild);
         window.setCursor("grabbing");
+
+        // Stop rearranging the window while we drag stuff about
+        setFlex(0);
         dragSetup = 1;
         //doMove(evt);
 }
 
-function doTreeDoubleClick() {
-    addToPlaylist(selectedSong(), "song", "");
+function setFlex(f) {
+    var elems = [ "box1", "box2", "playlistlist" ];
+    for (var i in elems) { 
+        var e = document.getElementById(elems[i]);
+        e.setAttribute("flex", f);
+    }
 }
 
-function addToPlaylist(song, type, data, label) {
+function createFakeLI(event) {
+    var row = tree.treeBoxObject.getRowAt(event.clientX, event.clientY);
+    var song = tree.view.getCellText(row, tree.columns.getNamedColumn("id"));
+    dragging = itemToListItem(song, "song", "");
+    // jsdump("Set to drag "+song);
+}
+
+function doTreeDoubleClick() {
+    var li = itemToListItem(selectedSong(), "song", "");
+    target.appendChild(li);
+}
+
+function itemToListItem(song, type, data, label) {
     // Convert to listitem
 	var li = document.createElement("listitem");
     li.setAttribute("onmousedown", "dragging = event.target;");
@@ -155,32 +174,57 @@ function addToPlaylist(song, type, data, label) {
 	} else {
         li.setAttribute("label", label);
 	}
-    target.appendChild(li);
+    return li;
 }
 
 function doMove(e) {
     //dragging.style["position"] = "absolute";
     if (!dragSetup) { beginToDrag(dragging) }
-    //dragging.setAttribute("left", e.clientX);
+    dragging.setAttribute("left", e.clientX);
     dragging.setAttribute("top", e.clientY);
     dragging.setAttribute("ordinal", 3);
 }
 
+function box (e) {
+    var bo = e.boxObject;
+    return {left: bo.screenX, right: bo.screenX+bo.width, top: bo.screenY, bottom: bo.screenY+bo.height };
+}
+
+function completelyOutside (item, container) {
+    var iBox = box(item);
+    var cBox = box(container);
+    jsdump("Item : L"+iBox.left+" T"+iBox.top+" R"+iBox.right+ " B"+iBox.bottom);
+    jsdump("Container : L"+cBox.left+" T"+cBox.top+" R"+cBox.right+ " B"+cBox.bottom);
+    if (iBox.left   &gt; cBox.right  ) return 1;
+    if (iBox.right  &lt; cBox.left   ) return 1;
+    if (iBox.top    &gt; cBox.bottom ) return 1;
+    if (iBox.bottom &lt; cBox.top    ) return 1;
+    jsdump("Falls inside");
+    return 0;
+}
 function endDrag() { if (!dragging) return;
+    setFlex(1);
     window.setCursor("auto");
+    dragSetup = 0;
+    var list = document.getElementById("playlistlist");
+    if ( completelyOutside(dragging, list) ) {
+        jsdump("Fell outside");
+        dragging.parentNode.removeChild(dragging);
+        dragging = 0; return;
+    }
+    // Create the new element
     var newElem = document.createElement("listitem");
     newElem.setAttribute("label", dragging.label);
 	var toCopy = ["piSong", "piData", "piType"];
 	for (var a in toCopy) newElem[toCopy[a]] = dragging[toCopy[a]];
     newElem.setAttribute("onmousedown", "dragging = event.target;");
-    dragSetup = 0;
+
     // Where to put it?
-    var top = dragging.boxObject.screenY;
-    var list = document.getElementById("playlistlist");
+    var dragBox = box(dragging);
     var items = list.getElementsByTagName( "listitem" );
     for (var i =0; i &lt; items.length; i++) {
         var off= items[i].boxObject.screenY;
-        if (top &lt;= off) {
+        if (dragBox.top &lt;= off) {
             dragging.parentNode.removeChild(dragging);
             list.insertBefore(newElem , items[i]);
             list.selectItem(newElem);
