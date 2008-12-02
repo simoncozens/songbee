@@ -192,7 +192,7 @@ function findNext(searchClass) {
     for (i = state.currentSectionIndex + 1; i <= maxItem; i++) {
         if (cs[i].className == searchClass) { return i; }
 	}
-    for (i = 0; i < state.currentSectionIndex; i++) {
+    for (i = 0; i <= state.currentSectionIndex; i++) {
         if (cs[i].className == searchClass) { return i; }
 	}
     return -1;
