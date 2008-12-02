@@ -43,7 +43,7 @@
             <spacer flex="1"/>
             <button label="Reset" oncommand="if(window.confirm('Really reset?')) reset();"/>
             <spacer flex="1"/>
-            <button label="&songbee.save;" oncommand="savechanges(window.arguments[0]);"/>
+            <button label="&songbee.save;" oncommand="savechanges(window.arguments);"/>
         </hbox>
     </vbox>
         <splitter/>
