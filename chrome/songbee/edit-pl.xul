@@ -94,7 +94,6 @@ onmouseup="endDrag()"
 <script>
     var pl = Playlist.retrieve(window.arguments[0]);
     var target = document.getElementById("playlistlist");
-    var tree = document.getElementById("songlist");
 
     /* Set up the Create... menu */
     var create = document.getElementById("create-popup");
@@ -105,7 +104,6 @@ onmouseup="endDrag()"
         create.appendChild(item);
     }
 
-    var ff = document.getElementById("find-field");
     var canvas = document.getElementById("canvas");
     var initial_order = new Array;
 
@@ -122,7 +120,7 @@ function setup () {
         initial_order.push(i._id);
     });
 
-    tree.view = new songTreeView();
+    setupTree();
 }
 
 var dragging = 0;
@@ -288,25 +286,14 @@ function deleteSong() {
         return;
     Song.retrieve(song).drop();
     // Start again
-    tree.view = new songTreeView();
-    tree.boxObject.invalidate();
+    refreshTree();
 }
 
 function editSong() {
     var song = selectedSong();
     if (!song) return;
     ItemTypeTable["song"].edit(song);
-    tree.view = new songTreeView();
-    tree.boxObject.invalidate();
-}
-
-function update_search() {
-    var v = new songTreeView();
-    v.searchColumn = "title";
-    v.searchText = ff.value;
-    tree.view = v;
-    v.recalculateRows();
-    tree.boxObject.invalidate();
+    refreshTree();
 }
 
 function preferences() {

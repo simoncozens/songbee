@@ -1,0 +1,96 @@
+<?xml version="1.0"?> 
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+<?xml-stylesheet href="chrome://songbee/content/css/findBar.css" type="text/css"?>
+<!DOCTYPE dialog [
+<!ENTITY % SongbeeDTD SYSTEM "chrome://songbee/locale/songbee.dtd" >
+%SongbeeDTD;
+<!ENTITY % findBarDTD SYSTEM "chrome://songbee/locale/findbar.dtd" >
+%findBarDTD;
+]>
+
+<dialog
+  xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+  id="MarkTranslation"
+  title="Mark as translation"
+  onload="forceIt()"
+  ondialogaccept="return fixup();"
+>
+<script src="chrome://songbee/content/findBar.js"/>
+<script src="chrome://songbee/content/songtreeview.js"/>
+<script src="chrome://songbee/content/songbee-sql.js"/>
+<script src="chrome://songbee/content/playitemtypes/playitemtypes.js"/>
+<script src="chrome://songbee/content/playitemtypes/song/create-song.js"/>
+   <label id="title" value="foo"/>
+        <textbox id="find-field" 
+        oninput="gFindBar.find(this.value);"
+                onkeypress="gFindBar.onFindBarKeyPress(event);"
+                onblur="gFindBar.onFindBarBlur();"
+                oncompositionstart="gFindBar.onFindBarCompositionStart(event);"                oncompositionend="gFindBar.onFindBarCompositionEnd(event);"/>
+      <spacer flex="1"/>
+        <tree id="songlist" minwidth="200" flex="1" seltype="single"
+        minheight="200"
+        onclick="updatePreview()" ondblclick="doTreeDoubleClick()">
+            <treecols>
+                <treecol id="title" label="&songbee.title;" flex="1"/>
+                <treecol id="first_line" label="&songbee.firstLine;" flex="2"/>
+                <treecol id="id" label="" hidden="true" ignoreincolumnpicker="true"/>
+            </treecols>
+            <treechildren/>
+        </tree>
+  <script>
+    var insong = window.arguments[0].insong;
+    function forceIt() { 
+        setupTree();
+        document.getElementById("title").value = "What song is '"+insong.title+"' a translation of?";
+    }
+	function fixup() {
+        /* Checks we need to make */
+        var insong = window.arguments[0].insong;
+
+        /* 1: We're not a translation of ourself (!) */
+        var outsong = selectedSong(); 
+        if ( insong.id == outsong ) {
+            alert("Please don't mark a song as a translation of itself");
+            return false;
+        }
+        
+        /* 2: Songs must be the same "shape" */
+        var outs = Song.retrieve(outsong);
+        var inXML = (new DOMParser()).parseFromString(from_text(insong), "text/xml");
+        var outXML = outs.xmlDOM();
+        var inShape = songShape(inXML);
+        var outShape = songShape(outXML);
+        if (inShape != outShape) {
+            alert("Songs must be the same shape: "+insong.title+" has shape "+inShape+"; "+outs.title()+" has shape "+outShape);
+            return false;
+        }
+
+        /* 3: If the other song has a language defined, it must be
+        different; if not, prompt for one */
+        var outMeta = outs.metadataAsObject();
+        var outLang = outMeta.language;
+        if (typeof(outLang) != "undefined") {
+            outLang = outLang[0];
+            if (outLang == insong.language) {
+                alert(outs.title()+" is the same language as "+insong.title);
+                return false;
+            }
+        } else {
+            var newLang;
+            var mess = "";
+            var ok = 0;
+            do {
+                newLang = prompt(mess+outs.title()+" does not have a language set; please set one now");
+                /* XXX checks here */
+                ok = 1;
+            } while (!ok);
+            outMeta.language = [ newLang ];
+            outs.setMetadata(outMeta); 
+        }
+
+		window.arguments[0].type = "translation"
+		window.arguments[0].value = outsong;
+		return true;
+	}
+  </script>
+</dialog>

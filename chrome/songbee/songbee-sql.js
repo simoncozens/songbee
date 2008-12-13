@@ -158,6 +158,32 @@ Song.prototype.xmlDOM = function () {
     return parsed;
 };
 
+/* This is horrible. It would be so much easier if we were using JSON
+but for backward compatibility we can't really now. */
+Song.prototype.metadataAsObject = function () {
+    var md = {};
+    var dom = Song.prototype.xmlDOM();
+    var options = dom.getElementsByTagName("head")[0].childNodes;
+    for (var i =0; i < sections.length; i++) {
+        var node = options[i];
+        if (node.nodeType == 1) {
+            var text = node.textContent;
+            text = text.replace(/^\s+/, "");
+            text = text.replace(/\s+$/, "");
+            if (typeof (md[node.tagName]) == "undefined") {  
+                md[node.tagName] = [ text ];
+            } else {
+                md[node.tagName].push(text);
+            }
+        }
+    }
+    return md;
+}
+
+Song.prototype.setMetadata = function (o) { 
+    alert("Can't do this yet");
+}
+
 Playlist.prototype.items = function (callback) {
     return doSQL("SELECT id, playlist, song, position, type, data FROM play_item WHERE play_item.playlist = "+this._id+" ORDER BY position ", PlayItem, function (pi) { pi.specialize(); if (callback) callback(pi); });
 };
@@ -193,3 +219,18 @@ PlayItem.prototype.specialize = function () {
 		this[handle] = ItemTypeTable[this.type()][handle] || ActionFallbacks[handle];
 	}
 }
+
+function songShape (dom) {
+    /* Notice this hack: songs created using create-song have a
+    different XML structure than those created by the old, old Perl
+    script to parse the Sankey hymnal. It's ugly. */
+    var sections = (dom.getElementsByTagName("lyrics")[0] || dom.getElementsByTagName("song")[0]).childNodes;
+    var shape = "";
+    for (var i =0; i < sections.length; i++) {
+        if (sections[i].tagName == "verse") { shape = shape + "v" }
+        if (sections[i].tagName == "chorus") { shape = shape + "c" }
+        if (sections[i].tagName == "brdige") { shape = shape + "b" }
+    }
+    return shape;
+}
+

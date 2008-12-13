@@ -73,8 +73,8 @@ function to_text(dom) {
 
 function Xesc(s) { return s.replace(/</g, "&lt;") }
 
-function from_text() {
-    var s = new SongPrototype();
+function from_text(s) {
+    if (!s) s = new SongPrototype();
     var output = "<song>\n<head>\n";
 	for (var k in s) {
 		if (k == "lyrics") continue;
@@ -120,9 +120,11 @@ function markTranslation () {
         return addTreeRow("language");
     }
 	var result = {};
-    alert("I haven't finished this yet. :(");
+    if (song) { s.id = song.id() }
+    result.insong = s;
 	window.openDialog("chrome://songbee/content/playitemtypes/song/marktranslation.xul", "", "chrome, dialog, modal, resizable=no", result).focus();
 	if (result.type) {
 		addTreeChild(result.type, result.type, result.value);
+        /* XXX Create backlinks */
 	}
 }

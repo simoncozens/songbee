@@ -1,3 +1,12 @@
+var ff; 
+var tree; 
+
+function setupTree() { 
+    ff = document.getElementById("find-field");
+    tree = document.getElementById("songlist");
+    tree.view = new songTreeView() 
+}
+
 function songTreeView()
 {
 
@@ -26,10 +35,10 @@ function songTreeView()
                 this.recalculateRows();
                 return;
             } else {
-                ff.setAttribute("status", "notfound");
+                if (ff) ff.setAttribute("status", "notfound");
             }
         } else {
-            ff.removeAttribute("status");
+            if (ff) ff.removeAttribute("status");
         }
     }
 
@@ -75,8 +84,8 @@ function songTreeView()
     return this;
 }
 
-var stylesheet = getXSLT();
 function updatePreview() {
+    var stylesheet = getXSLT();
     var sid = selectedSong();
     if (!sid) return;
     var song = Song.retrieve(sid);
@@ -94,4 +103,17 @@ function selectedSong() {
     var end = {};
     tree.view.selection.getRangeAt(0,start,end);
     return tree.view.getCellText(start.value, tree.columns.getNamedColumn("id"));
+}
+function update_search() {
+    var v = new songTreeView();
+    v.searchColumn = "title";
+    v.searchText = ff.value;
+    tree.view = v;
+    v.recalculateRows();
+    tree.boxObject.invalidate();
+}
+
+function refreshTree() {
+    tree.view = new songTreeView();
+    tree.boxObject.invalidate();
 }
