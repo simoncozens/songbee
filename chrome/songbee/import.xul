@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
-<?xml-stylesheet href="chrome://songbee/content/css/fileinput.css" type="text/css"?>
+<?xml-stylesheet href="chrome://songbee/content/xbl/fileinput/fileinput.css" type="text/css"?>
 <window
     xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
     <script src="chrome://songbee/content/playitemtypes/playitemtypes.js"/>

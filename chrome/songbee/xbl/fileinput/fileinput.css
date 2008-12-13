@@ -1,4 +1,4 @@
 @import url("chrome://global/skin/");
 @namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");
 
-box.fileinput { -moz-binding: url(chrome://songbee/content/fileinput.xml#fileinput) }
+box.fileinput { -moz-binding: url(chrome://songbee/content/xbl/fileinput/fileinput.xml#fileinput) }
