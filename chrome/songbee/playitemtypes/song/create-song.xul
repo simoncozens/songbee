@@ -24,7 +24,7 @@
 <vbox flex="1">
     <hbox flex="1">
         <vbox>
-			<tree flex="1" minwidth="200" editable="true" id="songmetadata" context="addmdpopup">
+			<tree flex="1" minwidth="200" editable="true" id="songmetadata" context="addmdpopup" onkeypress="if (event.keyCode == 8) { deleteHighlighted() }">
 				<treecols>
 					<treecol id="key" flex="1" editable="false"/>
 					<treecol id="value" flex="1" editable="true"/>
@@ -52,6 +52,19 @@
 var song;
 var sid;
 var ischanged = 0;
+
+function deleteHighlighted() {
+	var tree = document.getElementById("songmetadata");
+	var tc = document.getElementById("tc");
+	var idList = []; 
+	var rangeCount = tree.view.selection.getRangeCount();
+	for (var i = 0; i &lt; rangeCount; i++) {  
+		var start = {};  
+		var end = {};  
+		tree.view.selection.getRangeAt(i, start, end);  
+		for(var c = start.value; c &lt;= end.value; c++) tc.removeChild(tree.view.getItemAtIndex(c));
+	}
+}
 
 function savechanges() {
     var s = new SongPrototype();
