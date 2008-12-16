@@ -12,6 +12,7 @@
 
   <xsl:template match="title">
   </xsl:template>
+<xsl:template match="head"/>
 
   <xsl:template match="key" />
   <xsl:template match="copyright">

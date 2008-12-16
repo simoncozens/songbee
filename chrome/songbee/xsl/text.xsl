@@ -8,7 +8,7 @@
 <xsl:template match="copyright"/>
 <xsl:template match="lyrics"><xsl:apply-templates/></xsl:template>
 <xsl:template match="text()"><xsl:value-of select="normalize-space(.)"/></xsl:template>
-
+<xsl:template match="head"/>
 <xsl:template match="verse"><xsl:for-each select="line"><xsl:apply-templates/><xsl:text>
 </xsl:text></xsl:for-each><xsl:text>
 </xsl:text></xsl:template>
