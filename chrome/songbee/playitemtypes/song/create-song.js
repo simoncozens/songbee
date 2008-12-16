@@ -115,16 +115,55 @@ function addTreeRow(type) {
 
 function markTranslation () {
     var s = new SongPrototype();
+	if (song) { s.id = song.id() } else { alert("You must save this song at least once before marking it as a translation."); return }
+
     if (!s.language) { 
         alert("You must add a 'language' tag to this song first");
         return addTreeRow("language");
     }
 	var result = {};
-    if (song) { s.id = song.id() }
     result.insong = s;
 	window.openDialog("chrome://songbee/content/playitemtypes/song/marktranslation.xul", "", "chrome, dialog, modal, resizable=no", result).focus();
 	if (result.type) {
 		addTreeChild(result.type, result.type, result.value);
-        /* XXX Create backlinks */
+		createBacklinks(s.id, result.value)
 	}
+}
+
+function count(x) { var i = 0; for (var y in x) i++; return i}
+
+function createBacklinks(from, to) {
+	// We have just written into song "from" that it is a translation of "to". 
+	// Now we have to form a transitive closure.
+	
+	// This is insanely overcomplex for the default use case, but it's correct and it's fun.
+	
+	// First, we collect all the data.
+	var mdCache;
+	var tSet = {}; tSet[from] = 1; tSet[to] = 1;
+	var visited = {};
+	var todo = {}; todo[from] = 1; todo[to] = 1;
+	while (count(todo)) {
+		for (var visit in todo) {
+			mdCache[visit] = Song.retrieve(visit).metadataAsObject();
+			var translations = mdCache[visit].translation;
+			for (var t in translations) {
+				tSet[translations[t]] = 1;
+				if (!visited[translations[t]]) { todo[translations[t]] = 1; }
+			}
+			visited[visit] = 1;
+			delete todo[visit];
+		}
+	}
+	// Now we have to put all the data into every other song
+	for (var a in tSet) {
+		var tmp = [];
+		for (var b in tSet) {
+			if (a == b) continue;
+			tmp.push[b];
+		}
+		var meta = mdCache[a];
+		meta.translation = tmp;
+		s.setMetadata(a);
+	}	
 }

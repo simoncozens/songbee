@@ -162,9 +162,9 @@ Song.prototype.xmlDOM = function () {
 but for backward compatibility we can't really now. */
 Song.prototype.metadataAsObject = function () {
     var md = {};
-    var dom = Song.prototype.xmlDOM();
+    var dom = this.xmlDOM();
     var options = dom.getElementsByTagName("head")[0].childNodes;
-    for (var i =0; i < sections.length; i++) {
+    for (var i =0; i < options.length; i++) {
         var node = options[i];
         if (node.nodeType == 1) {
             var text = node.textContent;
@@ -181,7 +181,29 @@ Song.prototype.metadataAsObject = function () {
 }
 
 Song.prototype.setMetadata = function (o) { 
-    alert("Can't do this yet");
+	var dom = this.xmlDOM();
+	var options = dom.getElementsByTagName("head")[0];
+	var title; // Save this one;
+	var c;
+	while (c = options.firstChild) {
+		if (c.tagName == "title") { title = c; }
+		options.removeChild(c);
+	}
+	if (title) options.appendChild(title);
+	for (var node in o) {
+		for (var entry in o[node]) {
+			var c = dom.createElement(node); 
+			var tnode = dom.createTextNode(o[node][entry]);
+			c.appendChild(tnode);
+			options.appendChild(c);
+		}
+	}
+	// Serialise back to the Database
+	
+    var serializer = new XMLSerializer();
+	var temp = serializer.serializeToString(dom)
+	alert(temp);	
+    this.xml(temp); 
 }
 
 Playlist.prototype.items = function (callback) {
