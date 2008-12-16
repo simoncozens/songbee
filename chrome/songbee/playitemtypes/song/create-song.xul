@@ -55,6 +55,7 @@ var ischanged = 0;
 
 function deleteHighlighted() {
 	var tree = document.getElementById("songmetadata");
+	if (tree.editingRow != -1) return;
 	var tc = document.getElementById("tc");
 	var idList = []; 
 	var rangeCount = tree.view.selection.getRangeCount();
