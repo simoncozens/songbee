@@ -57,6 +57,7 @@
             <iframe id="preview" flex="1" name="preview" src="chrome://songbee/content/blank-song.html"/>
         </vbox>
     </hbox>
+    <toolbar id="translations" hidden="true" fullscreentoolbar="true"/>
     <toolbar id="FindToolbar" hidden="false" align="center" fullscreentoolbar="true">
       <label control="find-field" id="find-label" class="find-fast"/>
         <textbox id="find-field" 

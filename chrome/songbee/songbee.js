@@ -365,6 +365,15 @@ function determineNaturalOrder(song) {
     return [];
 }
 
+function displaySong(song) {
+    // Come up with a playitem for a song that's not on the playlist
+    var item = new PlayItem;
+    item["song"] = function () { return song }; 
+    item["type"] = function () { return "song"; }
+    item.specialize();
+    displayItem(item);
+}
+
 function doTreeDoubleClick() {
     displaySong(Song.retrieve(selectedSong()));
     ff.value = ""; update_search();

@@ -202,7 +202,6 @@ Song.prototype.setMetadata = function (o) {
 	
     var serializer = new XMLSerializer();
 	var temp = serializer.serializeToString(dom)
-	alert(temp);	
     this.xml(temp); 
 }
 

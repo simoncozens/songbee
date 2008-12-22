@@ -139,7 +139,7 @@ function createBacklinks(from, to) {
 	// This is insanely overcomplex for the default use case, but it's correct and it's fun.
 	
 	// First, we collect all the data.
-	var mdCache;
+	var mdCache = {};
 	var tSet = {}; tSet[from] = 1; tSet[to] = 1;
 	var visited = {};
 	var todo = {}; todo[from] = 1; todo[to] = 1;
@@ -160,10 +160,10 @@ function createBacklinks(from, to) {
 		var tmp = [];
 		for (var b in tSet) {
 			if (a == b) continue;
-			tmp.push[b];
+			tmp.push(b);
 		}
 		var meta = mdCache[a];
 		meta.translation = tmp;
-		s.setMetadata(a);
+		Song.retrieve(a).setMetadata(meta);
 	}	
 }
