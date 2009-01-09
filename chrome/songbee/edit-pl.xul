@@ -31,7 +31,6 @@ onmouseup="endDrag()"
 	    <menu id="file-menu" label="File">
 	        <menupopup id="file-popup">
 	            <menuitem label="&editPlaylist.save;" oncommand="saveDOC()"/>
-	            <menuitem label="Export songs" oncommand="export_songs()"/>
 	            <menuseparator/>
 	            <menuitem label="Preferences" oncommand="preferences()"/>
 	            <menuseparator/>

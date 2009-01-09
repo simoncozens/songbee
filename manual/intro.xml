@@ -100,6 +100,18 @@ icon.</para>
       <listitem>
 	<para>Ability to import and export databases of songs</para>
       </listitem>
+      <listitem>
+	<para>Drag-and-drop interface to adding songs to the playlist</para>
+      </listitem>
+      <listitem>
+    <para>Ability to insert web sites and Bible passages into the
+    playlist</para>
+      </listitem>
+      <listitem>
+    <para>Ability to tag songs by language and support for switching
+    language during worship.</para>
+      </listitem>
+
     </itemizedlist>
   </sect1>
   <sect1>
@@ -114,7 +126,7 @@ anticipated in future releases:
 	<para>Ability to select alternative song databases</para>
       </listitem>
       <listitem>
-	<para>Drag-and-drop interface to adding songs to the playlist</para>
+	<para>Ability to add "weekly notices" style rotating messages</para>
       </listitem>
     </itemizedlist>
     <para>
