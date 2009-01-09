@@ -1,0 +1,34 @@
+
+What's new in Songbee 2.0
+
+* Songbee not only supports songs, but is now extensible to allow display 
+  of other kinds of material: Bible passages, web sites, and so on.
+
+* Two such extensions are currently part of Songbee:
+  : If you are online, Bible passages will be displayed from the online
+    ESV. This is a proof-of-concept until we have sorted out Bible
+    licensing.
+  : You can add a web site address into a playlist and have the site appear
+    on the projector.
+
+* You can add any additional "annotations" to a song that you like - for
+  instance, the hymnal name and hymn number. Future versions will allow
+  you to search on this data.
+
+* When one song is marked as a translation of another, the option is
+  given during worship to switch between translations of the current song.
+
+* You can change the style (background, colours, etc.) of individual playlists.
+
+* The menus have been rearranged to make creating new types of material easier.
+
+* On the "edit playlist" window, you can now drag songs from the library
+  into your playlist.
+
+* Fix problem where databases were getting locked and could no longer be
+  modified.
+
+* Fix problem where the "edit playlist" window was coming up empty.
+
+* The default display now has its text nearer the top edge of the projector;
+  verse text is also centered on the screen.
