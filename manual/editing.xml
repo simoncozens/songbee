@@ -65,15 +65,85 @@ and with no blank line in between.
 	see this on the preview.</para>
       </listitem>
     </itemizedlist>
+    <sect2>
+      <title>Metadata</title> 
+
+      <para>"Metadata" means "data about data" or "information about
+      information". It's the name for additional data you can add to
+      your songs to help categorise them. Each song is guaranteed to
+      have some lyrics and a title, but anything else you want to add
+      is up to you.</para> 
+
+      <para>Metadata in Songbee has a <emphasis>key</emphasis> and a
+      <emphasis>value</emphasis>. <literal>title</literal> is a very
+      common key, and the song's title is the
+      value. <literal>language</literal> is another common key, and
+      common values include "Japanese", "English" and so on. But you
+      can make up whatever keys you like.
+      </para>
+
+      <para>For instance, when you're inputting old Japanese hymns,
+      you might want to tell Songbee what number they are in each of
+      the common hymnbooks. So <literal>sanbika</literal>,
+      <literal>seika</literal> and <literal>shinseika</literal> are
+      likely keys to use, and the number of the song in the songbook
+      would make good values.</para>
+
+      <para>To add a piece of metadata to a song, right click on the
+      table in the top-left of the song edit page and choose "Add
+      Metadata". You are then presented with the following pop-up
+      panel:</para>
+      <figure>
+	<title>Adding metadata</title>
+      <mediaobject>
+	<imageobject>
+	  <imagedata width="350" fileref="images/add-metadata.png"/>
+	</imageobject>
+      </mediaobject>
+      </figure>
+      <para>The drop-down menu will allow you to choose key names that
+      Songbee already knows. If you want to add something different,
+      simply type in your own key.</para>
+
+      <para>Currently Songbee doesn't do very much with the metadata
+      you add, apart from the "language" and "translation". However,
+      in the near future, you will be able to search and add songs to
+      playlists based on metadata, so it's in your interests to add
+      whatever metadata you want when creating songs. </para>
+    </sect2>
+    <sect2>
+      <title>Translated songs</title>
+
+      <para>Songbee supports multilingual worship if it has a database
+      where songs are tagged with translation metadata. If you have a
+      song (let's call it "X") which is a translation of another song
+      "Y", you can tell Songbee about this by editing "X",
+      right-clicking on the metadata section and choosing
+      <literal>Mark as translation</literal>. Songbee will then ask
+      you to select the song that "X" is a translation of; you should
+      choose "Y" from the list.
+</para>
+
+      <para>For translations to work, you need to tag both songs with
+      their language. If this is not done before you choose
+      <literal>Mark as translation</literal>, then Songbee will prompt
+      you for the languages.</para>
+
+      <para>Songbee also supports songs being translated several
+      times. It has no concept of which song is the "original" - if
+      you tell it that "Y" is a translation of "X" and that "Z" is a
+      translation of "Y", then it will connect X, Y and Z all
+      together.</para>
+
+    </sect2>
   </sect1>
   <sect1>
-    <title>Importing and exporting songs</title>
-    <para>
-     You may import and export song libraries to a special Songbee
-     library format. (For interested developers, it's not that
-     special, it's just ordinary XML and you'll be able to work out
-     how it goes by looking at it.) See <link
-     linkend="playlist.import">the playlist window menu</link>.
+    <title>Importing and exporting songs</title> <para>Currently you
+    may import and export song libraries to a special Songbee library
+    format. (For interested developers, it's not that special, it's
+    just ordinary XML and you'll be able to work out how it goes by
+    looking at it.) See <link linkend="playlist.import">the playlist
+    window menu</link>.
     </para>
   </sect1>
 </chapter>

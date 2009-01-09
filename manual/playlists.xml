@@ -37,7 +37,7 @@ songs in each playlist. At the top of the window are a set of menus:
 	<listitem>
 	  <variablelist>
 	    <varlistentry>
-	      <term>Import Songs</term>
+	      <term id="playlist.import">Import Songs</term>
 	      <listitem>
 		<para>
             This allows you to import songs from a Songbee song

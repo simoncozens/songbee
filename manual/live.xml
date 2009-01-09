@@ -100,6 +100,15 @@ portion of the verse to be displayed.</para>
 	</listitem>
       </varlistentry>
       <varlistentry>
+	<term><keycap>n</keycap></term>
+	<listitem>
+	  <para>Goes to the "next" bit of the song - if your song has
+	  a chorus, it will alternate between verses and choruses; if
+	  it has just verses, it will go from one verse to the next;
+	  otherwise, it won't do anything.</para>
+	</listitem>
+      </varlistentry>
+      <varlistentry>
 	<term><keycap>Esc</keycap></term>
 	<listitem>
 	  <para>The escape key "pauses" the display, removing the text
@@ -121,5 +130,14 @@ portion of the verse to be displayed.</para>
       directly. Clicking on a portion of a song in the left-hand
       window will cause Songbee to display that portion.
     </para>
+  </sect1>
+  <sect1>
+    <title>Multilingual worship</title> <para>Songbee supports
+    environments where worship happens in more than one language. If
+    the current song is translated into other languages, the names of
+    the translations appear in a bar at the bottom of your
+    console. Clicking on a name brings up the song of the appropriate
+    language.</para> <para>To learn how to mark songs as translations,
+    see the chapter on editing.</para>
   </sect1>
 </chapter>
