@@ -75,72 +75,72 @@ var booksizes = [
 
 var bookinfo = [
     {},
- { bookname: "Genesis", longbookname: "Genesis", lastchapter: 50 },
- { bookname: "Exodus", longbookname: "Exodus", lastchapter: 40 },
- { bookname: "Leviticus", longbookname: "Leviticus", lastchapter: 27 },
- { bookname: "Numbers", longbookname: "Book_of_Numbers", lastchapter: 36 },
- { bookname: "Deuteronomy", longbookname: "Deuteronomy", lastchapter: 34 },
- { bookname: "Joshua", longbookname: "Book_of_Joshua", lastchapter: 24 },
- { bookname: "Judges", longbookname: "Book_of_Judges", lastchapter: 21 },
- { bookname: "Ruth", longbookname: "Book_of_Ruth", lastchapter: 4 },
- { bookname: "1 Samuel", longbookname: "First_Samuel", lastchapter: 31 },
- { bookname: "2 Samuel", longbookname: "Second_Samuel", lastchapter: 24 },
- { bookname: "1 Kings", longbookname: "First_Kings", lastchapter: 22 },
- { bookname: "2 Kings", longbookname: "Second_Kings", lastchapter: 25 },
- { bookname: "1 Chronicles", longbookname: "First_Chronicles", lastchapter: 29 },
- { bookname: "2 Chronicles", longbookname: "Second_Chronicles", lastchapter: 36 },
- { bookname: "Ezra", longbookname: "Book_of_Ezra", lastchapter: 10 },
- { bookname: "Nehemiah", longbookname: "Book_of_Nehemiah", lastchapter: 13 },
- { bookname: "Esther", longbookname: "Book_of_Esther", lastchapter: 10 },
- { bookname: "Job", longbookname: "Book_of_Job", lastchapter: 42 },
- { bookname: "Psalm", longbookname: "Psalm", lastchapter: 150 },
- { bookname: "Proverbs", longbookname: "Book_of_Proverbs", lastchapter: 31 },
- { bookname: "Ecclesiastes", longbookname: "Ecclesiastes", lastchapter: 12 },
- { bookname: "Song of Solomon", longbookname: "Song_of_Solomon", lastchapter: 8 },
- { bookname: "Isaiah", longbookname: "Book_of_Isaiah", lastchapter: 66 },
- { bookname: "Jeremiah", longbookname: "Book_of_Jeremiah", lastchapter: 52 },
- { bookname: "Lamentations", longbookname: "Book_of_Lamentations", lastchapter: 5 },
- { bookname: "Ezekiel", longbookname: "Book_of_Ezekiel", lastchapter: 48 },
- { bookname: "Daniel", longbookname: "Book_of_Daniel", lastchapter: 12 },
- { bookname: "Hosea", longbookname: "Book_of_Hosea", lastchapter: 14 },
- { bookname: "Joel", longbookname: "Book_of_Joel", lastchapter: 3 },
- { bookname: "Amos", longbookname: "Book_of_Amos", lastchapter: 9 },
- { bookname: "Obadiah", longbookname: "Book_of_Obadiah", lastchapter: 1 },
- { bookname: "Jonah", longbookname: "Book_of_Jonah", lastchapter: 4 },
- { bookname: "Micah", longbookname: "Book_of_Micah", lastchapter: 7 },
- { bookname: "Nahum", longbookname: "Book_of_Nahum", lastchapter: 3 },
- { bookname: "Habakkuk", longbookname: "Book_of_Habakkuk", lastchapter: 3 },
- { bookname: "Zephaniah", longbookname: "Book_of_Zephaniah", lastchapter: 3 },
- { bookname: "Haggai", longbookname: "Book_of_Haggai", lastchapter: 2 },
- { bookname: "Zechariah", longbookname: "Book_of_Zechariah", lastchapter: 14 },
- { bookname: "Malachi", longbookname: "Book_of_Malachi", lastchapter: 4 },
- { bookname: "Matthew", longbookname: "Gospel_of_Matthew", lastchapter: 28 },
- { bookname: "Mark", longbookname: "Gospel_of_Mark", lastchapter: 16 },
- { bookname: "Luke", longbookname: "Gospel_of_Luke", lastchapter: 24 },
- { bookname: "John", longbookname: "Gospel_of_John", lastchapter: 21 },
- { bookname: "Acts", longbookname: "Acts_of_the_Apostles", lastchapter: 28 },
- { bookname: "Romans", longbookname: "Epistle_to_the_Romans", lastchapter: 16 },
- { bookname: "1 Corinthians", longbookname: "First_Epistle_to_the_Corinthians", lastchapter: 16 },
- { bookname: "2 Corinthians", longbookname: "Second_Epistle_to_the_Corinthians", lastchapter: 13 },
- { bookname: "Galatians", longbookname: "Epistle_to_the_Galatians", lastchapter: 6 },
- { bookname: "Ephesians", longbookname: "Epistle_to_the_Ephesians", lastchapter: 6 },
- { bookname: "Philippians", longbookname: "Epistle_to_the_Philippians", lastchapter: 4 },
- { bookname: "Colossians", longbookname: "Epistle_to_the_Colossians", lastchapter: 4 },
- { bookname: "1 Thessalonians", longbookname: "First_Epistle_to_the_Thessalonians", lastchapter: 5 },
- { bookname: "2 Thessalonians", longbookname: "Second_Epistle_to_the_Thessalonians", lastchapter: 3 },
- { bookname: "1 Timothy", longbookname: "First_Epistle_to_Timothy", lastchapter: 6 },
- { bookname: "2 Timothy", longbookname: "Second_Epistle_to_Timothy", lastchapter: 4 },
- { bookname: "Titus", longbookname: "Epistle_to_Titus", lastchapter: 3 },
- { bookname: "Philemon", longbookname: "Epistle_to_Philemon", lastchapter: 1 },
- { bookname: "Hebrews", longbookname: "Epistle_to_the_Hebrews", lastchapter: 13 },
- { bookname: "James", longbookname: "Epistle_of_James", lastchapter: 5 },
- { bookname: "1 Peter", longbookname: "First_Epistle_of_Peter", lastchapter: 5 },
- { bookname: "2 Peter", longbookname: "Second_Epistle_of_Peter", lastchapter: 3 },
- { bookname: "1 John", longbookname: "First_Epistle_of_John", lastchapter: 5 },
- { bookname: "2 John", longbookname: "Second_Epistle_of_John", lastchapter: 1 },
- { bookname: "3 John", longbookname: "Third_Epistle_of_John", lastchapter: 1 },
- { bookname: "Jude", longbookname: "Epistle_of_Jude", lastchapter: 1 },
- { bookname: "Revelation", longbookname: "Book_of_Revelations", lastchapter: 22 },
+ { re: /\b(ge(n(esis)?)?|gn)\b/i, bookname: "Genesis", longbookname: "Genesis", lastchapter: 50 },
+ { re: /\b(ex(o(d(us)?)?)?|exd)\b/i, bookname: "Exodus", longbookname: "Exodus", lastchapter: 40 },
+ { re: /\b(le(v(i(ticus)?)?)?|lv)\b/i, bookname: "Leviticus", longbookname: "Leviticus", lastchapter: 27 },
+ { re: /\b(nu(m(b(ers?)?)?)?)\b/i, bookname: "Numbers", longbookname: "Book_of_Numbers", lastchapter: 36 },
+ { re: /\b(de(u(t(eronomy)?)?)?|dt)\b/i, bookname: "Deuteronomy", longbookname: "Deuteronomy", lastchapter: 34 },
+ { re: /\b(jos(h(ua)?)?)\b/i, bookname: "Joshua", longbookname: "Book_of_Joshua", lastchapter: 24 },
+ { re: /\bj(dg|ud(ges|g)?|u)\b/i, bookname: "Judges", longbookname: "Book_of_Judges", lastchapter: 21 },
+ { re: /\bru(th)?\b/i, bookname: "Ruth", longbookname: "Book_of_Ruth", lastchapter: 4 },
+ { re: /\b(1st|first|[1i])\s*s(am(uel)?|ml|a)\b/i, bookname: "1 Samuel", longbookname: "First_Samuel", lastchapter: 31 },
+ { re: /\b(2nd|ii|sec(ond)?|2)\s*s(am(uel)?|ml|a)\b/i, bookname: "2 Samuel", longbookname: "Second_Samuel", lastchapter: 24 },
+ { re: /\b(1st|first|[1i])\s*k(gs|ings?|[in])?\b/i, bookname: "1 Kings", longbookname: "First_Kings", lastchapter: 22 },
+ { re: /\b(2nd|ii|sec(ond)?|2)\s*k(gs|ings?|[in])?\b/i, bookname: "2 Kings", longbookname: "Second_Kings", lastchapter: 25 },
+ { re: /\b(1st|first|[1i])\s*ch(ron(icles)?|r)?\b/i, bookname: "1 Chronicles", longbookname: "First_Chronicles", lastchapter: 29 },
+ { re: /\b(1st|first|[1i])\s*ch(ron(icles)?|r)?\b/i, bookname: "2 Chronicles", longbookname: "Second_Chronicles", lastchapter: 36 },
+ { re: /\bez(ra|r)?\b/i,  bookname: "Ezra", longbookname: "Book_of_Ezra", lastchapter: 10 },
+ { re: /\bne(h[ae]miah|h)?\b/i, bookname: "Nehemiah", longbookname: "Book_of_Nehemiah", lastchapter: 13 },
+ { re: /\bes(th(er)?|t)?\b/i, bookname: "Esther", longbookname: "Book_of_Esther", lastchapter: 10 },
+ { re: /\bj(ob|[bo])\b/i, bookname: "Job", longbookname: "Book_of_Job", lastchapter: 42 },
+ { re: /\bps(alms?|[am])?\b/i, bookname: "Psalm", longbookname: "Psalm", lastchapter: 150 },
+ { re: /\bpr(ov(erbs?)?|vbs|[ov])?\b/i, bookname: "Proverbs", longbookname: "Book_of_Proverbs", lastchapter: 31 },
+ { re: /\bec(cl(es(iastes?)?)?|[cl])?\b/i, bookname: "Ecclesiastes", longbookname: "Ecclesiastes", lastchapter: 12 },
+ { re: /\b(song\sof\ssolomon|song\sof\ssongs|sos|ss|son|so|song|songs)\b/i, bookname: "Song of Solomon", longbookname: "Song_of_Solomon", lastchapter: 8 },
+ { re: /\bi(sa(iah|[hi])|[as])\b/i, bookname: "Isaiah", longbookname: "Book_of_Isaiah", lastchapter: 66 },
+ { re: /\bje(r(emiah|imiah|e)|r)?\b/i, bookname: "Jeremiah", longbookname: "Book_of_Jeremiah", lastchapter: 52 },
+ { re: /\bla(mentations?|m)?\b/i, bookname: "Lamentations", longbookname: "Book_of_Lamentations", lastchapter: 5 },
+ { re: /\bez(ek(iel)?|[ek])?\b/i, bookname: "Ezekiel", longbookname: "Book_of_Ezekiel", lastchapter: 48 },
+ { re: /\bd(an(iel)?|[aln])\b/i, bookname: "Daniel", longbookname: "Book_of_Daniel", lastchapter: 12 },
+ { re: /\bho(sea|s)?\b/i, bookname: "Hosea", longbookname: "Book_of_Hosea", lastchapter: 14 },
+ { re: /\bj(oel?|l)\b/i, bookname: "Joel", longbookname: "Book_of_Joel", lastchapter: 3 },
+ { re: /\bam(os|o)?\b/i, bookname: "Amos", longbookname: "Book_of_Amos", lastchapter: 9 },
+ { re: /\bob(ad(iah)?|a)?\b/i, bookname: "Obadiah", longbookname: "Book_of_Obadiah", lastchapter: 1 },
+ { re: /\bj(nh|on(ah)?)\b/i, bookname: "Jonah", longbookname: "Book_of_Jonah", lastchapter: 4 },
+ { re: /\bmi(cah|c)?\b/i, bookname: "Micah", longbookname: "Book_of_Micah", lastchapter: 7 },
+ { re: /\bna(hum|h)?\b/i, bookname: "Nahum", longbookname: "Book_of_Nahum", lastchapter: 3 },
+ { re: /\bha(bakk?uk|b)?\b/i, bookname: "Habakkuk", longbookname: "Book_of_Habakkuk", lastchapter: 3 },
+ { re: /\bzep(haniah|h)?\b/i, bookname: "Zephaniah", longbookname: "Book_of_Zephaniah", lastchapter: 3 },
+ { re: /\bh(ag(g(ai|ia))?|g)\b/i, bookname: "Haggai", longbookname: "Book_of_Haggai", lastchapter: 2 },
+ { re: /\bz(ch|ec(hariah|h)?)\b/i, bookname: "Zechariah", longbookname: "Book_of_Zechariah", lastchapter: 14 },
+ { re: /\bmal(achi)?\b/i, bookname: "Malachi", longbookname: "Book_of_Malachi", lastchapter: 4 },
+ { re: /\bm(at(thew|t)?|t)\b/i, bookname: "Matthew", longbookname: "Gospel_of_Matthew", lastchapter: 28 },
+ { re: /\bm(ark|rk|[kr])\b/i, bookname: "Mark", longbookname: "Gospel_of_Mark", lastchapter: 16 },
+ { re: /\bl(ke|uke?|[ku])\b/i, bookname: "Luke", longbookname: "Gospel_of_Luke", lastchapter: 24 },
+ { re: /\bj(oh|h)?n\b/i, bookname: "John", longbookname: "Gospel_of_John", lastchapter: 21 },
+ { re: /\bac(ts|t)?\b/i, bookname: "Acts", longbookname: "Acts_of_the_Apostles", lastchapter: 28 },
+ { re: /\br(om(ans?)?|[mo])\b/i, bookname: "Romans", longbookname: "Epistle_to_the_Romans", lastchapter: 16 },
+ { re: /\b(1st|first|[1i])\s*cor(in(th(ians?)?|t)?|th)?\b/i, bookname: "1 Corinthians", longbookname: "First_Epistle_to_the_Corinthians", lastchapter: 16 },
+ { re: /\b(2nd|ii|sec(ond)?|2)\s*cor(in(th(ians?)?|t)?|th)?\b/i, bookname: "2 Corinthians", longbookname: "Second_Epistle_to_the_Corinthians", lastchapter: 13 },
+ { re: /\bga(la(ti(ans?|ons?)|t)?|l)?\b/i, bookname: "Galatians", longbookname: "Epistle_to_the_Galatians", lastchapter: 6 },
+ { re: /\bep(h(es(ians)?|[es])|h)?\b/i, bookname: "Ephesians", longbookname: "Epistle_to_the_Ephesians", lastchapter: 6 },
+ { re: /\bph(il(ip(pians)?)?|i)?\b/i, bookname: "Philippians", longbookname: "Epistle_to_the_Philippians", lastchapter: 4 },
+ { re: /\bco(los(sians?|s)?|l)?\b/i, bookname: "Colossians", longbookname: "Epistle_to_the_Colossians", lastchapter: 4 },
+ { re: /\b(1st|first|[1i])\s*th(es(sa(lonians?)?|s)?|e)?\b/i, bookname: "1 Thessalonians", longbookname: "First_Epistle_to_the_Thessalonians", lastchapter: 5 },
+ { re: /\b(2nd|ii|sec(ond)?|2)\s*th(es(sa(lonians?)?|s)?|e)?\b/i, bookname: "2 Thessalonians", longbookname: "Second_Epistle_to_the_Thessalonians", lastchapter: 3 },
+ { re: /\b(1st|first|[1i])\s*t(im(othy?)?|[im])\b/i, bookname: "1 Timothy", longbookname: "First_Epistle_to_Timothy", lastchapter: 6 },
+ { re: /\b(2nd|ii|sec(ond)?|2)\s*t(im(othy?)?|m)\b/i, bookname: "2 Timothy", longbookname: "Second_Epistle_to_Timothy", lastchapter: 4 },
+ { re: /\btit(us)?\b/i, bookname: "Titus", longbookname: "Epistle_to_Titus", lastchapter: 3 },
+ { re: /\bph(ile(mon|m)?|lmn|[lm])\b/i, bookname: "Philemon", longbookname: "Epistle_to_Philemon", lastchapter: 1 },
+ { re: /\bhe(brews?|b)?\b/i, bookname: "Hebrews", longbookname: "Epistle_to_the_Hebrews", lastchapter: 13 },
+ { re: /\bj(a(mes?|[ms])|ms|[am])\b/i, bookname: "James", longbookname: "Epistle_of_James", lastchapter: 5 },
+ { re: /\b(1st|first|[1i])\s*p(et(er|e)?|[et])?\b/i, bookname: "1 Peter", longbookname: "First_Epistle_of_Peter", lastchapter: 5 },
+ { re: /\b(2nd|ii|sec(ond)?|2)\s*p(et(er|e)?|[et])?\b/i,bookname: "2 Peter", longbookname: "Second_Epistle_of_Peter", lastchapter: 3 },
+ { re: /\b(1st|first|[1i])\s*j(ohn|[no])\b/i, bookname: "1 John", longbookname: "First_Epistle_of_John", lastchapter: 5 },
+ { re: /\b(2nd|ii|sec(ond)?|2)\s*j(ohn|[no])\b/i, bookname: "2 John", longbookname: "Second_Epistle_of_John", lastchapter: 1 },
+ { re: /\b(3rd|iii|third|3)\s*j(ohn|[no])\b/i, bookname: "3 John", longbookname: "Third_Epistle_of_John", lastchapter: 1 },
+ { re: /\b(3rd|iii|third|3)\s*j(ohn|[no])\b/i,  bookname: "Jude", longbookname: "Epistle_of_Jude", lastchapter: 1 },
+ { re: /\br(ev(elations?)?|[ev])\b/i, bookname: "Revelation", longbookname: "Book_of_Revelations", lastchapter: 22 },
 ];
 
 function Reference(bibleRef) {
@@ -148,99 +148,39 @@ function Reference(bibleRef) {
 	var bibleNames = new Object;
 	var book = bibleRef.substring(0, bibleRef.search(/\s\d/i));
 	
-	if (book.search(/\b(genesis|gen|ge|gn)\b/i) != -1) { this.book = 1; }
-	if (book.search(/\b(exodus|ex|exo|exod|exd)\b/i) != -1) { this.book = 2; }
-	if (book.search(/\b(leviticus|lev|le|levi|lv)\b/i) != -1) { this.book = 3; }
-	if (book.search(/\b(numbers|num|nu|numb|number)\b/i) != -1) { this.book = 4; }
-	if (book.search(/\b(deuteronomy|deut|de|dt|deu)\b/i) != -1) { this.book = 5; }
-	if (book.search(/\b(joshua|josh|jos)\b/i) != -1) { this.book = 6; }
-	if (book.search(/\b(judges|jud|ju|jdg|judg)\b/i) != -1) { this.book = 7; }
-	if (book.search(/\b(ruth|ru)\b/i) != -1) { this.book = 8; }
-	if (book.search(/\b(1|i|1st|first)\s*(samuel|sa|sam|sml)\b/i) != -1) { this.book = 9; }
-	if (book.search(/\b(2|ii|2nd|second|sec)\s*(samuel|sa|sam|sml)\b/i) != -1) { this.book = 10; }
-	if (book.search(/\b(1|i|1st|first)\s*(kings|king|kgs|kn|k|ki)\b/i) != -1) { this.book = 11; }
-	if (book.search(/\b(2|ii|2nd|second|sec)\s*(kings|king|kgs|kn|k|ki)\b/i) != -1) { this.book = 12; }
-	if (book.search(/\b(1|i|1st|first)\s*(chronicles|chron|ch|chr)\b/i) != -1) { this.book = 13; }
-	if (book.search(/\b(2|ii|2nd|second|sec)\s*(chronicles|chron|ch|chr)\b/i) != -1) { this.book = 14; }
-	if (book.search(/\b(ezra|ez|ezr)\b/i) != -1) { this.book = 15; }
-	if (book.search(/\b(nehemiah|neh|ne|nehamiah)\b/i) != -1) { this.book = 16; }
-	if (book.search(/\b(esther|est|es|esth)\b/i) != -1) { this.book = 17; }
-        if (book.search(/\b(job|jo|jb)\b/i) != -1) { this.book = 18; }
-	if (book.search(/\b(psalms|ps|psa|psalm|psm)\b/i) != -1) { this.book = 19; }
-	if (book.search(/\b(proverbs|prov|pr|pro|proverb|prv|prvbs)\b/i) != -1) { this.book = 20; }
-	if (book.search(/\b(ecclesiastes|eccl|ecc|eccles|ec|ecl|ecclesiaste)\b/i) != -1) { this.book = 21; }
-	if (book.search(/\b(song\sof\ssolomon|song\sof\ssongs|sos|ss|son|so|song|songs)\b/i) != -1) { this.book = 22; }
-	if (book.search(/\b(isaiah|is|is|isah|isai|ia)\b/i) != -1) { this.book = 23; }
-	if (book.search(/\b(jerimiah|jeremiah|jer|je|jere)\b/i) != -1) { this.book = 24; }
-	if (book.search(/\b(lamentations|lam|la|lamentation)\b/i) != -1) { this.book = 25; }
-	if (book.search(/\b(ezekiel|eze|ez|ezk|ezek)\b/i) != -1) { this.book = 26; }
-	if (book.search(/\b(daniel|dan|dn|dl|da)\b/i) != -1) { this.book = 27; }
-	if (book.search(/\b(hosea|hos|ho)\b/i) != -1) { this.book = 28; }
-	if (book.search(/\b(joel|joe|jl)\b/i) != -1) { this.book = 29; }
-	if (book.search(/\b(amos|am|amo)\b/i) != -1) { this.book = 30; }
-	if (book.search(/\b(obadiah|oba|ob|obad)\b/i) != -1) { this.book = 31; }
-	if (book.search(/\b(jonah|jnh|jon)\b/i) != -1) { this.book = 32; }
-	if (book.search(/\b(micah|mic|mi)\b/i) != -1) { this.book = 33; }
-	if (book.search(/\b(nahum|nah|na)\b/i) != -1) { this.book = 34; }
-	if (book.search(/\b(habakkuk|hab|ha|habakuk)\b/i) != -1) { this.book = 35; }
-	if (book.search(/\b(zephaniah|zeph|zep)\b/i) != -1) { this.book = 36; }
-	if (book.search(/\b(haggia|hag|hg|haggai)\b/i) != -1) { this.book = 37; }
-	if (book.search(/\b(zechariah|zech|zch|zec)\b/i) != -1) { this.book = 38; }
-	if (book.search(/\b(malachi|mal)\b/i) != -1) { this.book = 39; }
-	if (book.search(/\b(matthew|mt|matt|mat)\b/i) != -1) { this.book = 40; }
-	if (book.search(/\b(mark|mrk|mk|mr)\b/i) != -1) { this.book = 41; }
-	if (book.search(/\b(luke|lu|lke|luk|lk)\b/i) != -1) { this.book = 42; }
-	if (book.search(/\b(john|jn|jhn)\b/i) != -1) { this.book = 43; }
-  if (book.search(/\b(acts|ac|act)\b/i) != -1) { this.book = 44; }
-	if (book.search(/\b(romans|rom|ro|rm|roman)\b/i) != -1) { this.book = 45; }
-	if (book.search(/\b(1|i|1st|first)\s*(corinthian|cor|corinthians|corinth|corin|corth|corint)\b/i) != -1) { this.book = 46; }
-	if (book.search(/\b(2|ii|2nd|second|sec)\s*(corinthian|cor|corinthians|corinth|corin|corth|corint)\b/i) != -1) { this.book = 47; }
-	if (book.search(/\b(galatians|galatian|galations|gal|ga|gala|galation|galat)\b/i) != -1) { this.book = 48; }
-	if (book.search(/\b(ephesians|eph|ep|ephes|ephe|ephs)\b/i) != -1) { this.book = 49; }
-	if (book.search(/\b(philippians|phi|phil|ph|philip)\b/i) != -1) { this.book = 50; }
-	if (book.search(/\b(colossians|col|co|colossian|colos|coloss)\b/i) != -1) { this.book = 51; }
-	if (book.search(/\b(1|i|1st|first)\s*(thessalonians|the|thessa|thessalonian|thes|thess|th)\b/i) != -1) { this.book = 52; }
-	if (book.search(/\b(2|ii|2nd|second|sec)\s*(thessalonians|the|thessa|thessalonian|thes|thess|th)\b/i) != -1) { this.book = 53; }
-	if (book.search(/\b(1|i|1st|first)\s*(timothy|tim|ti|timoth|tm)\b/i) != -1) { this.book = 54; }
-	if (book.search(/\b(2|ii|2nd|second|sec)\s*(timothy|tim|timoth|tm)\b/i) != -1) { this.book = 55; }
-	if (book.search(/\b(titus|tit)\b/i) != -1) { this.book = 56; }
-	if (book.search(/\b(philemon|phlmn|phl|phm|phile|philem)\b/i) != -1) { this.book = 57; }
-	if (book.search(/\b(hebrews|heb|he|hebrew)\b/i) != -1) { this.book = 58; }
-	if (book.search(/\b(james|jam|ja|jas|jms|jame|jm)\b/i) != -1) { this.book = 59; }
-	if (book.search(/\b(1|i|1st|first)\s*(peter|pe|pet|pete|pt|p)\b/i) != -1) { this.book = 60; }
-	if (book.search(/\b(2|ii|2nd|second|sec)\s*(peter|pe|pet|pete|pt|p)\b/i) != -1) { this.book = 61; }
-	if (book.search(/\b(1|i|1st|first)\s*(john|jn|jo)\b/i) != -1) { this.book = 62; }
-	if (book.search(/\b(2|ii|2nd|second|sec)\s*(john|jn|jo)\b/i) != -1) { this.book = 63; }
-	if (book.search(/\b(3|iii|3rd|third)\s*(john|jn|jo)\b/i) != -1) { this.book = 64; }
-	if (book.search(/\b(jude|jud|ju)\b/i) != -1) { this.book = 65; }
-	if (book.search(/\b(revelation|rev|re|revelations|rv)\b/i) != -1) { this.book = 66; }
-
-        this.bookname     = bookinfo[this.book].bookname;
-        this.longbookname = bookinfo[this.book].longbookname;
-        this.lastchapter  = bookinfo[this.book].lastchapter;
-
-        var chvs = bibleRef.substring(bibleRef.search(/\s\d/)+1, bibleRef.length);
-        
-        if (chvs.search(":") == -1) {
-                this.chapter = parseInt(chvs.substring(chvs.search(/\s\d\s/) +1,chvs.length));
-                this.startverse = 1;
-                this.endverse = booksizes[this.book][this.chapter-1];
-        } else {
-                this.chapter = parseInt(chvs.substring(chvs.search(/\s\d\:/) +1, chvs.search(":")));
-                        var vss = chvs.substring(chvs.search(":") + 1, chvs.length);
-                        
-                        if (vss.search("-") != -1) {
-                                this.startverse = parseInt(vss.substring(0, vss.search("-")));
-                                var ev = vss.substring(vss.search("-") + 1, vss.length);
-                                if (ev != "*") {
-                                        this.endverse = parseInt(ev);
-                                } else {
-                                        this.endverse = ev;
-                                }
-                                if (!this.endverse) { this.endverse = booksizes[this.book][this.chapter-1]; }
-                        } else {
-                                this.startverse = parseInt(vss);
-                                this.endverse = parseInt(vss);
-                        }
+    for (var num in bookinfo) {
+        if (num == 0) continue;
+        var b = bookinfo[num];
+        if (book.match(b.re)) {
+            this.book         = num; 
+            this.bookname     = b.bookname;
+            this.longbookname = b.longbookname;
+            this.lastchapter  = b.lastchapter;
         }
+    }
+
+    var chvs = bibleRef.substring(bibleRef.search(/\s\d/)+1, bibleRef.length);
+    
+    if (chvs.search(":") == -1) {
+            this.chapter = parseInt(chvs.substring(chvs.search(/\s\d\s/) +1,chvs.length));
+            this.startverse = 1;
+            this.endverse = booksizes[this.book][this.chapter-1];
+    } else {
+            this.chapter = parseInt(chvs.substring(chvs.search(/\s\d\:/) +1, chvs.search(":")));
+                    var vss = chvs.substring(chvs.search(":") + 1, chvs.length);
+                    
+                    if (vss.search("-") != -1) {
+                            this.startverse = parseInt(vss.substring(0, vss.search("-")));
+                            var ev = vss.substring(vss.search("-") + 1, vss.length);
+                            if (ev != "*") {
+                                    this.endverse = parseInt(ev);
+                            } else {
+                                    this.endverse = ev;
+                            }
+                            if (!this.endverse) { this.endverse = booksizes[this.book][this.chapter-1]; }
+                    } else {
+                            this.startverse = parseInt(vss);
+                            this.endverse = parseInt(vss);
+                    }
+    }
 }
