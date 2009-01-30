@@ -163,25 +163,37 @@ function Reference(bibleRef) {
     var chvs = bibleRef.substring(bibleRef.search(/\s\d/)+1, bibleRef.length);
     
     if (chvs.search(":") == -1) {
-            this.chapter = parseInt(chvs.substring(chvs.search(/\s\d\s/) +1,chvs.length));
-            this.startverse = 1;
-            this.endverse = booksizes[this.book][this.chapter-1];
+        this.chapter = parseInt(chvs.substring(chvs.search(/\s\d\s/) +1,chvs.length));
+        this.startverse = 1;
+        this.endverse = booksizes[this.book][this.chapter-1];
     } else {
-            this.chapter = parseInt(chvs.substring(chvs.search(/\s\d\:/) +1, chvs.search(":")));
-                    var vss = chvs.substring(chvs.search(":") + 1, chvs.length);
-                    
-                    if (vss.search("-") != -1) {
-                            this.startverse = parseInt(vss.substring(0, vss.search("-")));
-                            var ev = vss.substring(vss.search("-") + 1, vss.length);
-                            if (ev != "*") {
-                                    this.endverse = parseInt(ev);
-                            } else {
-                                    this.endverse = ev;
-                            }
-                            if (!this.endverse) { this.endverse = booksizes[this.book][this.chapter-1]; }
-                    } else {
-                            this.startverse = parseInt(vss);
-                            this.endverse = parseInt(vss);
-                    }
+        this.chapter = parseInt(chvs.substring(chvs.search(/\s\d\:/) +1, chvs.search(":")));
+        var vss = chvs.substring(chvs.search(":") + 1, chvs.length);
+                
+        if (vss.search("-") != -1) {
+            this.startverse = parseInt(vss.substring(0, vss.search("-")));
+            var ev = vss.substring(vss.search("-") + 1, vss.length);
+            this.endverse = (ev == "*") ? "*" : parseInt(ev);
+            if (!this.endverse) { this.endverse = booksizes[this.book][this.chapter-1]; }
+        } else {
+                this.startverse = parseInt(vss);
+                this.endverse = parseInt(vss);
+        }
     }
 }
+
+Reference.prototype.iterator = function() { return new VerseIterator(this) };
+function VerseIterator(reference) {
+    // Keep it simple for now
+    this.book       = reference.book;
+    this.chapter    = reference.chapter;
+    this.verse      = reference.startverse;
+    this.startverse = reference.startverse;
+    this.endverse   = reference.endverse;
+}
+
+VerseIterator.prototype.reset = function() { this.verse = this.startverse };
+VerseIterator.prototype.next = function() {
+    if (this.verse > this.endverse) { return };
+    return { book: this.book, chapter: this.chapter, verse: this.verse++ };
+};
