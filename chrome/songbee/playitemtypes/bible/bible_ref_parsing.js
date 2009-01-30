@@ -140,7 +140,7 @@ var bookinfo = [
  { re: /\b(2nd|ii|sec(ond)?|2)\s*j(ohn|[no])\b/i, bookname: "2 John", longbookname: "Second_Epistle_of_John", lastchapter: 1 },
  { re: /\b(3rd|iii|third|3)\s*j(ohn|[no])\b/i, bookname: "3 John", longbookname: "Third_Epistle_of_John", lastchapter: 1 },
  { re: /\b(3rd|iii|third|3)\s*j(ohn|[no])\b/i,  bookname: "Jude", longbookname: "Epistle_of_Jude", lastchapter: 1 },
- { re: /\br(ev(elations?)?|[ev])\b/i, bookname: "Revelation", longbookname: "Book_of_Revelations", lastchapter: 22 },
+ { re: /\br(ev(elations?)?|[ev])\b/i, bookname: "Revelation", longbookname: "The_Apocalypse_Of_John", lastchapter: 22 },
 ];
 
 function Reference(bibleRef) {
