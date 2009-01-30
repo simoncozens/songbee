@@ -120,8 +120,8 @@ var bookinfo = [
  { re: /\bj(oh|h)?n\b/i, bookname: "John", longbookname: "Gospel_of_John", lastchapter: 21 },
  { re: /\bac(ts|t)?\b/i, bookname: "Acts", longbookname: "Acts_of_the_Apostles", lastchapter: 28 },
  { re: /\br(om(ans?)?|[mo])\b/i, bookname: "Romans", longbookname: "Epistle_to_the_Romans", lastchapter: 16 },
- { re: /\b(1st|first|[1i])\s*cor(in(th(ians?)?|t)?|th)?\b/i, bookname: "1 Corinthians", longbookname: "First_Epistle_to_the_Corinthians", lastchapter: 16 },
- { re: /\b(2nd|ii|sec(ond)?|2)\s*cor(in(th(ians?)?|t)?|th)?\b/i, bookname: "2 Corinthians", longbookname: "Second_Epistle_to_the_Corinthians", lastchapter: 13 },
+ { re: /\b(1st|first|[1i])\s*co(rin(th(ians?)?|t)?|th)?\b/i, bookname: "1 Corinthians", longbookname: "First_Epistle_to_the_Corinthians", lastchapter: 16 },
+ { re: /\b(2nd|ii|sec(ond)?|2)\s*co(rin(th(ians?)?|t)?|th)?\b/i, bookname: "2 Corinthians", longbookname: "Second_Epistle_to_the_Corinthians", lastchapter: 13 },
  { re: /\bga(la(ti(ans?|ons?)|t)?|l)?\b/i, bookname: "Galatians", longbookname: "Epistle_to_the_Galatians", lastchapter: 6 },
  { re: /\bep(h(es(ians)?|[es])|h)?\b/i, bookname: "Ephesians", longbookname: "Epistle_to_the_Ephesians", lastchapter: 6 },
  { re: /\bph(il(ip(pians)?)?|i)?\b/i, bookname: "Philippians", longbookname: "Epistle_to_the_Philippians", lastchapter: 4 },
@@ -156,6 +156,7 @@ function Reference(bibleRef) {
             this.bookname     = b.bookname;
             this.longbookname = b.longbookname;
             this.lastchapter  = b.lastchapter;
+            break;
         }
     }
 
