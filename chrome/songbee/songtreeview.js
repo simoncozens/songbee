@@ -16,9 +16,13 @@ function songTreeView()
     this.searchText = "";
     this.searchColumn = "";
 
+    this.whereClause = function() {
+        return this.searchColumn ? "WHERE "+this.searchColumn+" LIKE (?1)" : "";
+    }
+
     this.recalculateRows = function () {
         this.cacheRowNum = -1;
-        var whereclause = this.searchColumn ? "WHERE "+this.searchColumn+" LIKE (?1)" : "";
+        var whereclause = this.whereClause();
         var count;
         if (whereclause) 
             count = doSQL("SELECT COUNT(*) FROM song "+whereclause, null, null, ["%"+this.searchText+"%"]);
@@ -47,7 +51,7 @@ function songTreeView()
         return (this.getSongAtIndex(row))[column.id]();
     };
     this.getSongAtIndex      = function(row) {
-        var whereclause = this.searchColumn ? "WHERE "+this.searchColumn+" LIKE (?1)" : "";
+        var whereclause = this.whereClause();
         var orderclause = this.orderColumn + (this.orderDirection ? "": " DESC");
         if (row != this.cacheRowNum){
             var limitclause = "LIMIT 1 OFFSET "+row;

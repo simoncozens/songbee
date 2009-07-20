@@ -21,6 +21,7 @@
         <menupopup id="file-popup">
             <menuitem label="Import songs" oncommand="import_songs()"/>
             <menuitem label="Export songs" oncommand="export_songs()"/>
+            <menuitem label="Song Report" oncommand="song_report()"/>
             <menuseparator/>
             <menuitem label="Preferences" oncommand="preferences()"/>
             <menuitem label="Debugger" oncommand="opendebugger()"/>
@@ -145,6 +146,11 @@
 
    function preferences() {
         window.openDialog("chrome://songbee/content/preferences.xul",
+        "preferences", "chrome, dialog");
+    }
+
+    function song_report() {
+        window.openDialog("chrome://songbee/content/song-report.xul",
         "preferences", "chrome, dialog");
     }
     function opendebugger() { 
