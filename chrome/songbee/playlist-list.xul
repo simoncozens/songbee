@@ -151,7 +151,7 @@
 
     function song_report() {
         window.openDialog("chrome://songbee/content/song-report.xul",
-        "preferences", "chrome, dialog");
+        "preferences", "chrome, resizable,dialog");
     }
     function opendebugger() { 
 const Cc = Components.classes;

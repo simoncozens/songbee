@@ -153,6 +153,10 @@ Song.prototype.played = function () {
     doSQLStatement("UPDATE song SET playcount = playcount + 1 WHERE id = "+this.id());
 }
 
+Song.resetAllPlaycounts = function () {
+    doSQLStatement("UPDATE song SET playcount = 0");
+};
+
 Song.prototype.xmlDOM = function () {
     var parsed = (new DOMParser()).parseFromString(this.xml(), "text/xml");
     return parsed;
