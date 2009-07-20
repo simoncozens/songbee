@@ -52,11 +52,11 @@ function verseText(reference, version) {
     var iter = reference.iterator();
     var sql = "SELECT content FROM bible WHERE book = (?1) AND chapter = (?2) AND verse = (?3)";
     var statement = handle.createStatement(sql);
-    if (!statement) { alert("Oops"); return }
+    if (!statement) { alert("Oops"); return ""; }
     // Slow stupid way for now.
     var text = "<h1>"+reference.toString()+"</h1> ";
     var bcv;
-    while (bcv = iter.next()) {
+    while ((bcv = iter.next())) {
         statement.bindInt32Parameter(0, bcv.book);
         statement.bindInt32Parameter(1, bcv.chapter);
         statement.bindInt32Parameter(2, bcv.verse);

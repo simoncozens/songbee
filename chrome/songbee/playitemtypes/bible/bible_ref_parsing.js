@@ -196,6 +196,6 @@ function VerseIterator(reference) {
 
 VerseIterator.prototype.reset = function() { this.verse = this.startverse };
 VerseIterator.prototype.next = function() {
-    if (this.verse > this.endverse) { return };
+    if (this.verse > this.endverse) { return null };
     return { book: this.book, chapter: this.chapter, verse: this.verse++ };
 };
