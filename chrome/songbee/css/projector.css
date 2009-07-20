@@ -25,7 +25,7 @@ FONT-FAMILY: Optima, "Lucida Grande",Sans-serif;
 
 /* ESV Bible hacks */
 
-.esv-text p { font-size: 40pt; font-weight: bold; margin-right: 20px; FONT-FAMILY: Arial; color: #007; padding:10px }
+.bible-text p { font-size: 25pt; font-weight: bold; margin-right: 20px; FONT-FAMILY: Arial; color: #007; padding:10px; line-height:150%; }
 .verse-num {font-size:40%; top:-2.1em; left:-0px;}
 .indent { margin-left: 40pt; }
 .footnote { display:none }

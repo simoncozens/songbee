@@ -182,6 +182,8 @@ function Reference(bibleRef) {
     }
 }
 
+Reference.prototype.toString = function () { return this.bookname+" "+this.chapter+":"+this.startverse+"-"+this.endverse }
+
 Reference.prototype.iterator = function() { return new VerseIterator(this) };
 function VerseIterator(reference) {
     // Keep it simple for now

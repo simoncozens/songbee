@@ -21,7 +21,7 @@ ItemTypeTable["bible"] = {
             this.data(JSON.stringify(obj));
         }
         var frag = doc.createElement("div"); 
-        frag.setAttribute("class", "esv-text");
+        frag.setAttribute("class", "bible-text");
         frag.innerHTML = obj.passageText;
         return frag;
     }
@@ -34,7 +34,7 @@ var storageService = Components.classes["@mozilla.org/storage/service;1"]
 
 function getPassage(ref) {
     var passage = new Reference(ref);
-    return verseText(passage, "net");
+    return verseText(passage, "jss");
 }
 
 function getHandleToBibleVersion(version) {
@@ -54,17 +54,20 @@ function verseText(reference, version) {
     var statement = handle.createStatement(sql);
     if (!statement) { alert("Oops"); return }
     // Slow stupid way for now.
-    var text = " ";
+    var text = "<h1>"+reference.toString()+"</h1> ";
     var bcv;
     while (bcv = iter.next()) {
         statement.bindInt32Parameter(0, bcv.book);
         statement.bindInt32Parameter(1, bcv.chapter);
         statement.bindInt32Parameter(2, bcv.verse);
         while (statement.executeStep()) {
+            var l = statement.getString(0);
+            l = l.replace(/\((.*?)\|(.*?)\)/g,'<nobr><ruby style="position:relative"> <rb>$1</rb> <rt class="sup">$2</rt> </ruby></nobr>');
             text += "<p><span class=\"verse-num\">"+bcv.verse+"</span> ";
-            text += statement.getString(0)+"</p> ";
+            text += l+"</p>";
         }
         statement.reset();
     }
+    //text = "<p>"+text+"</p>";
     return text;
 }

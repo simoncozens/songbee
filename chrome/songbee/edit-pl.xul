@@ -155,7 +155,12 @@ function createFakeLI(event) {
 }
 
 function doTreeDoubleClick() {
-    var li = itemToListItem(selectedSong(), "song", "");
+    addToPlaylist(selectedSong(), "song", ""); 
+}
+
+// Don't remove this, other playitemtypes need it.
+function addToPlaylist(song, type, data, label) {
+    var li = itemToListItem(song, type, data, label);
     target.appendChild(li);
 }
 

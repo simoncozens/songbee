@@ -12,4 +12,4 @@ BODY { BACKGROUND-COLOR: #ffffea }
 HTML { overflow: auto }
 .container { margin-left: 0; margin-right: 0;}
 
-
+.bible-text p { font-size: 13pt; font-weight: bold; margin-right: 20px; FONT-FAMILY: Arial; color: #007; padding:10px }
