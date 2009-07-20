@@ -11,6 +11,7 @@
   minheight="200" minwidth="600"
 >
 <script src="chrome://songbee/content/songbee-sql.js"/>
+<script src="chrome://songbee/content/export.js"/>
 <script src="chrome://songbee/content/songtreeview.js"/>
 <keyset>
   <key id="close_cmd" keycode="VK_ESCAPE" oncommand="window.close();"/>
@@ -25,12 +26,26 @@
     </treecols>
     <treechildren context="songpopup"/>
     </tree>
+    <hbox>
+    <button label="Export to CSV" oncommand="export_songreport()"/>
+    <button label="Clear data" oncommand="clearAll()"/>
+    </hbox>
     <script> 
         var view = new songTreeView();
         view.columns = ["title", "playcount", "first_line"]; 
         view.whereClause = function () { return "WHERE playcount > 0 AND (?1) = (?1) ";};
         view.recalculateRows();
         document.getElementById("songlist").view = view;
+
+        function clearAll() { 
+            var promptService = Components.classes["@mozilla.org/embedcomp/prompt-service;1"] .getService(Components.interfaces.nsIPromptService);
+            if (!promptService.confirm(window, "Really clear?", "Do you want to reset all the counts to zero?"))
+               return;
+            Song.resetAllPlaycounts();
+            window.close();
+        }
+
+
     </script>
 </vbox>
 </window>

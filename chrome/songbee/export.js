@@ -12,16 +12,16 @@ function saveDialog(classname, extension) {
         thefile.leafName += "."+extension;
     if (thefile.exists())
        thefile.remove(false);
-    return thefile;
-}
-
-function saveDOC() {
-    var thefile = saveDialog("Word document", "doc");
-    if (!thefile) return;
-    // We cheat, using the hidden iframe trick.
     var foStream = Components.classes["@mozilla.org/network/file-output-stream;1"]
                  .createInstance(Components.interfaces.nsIFileOutputStream);
     foStream.init(thefile, 0x02 | 0x08 | 0x20, 0664, 0); 
+    return {name: thefile, stream: foStream};
+}
+
+function saveDOC() {
+    var file = saveDialog("Word document", "doc");
+    if (!file) return;
+    // We cheat, using the hidden iframe trick.
     var save = document.getElementById("save").contentDocument;
     var song_place = save.getElementById("song");
     var stylesheet = getXSLT();
@@ -32,25 +32,39 @@ function saveDOC() {
         song_place.appendChild(i.transformToHTML(stylesheet, save));
     });
     var serializer = new XMLSerializer();
-    serializer.serializeToStream(save, foStream, ""); 
+    serializer.serializeToStream(save, file.stream, ""); 
     song_place.innerHTML = "";
-    foStream.close();
-    alert("Saved "+thefile.leafName);
+    file.stream.close();
+    alert("Saved "+file.name.leafName);
 }
 
 function export_songs () {
-    var thefile = saveDialog("Songbee library file", "songbee");
-    if (!thefile) return;
-    var foStream = Components.classes["@mozilla.org/network/file-output-stream;1"]
-                 .createInstance(Components.interfaces.nsIFileOutputStream);
-    foStream.init(thefile, 0x02 | 0x08 | 0x20, 0664, 0); 
+    var file = saveDialog("Songbee library file", "songbee");
+    if (!file) return;
 
-    foStream.write("<songs>\n", 12);
+    file.stream.write("<songs>\n", 12);
     Song.retrieveAll(function(song) { 
         var ser = new XMLSerializer(); 
-        ser.serializeToStream(song.xmlDOM(), foStream, "");
+        ser.serializeToStream(song.xmlDOM(), file.stream, "");
     });
-    foStream.write("\n</songs>\n", 14);
-    foStream.close();
-    alert("Saved "+thefile.leafName);
+    file.stream.write("\n</songs>\n", 14);
+    file.stream.close();
+    alert("Saved "+file.name.leafName);
+}
+
+function csvQuote(x) { return '"'+x.replace(/"/g, '""')+'"'; }
+
+function export_songreport() {
+    var file = saveDialog("Comma-separated variable file", "csv");
+    if (!file) return;
+    var header = '"Title","First line","Play count"\n';
+    file.stream.write(header, header.length);
+    Song.retrieveAll(function(song) { 
+        if (song.playcount() > 0) {
+            var line = csvQuote(song.title())+","+csvQuote(song.first_line())+","+song.playcount()+"\n";
+            file.stream.write(line, line.length);
+        }
+    });
+    file.stream.close();
+    alert("Saved "+file.name.leafName);
 }
