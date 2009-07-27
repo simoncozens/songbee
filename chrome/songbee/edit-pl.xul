@@ -62,7 +62,7 @@ onmouseup="endDrag()"
         <splitter/>
         <vbox flex="1">
         <tree id="songlist" minwidth="200" flex="1" seltype="single"
-        minheight="200"
+        minheight="200" onselect="updatePreview()"
         context="treepopup"
         onclick="updatePreview()" ondblclick="doTreeDoubleClick()">
             <treecols>

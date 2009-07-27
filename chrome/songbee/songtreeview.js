@@ -114,6 +114,7 @@ function update_search() {
     v.searchText = ff.value;
     tree.view = v;
     v.recalculateRows();
+    v.selection.select(0);
     tree.boxObject.invalidate();
 }
 

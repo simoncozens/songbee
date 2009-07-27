@@ -48,6 +48,7 @@
         <!-- it would be lovely to turn this into XBL, but it hurts my head -->
             <tree id="songlist" minwidth="200" flex="1" seltype="single"
             onclick="updatePreview()" ondblclick="doTreeDoubleClick()"
+            onselect="updatePreview()"
             minheight="200">
                 <treecols>
                     <treecol id="title" label="&songbee.title;" flex="1"/>
