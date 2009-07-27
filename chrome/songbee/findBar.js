@@ -696,60 +696,22 @@ var gFindBar = {
   onFindBarKeyPress: function (evt)
   {
     if (evt.keyCode == KeyEvent.DOM_VK_RETURN) {
-      if (this.mFindMode == FIND_NORMAL) {
-        var findString = document.getElementById("find-field");
-        if (!findString.value)
-          return;
-
-//@line 755 "/builds/tinderbox/Fx-Mozilla1.8-release/Darwin_8.7.0_Depend/mozilla/toolkit/components/typeaheadfind/content/findBar.js"
-        if (evt.metaKey) {
-//@line 759 "/builds/tinderbox/Fx-Mozilla1.8-release/Darwin_8.7.0_Depend/mozilla/toolkit/components/typeaheadfind/content/findBar.js"
-          document.getElementById("highlight").click();
-          return;
-        }
-
-        if (evt.shiftKey)
-          this.findPrevious();
-        else
-          this.findNext();
-      }
-      else {
-        if (this.mFoundLink) {
-          var tmpLink = this.mFoundLink;
-          if (this.finishFAYT(evt))
-            this.fireKeypressEvent(tmpLink, evt);
-        }
-      }
+        // XXX Songbee-specific hack
+        addToPlaylist(selectedSong(), "song", "");
     }
     else if (evt.keyCode == KeyEvent.DOM_VK_TAB) {
-      var shouldHandle = !evt.altKey && !evt.ctrlKey && !evt.metaKey;
-      if (shouldHandle && this.mFindMode != FIND_NORMAL &&
-          this.finishFAYT(evt)) {
-        if (evt.shiftKey)
-          document.commandDispatcher.rewindFocus();
-        else
-          document.commandDispatcher.advanceFocus();
-      }
     }
     else if (evt.keyCode == KeyEvent.DOM_VK_ESCAPE) {
       this.closeFindBar();
       evt.preventDefault();
     } 
     else if (evt.keyCode == KeyEvent.DOM_VK_PAGE_UP) {
-      window.top._content.scrollByPages(-1);
-      evt.preventDefault();
     }
     else if (evt.keyCode == KeyEvent.DOM_VK_PAGE_DOWN) {
-      window.top._content.scrollByPages(1);
-      evt.preventDefault();
     }
     else if (evt.keyCode == KeyEvent.DOM_VK_UP) {
-      window.top._content.scrollByLines(-1);
-      evt.preventDefault();
     }
     else if (evt.keyCode == KeyEvent.DOM_VK_DOWN) {
-      window.top._content.scrollByLines(1);
-      evt.preventDefault();
     }
   },
 
