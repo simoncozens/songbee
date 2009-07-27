@@ -273,15 +273,15 @@ function pageUp() {}
 function onKeyPress(e) {
     var fe = document.commandDispatcher.focusedElement;
     if (fe && fe.tagName == "html:input") { return; }
-    e.preventDefault();
+    jsdump("Which :"+e.which+" Alt: "+e.altKey+" Ctrl: "+e.ctrlKey+" Meta: "+e.metaKey);
     switch (e.keyCode) {
-        case e.DOM_VK_UP: handleUp(); return;
-        case e.DOM_VK_DOWN: handleDown(); return;
-        case e.DOM_VK_LEFT: switchItem(state.currentItemIndex-1); return;
-        case e.DOM_VK_RIGHT: switchItem(state.currentItemIndex+1); return;
-        case e.DOM_VK_PAGE_DOWN: pageDown(); return;
-        case e.DOM_VK_PAGE_UP: pageUp(); return;
-        case e.DOM_VK_ESCAPE: togglePaused(); return;
+        case e.DOM_VK_UP: handleUp(); e.preventDefault(); return;
+        case e.DOM_VK_DOWN: handleDown(); e.preventDefault(); return;
+        case e.DOM_VK_LEFT: switchItem(state.currentItemIndex-1); e.preventDefault();return;
+        case e.DOM_VK_RIGHT: switchItem(state.currentItemIndex+1); e.preventDefault();return;
+        case e.DOM_VK_PAGE_DOWN: pageDown(); e.preventDefault(); return;
+        case e.DOM_VK_PAGE_UP: pageUp(); e.preventDefault(); return;
+        case e.DOM_VK_ESCAPE: togglePaused(); e.preventDefault(); return;
     }
     var newSection = -1;
     switch (e.charCode) {
@@ -296,6 +296,7 @@ function onKeyPress(e) {
         case 98: newSection = findNext("bridge"); break; // b
     }
     if (newSection == -1) { return; }
+    e.preventDefault();
     changeSection(newSection);
 } 
 

@@ -24,6 +24,7 @@ onmouseup="endDrag()"
 <script src="chrome://songbee/content/export.js"/>
 <keyset>
   <key id="close_cmd" keycode="VK_ESCAPE" oncommand="escapeOut();"/>
+  <key id="focus_search" key="f" modifiers="shift any accel" oncommand="document.getElementById('find-field').focus()"/>
 </keyset>
 <toolbox>
 	
