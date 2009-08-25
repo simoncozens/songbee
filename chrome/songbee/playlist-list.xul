@@ -107,6 +107,7 @@
 
     function create_pl () {
         var name = prompt("&playlistList.newPlaylistName;");
+        if (!name) { return };
         var playlist = Playlist.create(["name", name]);
         // Age the songs:
         Song.ageAll();
