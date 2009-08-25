@@ -26,6 +26,7 @@
             <menuitem label="Preferences" oncommand="preferences()"/>
             <menuitem label="Debugger" oncommand="opendebugger()"/>
             <menuseparator/>
+            <menuitem id="aboutName" label="About" oncommand="aboutwindow()"/>
             <menuitem label="Exit" oncommand="window.close()"/>
         </menupopup>
     </menu>
@@ -150,6 +151,10 @@
         "preferences", "chrome, dialog");
     }
 
+    function aboutwindow() {
+        window.openDialog("chrome://songbee/content/about-window.xul",
+        "preferences", "chrome, dialog");
+    }
     function song_report() {
         window.openDialog("chrome://songbee/content/song-report.xul",
         "preferences", "chrome, resizable,dialog");
