@@ -21,6 +21,7 @@
 			<menuitem label="language" value="language"/>
 			<menuitem label="sambika" value="sambika"/>
 			<menuitem label="shinseika" value="shinseika"/>
+			<menuitem label="title" value="title"/>
 			<menuitem label="year" value="year"/>
 		</menupopup>
 	  </menulist>
@@ -35,7 +36,7 @@
         }
     }
 	function fixup() {
-		window.arguments[0].type = document.getElementById("type").value;
+		window.arguments[0].type = document.getElementById("type").value.toLowerCase();
 		window.arguments[0].value = document.getElementById("value").value;
 		return true;
 	}
