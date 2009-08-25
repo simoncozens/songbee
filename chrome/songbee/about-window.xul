@@ -15,7 +15,7 @@
   <key id="close_cmd" keycode="VK_ESCAPE" oncommand="window.close();"/>
 </keyset>
 <html:div id="main">
-<html:img src="songbee.png"/>
+<html:img src="chrome://branding/content/about.png"/>
 <html:p id="sb"> Songbee </html:p>
 <html:p>Version <label id="songbeeversion"/> (build
 <label id="buildid"/>)
