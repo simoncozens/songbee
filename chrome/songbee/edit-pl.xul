@@ -215,6 +215,7 @@ function endDrag() {
     dragSetup = 0;
     dragging = 0;
     if (!wasDragging) return;
+    if (!dragging.parentNode) return;
     var list = document.getElementById("playlistlist");
     if ( completelyOutside(wasDragging, list) ) {
         //jsdump("Fell outside");
