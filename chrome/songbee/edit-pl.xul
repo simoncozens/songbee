@@ -172,6 +172,7 @@ function itemToListItem(song, type, data, label) {
 	li.piType = type;
 	li.piData = data;
 	if (type == "song") {
+        if (!song) return;
 		var s = Song.retrieve(song); 
 		li.setAttribute("label", s.title());
 		if (!s) { alert("Bug: Couldn't get a song we've clicked on") }
