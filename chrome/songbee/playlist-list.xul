@@ -27,6 +27,7 @@
             <menuitem label="Debugger" oncommand="opendebugger()"/>
             <menuseparator/>
             <menuitem id="aboutName" label="About" oncommand="aboutwindow()"/>
+            <menuitem label="Check for updates..." oncommand="checkUpdates()"/>
             <menuitem label="Exit" oncommand="window.close()"/>
         </menupopup>
     </menu>
