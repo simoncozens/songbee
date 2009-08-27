@@ -16,8 +16,9 @@ FONT-FAMILY: Arial; color: #007;
 line-height:150%;
 margin:10px 20px;
 padding:0;
+text-indent:-1.5em; margin-left: 1.5em
 }
-.sup { font-size: 40%; position:absolute;top:-2.1em; left:-0px; width:100%;
+.sup { font-size: 40%; position:absolute;top:-2.1em; left:1.5em; width:100%;
 text-align: center;
 FONT-FAMILY: Optima, "Lucida Grande",Sans-serif;
 }
@@ -25,7 +26,10 @@ FONT-FAMILY: Optima, "Lucida Grande",Sans-serif;
 
 /* ESV Bible hacks */
 
-.bible-text p { font-size: 25pt; font-weight: bold; margin-right: 20px; FONT-FAMILY: Arial; color: #007; padding:10px; line-height:150%; }
+.bible-text p { font-size: 25pt; font-weight: bold; margin-right: 20px; FONT-FAMILY: Arial; color: #007; padding:10px; line-height:150%; 
+text-indent:-1.5em; margin-left: 1.5em;
+}
+/*.bible-text p .sup { left: 0 }*/
 .verse-num {font-size:40%; top:-2.1em; left:-0px;}
 .indent { margin-left: 40pt; }
 .footnote { display:none }
