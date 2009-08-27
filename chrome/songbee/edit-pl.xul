@@ -53,7 +53,7 @@ onmouseup="endDrag()"
     </popup>
 </popupset>
 
-        <stack onmousemove="if(dragging) { doMove(event) }" id="canvas">
+        <stack onmousemove="if(dragging) { doMove(event) }" id="canvas" flex="1">
 <vbox flex="1" id="box1">
     <hbox flex="1" id="box2">
         <vbox flex="1" label="&songbee.playlist;">
