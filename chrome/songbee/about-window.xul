@@ -3,10 +3,12 @@
 <?xml-stylesheet href="about-window.css" type="text/css"?>
 <!DOCTYPE window [
 <!ENTITY % SongbeeDTD SYSTEM "chrome://songbee/locale/songbee.dtd" >
+<!ENTITY % AboutWindowDTD SYSTEM "chrome://songbee/locale/about-window.dtd" >
 %SongbeeDTD;
+%AboutWindowDTD;
 ]>
 
-<window id="about-window" title="About Songbee"
+<window id="about-window" title="&aboutwindow.windowtitle;"
   xmlns:html="http://www.w3.org/1999/xhtml"
   minwidth="250"
   xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
@@ -16,11 +18,10 @@
 </keyset>
 <html:div id="main">
 <html:img src="chrome://branding/content/about.png"/>
-<html:p id="sb"> Songbee </html:p>
-<html:p>Version <label id="songbeeversion"/> (build
-<label id="buildid"/>)
-running on Mozilla <label id="platformversion"/>
-(build <label id="platformbuildid"/>).</html:p>
+<html:p id="sb"> &songbee.appname; </html:p>
+<html:p> &aboutwindow.version; <label id="songbeeversion"/> 
+(&aboutwindow.build; <label id="buildid"/>) &aboutwindow.mozilla; <label id="platformversion"/>
+(&aboutwindow.build; <label id="platformbuildid"/>)</html:p>
 <button label="OK" oncommand="window.close();"/>
 </html:div>
     <script> 
