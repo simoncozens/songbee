@@ -90,13 +90,14 @@ function songTreeView()
 
 function updatePreview() {
     var stylesheet = getXSLT();
+    var preview = document.getElementById("preview").contentDocument;
+    var song_place = preview.getElementById("song");
+    song_place.innerHTML = "";
+
     var sid = selectedSong();
     if (!sid) return;
     var song = Song.retrieve(sid);
-    var preview = document.getElementById("preview").contentDocument;
-    var song_place = preview.getElementById("song");
     var frag = transformDOM(song.xmlDOM(), stylesheet, preview);
-    song_place.innerHTML = "";
     song_place.appendChild(frag);
 }
 
@@ -121,4 +122,5 @@ function update_search() {
 function refreshTree() {
     tree.view = new songTreeView();
     tree.boxObject.invalidate();
+    updatePreview();
 }
