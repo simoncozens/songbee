@@ -19,6 +19,7 @@
     <popup id="addmdpopup">
         <menuitem label="Add metadata" oncommand="addTreeRow()"/>
         <menuitem label="Mark as translation" oncommand="markTranslation()"/>
+        <menuitem label="Delete metadata" oncommand="deleteHighlighted()"/>
 	</popup>
 </popupset>
 <vbox flex="1">
