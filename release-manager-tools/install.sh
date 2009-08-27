@@ -2,8 +2,8 @@
 if [ "XX" = "XX"`which xulrunner` ]; then
     echo "xulrunner not installed at all!"; exit 1;
 fi;
-if [ `xulrunner --gre-version` '<' 1.8.0 ]; then
-    echo "We need xulrunner >1.8.0"; exit 1;
+if [ `xulrunner --gre-version` '<' 1.9.0 ]; then
+    echo "We need xulrunner >1.9.0"; exit 1;
 fi;
 xulrunner --register-global
 TARGET=$1;

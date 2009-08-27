@@ -1,15 +1,18 @@
-VERSION = 1.1
+VERSION = 2.1
 SCRATCHDIR = /tmp/songbee-dist
 PRISTINE = /tmp/songbee-pristine
 RELEASEDIR = /tmp/songbee-releases
 
 checklist:
 	@echo "Have you updated the version in this Makefile?"
+	@echo "Have you updated the version in Info.plist and application.ini?"
 	@echo "Have you updated README.unix?"
+	@echo "Have you updated update.xml and any mars on the web site"
 	@echo "Have you rebuilt the manual PDF? (And updated the manual!)"
+	@echo "Are you using the latest xulrunner? (Check also this Makefile)"
 	@echo "Have you checked the xulrunner version in install.sh?"
-	@echo "Have you checked all your changes into SVN?"
-	@cd ..; svn status
+	@echo "Have you checked all your changes into git?"
+	@cd ..; git status
 	@echo "If so, then you can make release."
 
 release : release-osx release-win release-unix
