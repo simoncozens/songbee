@@ -1,4 +1,41 @@
 
+What's new in Songbee 2.1
+
+* Songbee will notify you when new versions are available and help you to
+  upgrade.
+
+* Songbee can now display Bible passages from SBB (SongBee Bible) files.
+ : Songbee comes with several out-of-copyright Bibles, and allows you to
+   import your own SBB files.
+ : The SBB Bible format also supports Japanese Bibles like the
+   Shinkayaku version, if you know where to get one from...
+
+* Various visual fixes have been made to the projector display,
+  including hanging indents on long lines.
+  : On the console display, each part of the song also displays the
+    accelerator key to jump to it.
+
+* You can view and save a report of how many times each song has been
+  sung, for copyright purposes.
+
+* A pretty new icon!
+
+* The in-worship searching facility has been improved:
+ : The preview pane is kept up to date with the best matched song.
+ : Pressing enter will insert the selected item.
+ : Ctrl-F (command-F on OS X) will jump to the find bar.
+
+* An "About" box displays the Songbee version and the version of the XUL
+  platform.
+
+* Minor fixes:
+ : You can no longer create playlists with blank names.
+ : Updated build numbers and version numbers everywhere.
+ : The "edit playlist" page again resizes properly.
+ : Metadata attributes added to songs are forced into lower case.
+ : Right-clicking on a metadata attribute has a "delete" option in the menu. 
+ : When a song is deleted, the preview window is emptied.
+
 What's new in Songbee 2.0
 
 * Songbee not only supports songs, but is now extensible to allow display 

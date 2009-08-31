@@ -65,6 +65,18 @@ songs in each playlist. At the top of the window are a set of menus:
 	      </listitem>
 	    </varlistentry>
 	    <varlistentry>
+	      <term><command>Song Report</command></term>
+	      <listitem>
+		<para>This opens a window which displays the number of
+		times that each song has been played. You can use this
+		for copyright agency reports.</para> 
+
+		<para>The window also provides options to reset the
+		counts, and also to download the data as a CSV file
+		which you can import to Excel.</para>
+	      </listitem>
+	    </varlistentry>
+	    <varlistentry>
 	      <term>Preferences</term>
 	      <listitem>
 		<para> This allows you to determine how you would like
@@ -81,6 +93,24 @@ songs in each playlist. At the top of the window are a set of menus:
 		  <para>On the Mac, the profile directory is <filename>Library:Application Support:Songbee:Profiles</filename>. Inside that directory you will find a file called <filename>user.projector.css</filename> which contains all your customizations. For the base CSS file, see <filename>Contents:Resources:Chrome:songbee:css:projector.css</filename> in your Songbee application bundle. (Right-click on the Songbee application and select <command>Show package contents</command> to find this file.</para>
 		  <para>On Windows, the relevant directories are <filename>%XXX%/Simon Cozens/Songbee</filename> and <filename>\Program Files\Songbee\chrome\songbee\css</filename>.</para>
 		</note>
+	      </listitem>
+	    </varlistentry>
+	    <varlistentry>
+	      <term>Check for updates</term>
+	      <listitem>
+		<para>This will manually check to see if there are any
+		new versions of Songbee available, and if so, will
+		offer to install them for you. This check is performed
+		automatically at regular intervals.</para>
+	      </listitem>
+	    </varlistentry>
+	    <varlistentry>
+	      <term>About</term>
+	      <listitem>
+		<para>Displays a dialog box showing you the current
+		version of Songbee, and the version of the XUL
+		platform - please send this information in to me if
+		you report any problems with Songbee!</para>
 	      </listitem>
 	    </varlistentry>
 	    <varlistentry>
@@ -166,9 +196,12 @@ songs in each playlist. At the top of the window are a set of menus:
       <para>
        To find a song in the song list, you may either scroll through,
        or use the search interface at the bottom of the window. To use
-       this, type in part of the song you are looking for, and Songbee
-       will narrow down the song list to only include songs that match
-your search. Songbee uses the following strategies to find your song:
+       this, first click on the search box, or press
+       <keycap>Ctrl</keycap>-<keycap>f</keycap>
+       (<keycap>Command</keycap>-f on OS X). Then type in part of the
+       song you are looking for, and Songbee will narrow down the song
+       list to only include songs that match your search. Songbee uses
+       the following strategies to find your song:
 </para>
       <itemizedlist>
 	<listitem>
@@ -186,9 +219,12 @@ search text anywhere in their lyrics</para>
       </itemizedlist>
       <para>
        Songbee's search function generally does what you want, so if
-you cannot find the song you are looking for, keep typing in words
-until it appears in the song list.
-</para>
+       you cannot find the song you are looking for, keep typing in
+       words until it appears in the song list.
+      </para>
+      <para>Once you have found the song you want, press
+      <keycap>Enter</keycap> or double click on the song name in the
+      song list to add it to the playlist.</para>
     </sect2>
     <sect2>
       <title>Adding other kinds of content to your playlist</title>
@@ -210,12 +246,6 @@ until it appears in the song list.
        supported. The passage will be looked up and displayed at the
        appropriate point in the worship time.
 </para>
-      <warning>
-	<para>Bible passage display currently requires an active Internet
-	connection; passages are looked up in the online version of the
-	ESV. We know this is not ideal, but it is a start and making
-	it work well will be a lot of work.</para>
-      </warning>
       <para>
        If you select the <command>Web page</command> option, you will
        be prompted for a web site URL. This web page will be displayed
