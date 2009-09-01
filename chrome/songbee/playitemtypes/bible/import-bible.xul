@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+<?xml-stylesheet href="chrome://songbee/content/xbl/fileinput/fileinput.css" type="text/css"?>
+<dialog
+    ondialogaccept="copyToProfile()"
+    xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+    <script src="chrome://songbee/content/playitemtypes/playitemtypes.js"/>
+<script src="chrome://songbee/content/songbee-sql.js"/>
+    <vbox>
+      <description> Import a Bible to Songbee</description>
+      <box class="fileinput" id="file"/>
+    </vbox>
+<script>
+function copyToProfile() {
+    var filename = document.getElementById("file").fileName;
+    if (filename.leafName.search(/\.sbb$/) &lt; 0) {
+        alert("That is not a Songbee Bible"); return false;
+    }
+    var profile = dserv.get("ProfD", Components.interfaces.nsIFile);
+    filename.copyTo(profile, filename.leafName); return true;
+}
+</script>
+</dialog>
+

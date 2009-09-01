@@ -24,17 +24,20 @@
             <menuitem label="Export songs" oncommand="export_songs()"/>
             <menuitem label="Song Report" oncommand="song_report()"/>
             <menuseparator/>
-            <menuitem label="Preferences" oncommand="preferences()"/>
-            <menuitem label="Debugger" oncommand="opendebugger()"/>
-            <menuseparator/>
             <menuitem id="aboutName" label="About" oncommand="aboutwindow()"/>
-            <menuitem label="Check for updates..." oncommand="checkUpdates()"/>
             <menuitem label="Exit" oncommand="window.close()"/>
         </menupopup>
     </menu>
     <menu id="create-menu" label="Create...">
         <menupopup id="create-popup">
             <menuitem label="&playlistList.addPlaylist;" oncommand="create_pl()"/>
+        </menupopup>
+    </menu>
+    <menu id="tools-menu" label="Tools">
+        <menupopup id="tools-popup">
+            <menuitem label="Preferences" oncommand="preferences()"/>
+            <menuitem label="Debugger" oncommand="opendebugger()"/>
+            <menuitem label="Check for updates..." oncommand="checkUpdates()"/>
         </menupopup>
     </menu>
 </menubar>

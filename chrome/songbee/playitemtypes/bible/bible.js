@@ -24,6 +24,20 @@ ItemTypeTable["bible"] = {
         frag.setAttribute("class", "bible-text");
         frag.innerHTML = obj.passageText;
         return frag;
+    },
+    fixups: function() { 
+        if (document.documentElement.id != "playlist-list") return;
+        var m;
+        if ((m = document.getElementById("tools-popup"))) {
+            m.appendChild(document.createElement("menuseparator"));
+            var i = document.createElement("menuitem");
+            i.setAttribute("label", "Import Bible...");
+            i.setAttribute("oncommand", "importBible()");
+            importBible = function () {
+                window.openDialog("chrome://songbee/content/playitemtypes/bible/import-bible.xul", "import-bible", "chrome, dialog,modal,resizable=no");
+            };
+            m.appendChild(i);
+        }
     }
 };
 
@@ -97,3 +111,4 @@ function verseText(reference, version) {
     //text = "<p>"+text+"</p>";
     return text;
 }
+
