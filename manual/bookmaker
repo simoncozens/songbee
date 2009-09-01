@@ -12,7 +12,7 @@ my @chapters = qw(
 my $dtd = "/sw/share/xml/dtd/docbookx/4.2.0/docbookx.dtd";
 my $fo_stylesheet = "/sw/share/xml/xsl/docbook-xsl/fo/docbook.xsl";
 my $html_stylesheet = "/sw/share/xml/xsl/docbook-xsl/xhtml/chunk.xsl";
-my $fop = "/Users/simon/Desktop/trunk/fop";
+my $fop = "/Users/simon/svn/fop/fop";
 my ($first, $last) = qw(Simon Cozens);
 # END of customization
 
@@ -63,8 +63,7 @@ print BOOK <<EOF;
     </authorgroup>
     <edition>Draft</edition>
     <copyright>
-      <!-- obviously this will change in the final version -->
-      <year>2006-2007</year>
+      <year>2006-2009</year>
       <holder>$first $last</holder>
     </copyright>
     <edition>1st</edition>

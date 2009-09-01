@@ -65,7 +65,7 @@ songs in each playlist. At the top of the window are a set of menus:
 	      </listitem>
 	    </varlistentry>
 	    <varlistentry>
-	      <term><command>Song Report</command></term>
+	      <term>Song Report</term>
 	      <listitem>
 		<para>This opens a window which displays the number of
 		times that each song has been played. You can use this
@@ -74,34 +74,6 @@ songs in each playlist. At the top of the window are a set of menus:
 		<para>The window also provides options to reset the
 		counts, and also to download the data as a CSV file
 		which you can import to Excel.</para>
-	      </listitem>
-	    </varlistentry>
-	    <varlistentry>
-	      <term>Preferences</term>
-	      <listitem>
-		<para> This allows you to determine how you would like
-		the default display to appear: you can change the font
-		sizes, spacing, colours, set a background image and so
-		on. </para>
-		<note>
-		  <title>For the technically inclined</title>
-		  <para>If you want more control over how the display
-		  appears, and you speak CSS, then you can create your
-		  own display preferences manually. Simply make some
-		  changes and save the preferences, then look in your
-		  profile directory.</para>
-		  <para>On the Mac, the profile directory is <filename>Library:Application Support:Songbee:Profiles</filename>. Inside that directory you will find a file called <filename>user.projector.css</filename> which contains all your customizations. For the base CSS file, see <filename>Contents:Resources:Chrome:songbee:css:projector.css</filename> in your Songbee application bundle. (Right-click on the Songbee application and select <command>Show package contents</command> to find this file.</para>
-		  <para>On Windows, the relevant directories are <filename>%XXX%/Simon Cozens/Songbee</filename> and <filename>\Program Files\Songbee\chrome\songbee\css</filename>.</para>
-		</note>
-	      </listitem>
-	    </varlistentry>
-	    <varlistentry>
-	      <term>Check for updates</term>
-	      <listitem>
-		<para>This will manually check to see if there are any
-		new versions of Songbee available, and if so, will
-		offer to install them for you. This check is performed
-		automatically at regular intervals.</para>
 	      </listitem>
 	    </varlistentry>
 	    <varlistentry>
@@ -134,6 +106,49 @@ songs in each playlist. At the top of the window are a set of menus:
             takes you to the <link linkend="playlist.editor">playlist
             editor</link>.
           </para>
+	      </listitem>
+	    </varlistentry>
+	  </variablelist>
+	</listitem>
+      </varlistentry>
+      <varlistentry>
+	<term>Tools</term>
+	<listitem>
+	  <variablelist>
+	    <varlistentry>
+	      <term>Preferences</term>
+	      <listitem>
+		<para> This allows you to determine how you would like
+		the default display to appear: you can change the font
+		sizes, spacing, colours, set a background image and so
+		on. </para>
+		<note>
+		  <title>For the technically inclined</title>
+		  <para>If you want more control over how the display
+		  appears, and you speak CSS, then you can create your
+		  own display preferences manually. Simply make some
+		  changes and save the preferences, then look in your
+		  profile directory.</para>
+		  <para>On the Mac, the profile directory is <filename>Library:Application Support:Songbee:Profiles</filename>. Inside that directory you will find a file called <filename>user.projector.css</filename> which contains all your customizations. For the base CSS file, see <filename>Contents:Resources:Chrome:songbee:css:projector.css</filename> in your Songbee application bundle. (Right-click on the Songbee application and select <command>Show package contents</command> to find this file.</para>
+		  <para>On Windows, the relevant directories are <filename>%XXX%/Simon Cozens/Songbee</filename> and <filename>\Program Files\Songbee\chrome\songbee\css</filename>.</para>
+		</note>
+	      </listitem>
+	    </varlistentry>
+	    <varlistentry>
+	      <term>Check for updates</term>
+	      <listitem>
+		<para>This will manually check to see if there are any
+		new versions of Songbee available, and if so, will
+		offer to install them for you. This check is performed
+		automatically at regular intervals.</para>
+	      </listitem>
+	    </varlistentry>
+	    <varlistentry>
+	      <term>Import Bible</term>
+	      <listitem>
+		<para>If you receive a Songbee Bible (.sbb) file, you
+		must import it using this menu option before you can
+		use it in Songbee.</para>
 	      </listitem>
 	    </varlistentry>
 	  </variablelist>

@@ -8,12 +8,6 @@
     taken to Songbee's "live" interface. This consists of two
     windows. The first window should appear on your projector.
   </para>
-  <note>
-    <para>It <emphasis>should</emphasis> appear on your projector. At
-    the moment, it won't, and you have to drag it there
-    manually. We're working on this.
-    </para>
-  </note>
   <para>
    The second window is the <firstterm>live console</firstterm>. It
 looks like this:
@@ -139,5 +133,18 @@ portion of the verse to be displayed.</para>
     console. Clicking on a name brings up the song of the appropriate
     language.</para> <para>To learn how to mark songs as translations,
     see the chapter on editing.</para>
+  </sect1>
+  <sect1>
+    <title>Searching</title> 
+
+    <para>Occasionally in worship the worship leader will start
+    playing a song which was not on the set list. Songbee allows you
+    to jump to any song at run-time. To do this, click on the search
+    box at the bottom left of the console window, and start typing
+    either the song's title, first line or any lyrics you recognise
+    from the song. Just like the playlist edit window, a list of songs
+    will appear on the right-hand side of the window with a preview
+    below them. Double-click or press enter on the chosen song to jump
+    to it.</para>
   </sect1>
 </chapter>

@@ -3,7 +3,7 @@ PDFCHAPTERS = $(CHAPTERS:.xml=.pdf)
 FO_STYLESHEET = /sw/share/xml/xsl/docbook-xsl/fo/docbook.xsl
 HTML_STYLESHEET = /sw/share/xml/xsl/docbook-xsl/xhtml/chunk.xsl
 MANIFEST = Makefile $(CHAPTERS) bookmaker
-FOP = /Users/simon/Desktop/trunk/fop
+FOP = /Users/simon/svn/fop/fop
 
 .SUFFIXES:
 .SUFFIXES: .xml .fo .pdf
