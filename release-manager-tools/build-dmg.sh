@@ -3,7 +3,7 @@
 [ -e Songbee.mpkg/Contents/Packages/xulrunner.pkg ] || echo "Can't find the xulrunner package";
 rm -rf dist
 mkdir dist
-hdiutil create dist/$1.dmg -size 13m -fs HFS+ -volname "Songbee"
+hdiutil create dist/$1.dmg -size 21m -fs HFS+ -volname "Songbee"
 dev_handle=`hdid dist/$1.dmg | grep Apple_HFS | perl -e '\$_=<>; /^\\/dev\\/(disk.)/; print \$1'`
 ditto -rsrcFork "Songbee.mpkg" "/Volumes/Songbee/Songbee.mpkg"
 ditto -rsrcFork Songbee-Volume.icns "/Volumes/Songbee/.VolumeIcon.icns"

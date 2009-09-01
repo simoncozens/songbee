@@ -48,7 +48,7 @@ get-xulrunner:
 	mv $(SCRATCHDIR)/xulrunner/xulrunner-stub.exe $(SCRATCHDIR)/songbee.exe
 
 add-icon: 
-	convert $(SCRATCHDIR)/chrome/songbee/songbee.png $(SCRATCHDIR)/songbee.ico
+	convert $(SCRATCHDIR)/chrome/branding/icon48.png $(SCRATCHDIR)/songbee.ico
 	exe_update.pl --icon $(SCRATCHDIR)/songbee.ico $(SCRATCHDIR)/songbee.exe
 
 make-installer: 
