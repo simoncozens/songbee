@@ -4,20 +4,20 @@ eval(jsText);
 ItemTypeTable["bible"] = {
     label: "Bible passage",
     create: function () {
-        var passage = prompt("Bible passage to add?");
-        /* Add on the end of the LHS list */
-        if (!passage) { return; }
-        var obj = { passage: passage };
-        addToPlaylist(null, "bible", JSON.stringify(obj), "Bible passage: "+passage);
+        var result = { catalog: buildCatalog() };
+        window.openDialog("chrome://songbee/content/playitemtypes/bible/choosepassage.xul", "", "chrome, dialog, modal, resizable=no", result).focus();
+        if (!result.passage) return;
+        var obj = { passage: result.passage, version: result.version, db: result.catalog[result.version].target };
+        addToPlaylist(null, "bible", JSON.stringify(obj), "Bible passage: "+obj.passage+" ("+obj.version+")");
     },
     title: function () {
         var obj = JSON.parse(this.data());
-        return "Bible passage: "+obj.passage;
+        return "Bible passage: "+obj.passage+" ("+obj.version+")";
     },
     transformToHTML: function (stylesheet, doc) { 
         var obj = JSON.parse(this.data());
         if (!obj.passageText) {
-            obj.passageText = getPassage(obj.passage);
+            obj.passageText = getPassage(obj.passage, obj.db);
             this.data(JSON.stringify(obj));
         }
         var frag = doc.createElement("div"); 
@@ -32,22 +32,48 @@ var dserv = Components.classes["@mozilla.org/file/directory_service;1"]
 var storageService = Components.classes["@mozilla.org/storage/service;1"]
                         .getService(Components.interfaces.mozIStorageService);
 
-function getPassage(ref) {
+function getPassage(ref, db) {
     var passage = new Reference(ref);
-    return verseText(passage, "jss");
+    return verseText(passage, db);
 }
 
-function getHandleToBibleVersion(version) {
-    var bible = dserv.get("resource:app", Components.interfaces.nsIFile);
-    bible.append("chrome"); bible.append("songbee");
-    bible.append("playitemtypes"); bible.append("bible");
-    bible.append(version+".db");
-    //if (!bible.exists()) { alert("We don't have that bible version"); return; }
-    return storageService.openDatabase(bible);
+
+function buildCatalog() {
+    var profile = dserv.get("ProfD", Components.interfaces.nsIFile);
+    var catalog = {};
+    scanVersions(profile, catalog);
+    var appdir = dserv.get("resource:app", Components.interfaces.nsIFile);
+    appdir.append("chrome"); appdir.append("songbee");
+    appdir.append("playitemtypes"); appdir.append("bible");
+    scanVersions(appdir, catalog);
+    return catalog;
+}
+
+function scanVersions (directory, catalog) {
+    var entries = directory.directoryEntries;
+    while(entries.hasMoreElements()) {
+      var entry = entries.getNext();
+      entry.QueryInterface(Components.interfaces.nsIFile);
+      if (entry.leafName.search(/\.sbb$/) >= 0) 
+        catalog[getVersionName(entry)] = entry;
+    }
+}
+
+function getVersionName(file) {
+    var dbh = storageService.openDatabase(file);
+    var sql = "SELECT name FROM metadata";
+    var statement = dbh.createStatement(sql);
+    statement.executeStep();
+    return statement.getString(0);
 }
 
 function verseText(reference, version) {
-    var handle = getHandleToBibleVersion(version);
+    var file = Components.classes['@mozilla.org/file/local;1']  
+               .createInstance(Components.interfaces.nsILocalFile);  
+    jsdump(version);
+    file.initWithPath(version);  
+    var handle = storageService.openDatabase(file);
+    jsdump(handle);
     if (!handle) return "";
     var iter = reference.iterator();
     var sql = "SELECT content FROM bible WHERE book = (?1) AND chapter = (?2) AND verse = (?3)";

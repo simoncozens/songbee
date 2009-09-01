@@ -1,0 +1,35 @@
+<?xml version="1.0"?> 
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+<dialog
+  xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+  id="SelectPassage"
+  title="Select Bible Passage"
+  onload="fillVersionPopup()"
+  ondialogaccept="return fixup();"
+>
+    <hbox>
+      <label value="Version:"/>
+	  <menulist editable="false" id="version">
+		<menupopup id="menupop"/>
+	  </menulist>
+      <label value="Passage:"/>
+      <textbox id="passage"/>
+    </hbox>
+  <script>
+    function fillVersionPopup() {
+        var pop = document.getElementById("menupop");
+        for (v in window.arguments[0].catalog) {
+           var i = document.createElement("menuitem");
+           i.setAttribute("label", v);
+           i.setAttribute("value", v);
+           pop.appendChild(i);
+        }
+        pop.parentNode.selectedIndex=0;
+    }
+	function fixup() {
+		window.arguments[0].version = document.getElementById("version").value;
+		window.arguments[0].passage = document.getElementById("passage").value;
+		return true;
+	}
+  </script>
+</dialog>
