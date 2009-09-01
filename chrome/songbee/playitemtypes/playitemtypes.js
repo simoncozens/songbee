@@ -53,6 +53,13 @@ function setupType(typename) {
 
 for (var a in supportedTypes) { setupType(supportedTypes[a]); }
 
+function runFixups() {
+    for (var a in ItemTypeTable) {
+        if (ItemTypeTable[a].fixups) ItemTypeTable[a].fixups();
+    }
+}
+
+
 function checkUpdates()
 {
         var updateListener = {
