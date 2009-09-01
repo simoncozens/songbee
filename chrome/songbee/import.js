@@ -38,7 +38,9 @@ function xmlimport()  {
 
 function importSong(xml) { 
     var lines = xml.ownerDocument.evaluate("descendant::line", xml, null, XPathResult.ANY_TYPE,null);
-    var firstLine = lines.iterateNext().firstChild.textContent;
+    var firstLine = lines.iterateNext();
+    if (!firstLine) { return "Song badly formatted" }
+    firstLine = firstLine.firstChild.textContent;
     firstLine = firstLine.replace(/\W$/, "");
     firstLine = firstLine.replace(/^\s+/, " ");
     var title = xml.ownerDocument.evaluate("descendant::title", xml, null, XPathResult.ANY_TYPE,null).iterateNext().firstChild.textContent;
