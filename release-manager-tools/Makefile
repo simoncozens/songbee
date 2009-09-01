@@ -30,19 +30,19 @@ release-unix : checkout-pristine create-clean-dist zip-dist
 checkout-pristine :
 	rm -rf $(PRISTINE)
 	mkdir $(PRISTINE)
-	svn co http://svn.simon-cozens.org/songbee $(PRISTINE)
+	git clone git://github.com/simoncozens/songbee.git $(PRISTINE)
 
 create-clean-dist:
 	rm -rf $(SCRATCHDIR)
 	cp -ar $(PRISTINE) $(SCRATCHDIR)
-	cd $(SCRATCHDIR); rm -rf Songbee.icns release-manager-tools **/svn-commit* **/.svn songs manual load.pl
-	cd $(SCRATCHDIR); find . -name '.svn' -print0 | xargs -0 rm -rf
+	cd $(SCRATCHDIR); rm -rf Songbee.icns release-manager-tools **/svn-commit* **/.git songs manual load.pl
+	cd $(SCRATCHDIR); find . -name '.git' -print0 | xargs -0 rm -rf
 
 zip-dist:
 	cd $(SCRATCHDIR);zip -r songbee.zip *
 
 get-xulrunner:
-	cd $(SCRATCHDIR);wget http://ftp.mozilla.org/pub/mozilla.org/xulrunner/nightly/latest-trunk/xulrunner-1.9.0.2pre.en-US.win32.zip
+	cd $(SCRATCHDIR);wget http://releases.mozilla.org/pub/mozilla.org/xulrunner/releases/1.9.0.13/runtimes/xulrunner-1.9.0.13.en-US.win32.zip
 	cd $(SCRATCHDIR);unzip xulrunner-*.en-US.win32.zip
 	rm $(SCRATCHDIR)/xulrunner-*.en-US.win32.zip 
 	mv $(SCRATCHDIR)/xulrunner/xulrunner-stub.exe $(SCRATCHDIR)/songbee.exe
