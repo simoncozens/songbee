@@ -6,7 +6,7 @@
 .chorusdiv { margin: 50px; position: relative }
 .line { padding: 0; font-size: 12pt }
 .partnum { background: #ffffff; left: -20px; font-size: 9pt; float: left; position: relative }
-.sup { font-size: 40%; position:absolute; left:0; display:block; text-align:center}
+.sup { font-size: 40%; position:absolute; left:1.5em; display:block; text-align:center}
 .verse { position: static; background: #fff; padding: 0px; border-bottom: 1px dotted gray }
 BODY { BACKGROUND-COLOR: #ffffea }
 HTML { overflow: auto }
