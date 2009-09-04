@@ -1,11 +1,9 @@
-[ -e Songbee.mpkg ] || echo "You're in the wrong directory!";
-[ -e Songbee.mpkg/Contents/Packages/songbee.pkg ] || echo "Can't find the songbee package";
-[ -e Songbee.mpkg/Contents/Packages/xulrunner.pkg ] || echo "Can't find the xulrunner package";
+[ -e songbee.pkg ] || echo "You're in the wrong directory!";
 rm -rf dist
 mkdir dist
 hdiutil create dist/$1.dmg -size 21m -fs HFS+ -volname "Songbee"
 dev_handle=`hdid dist/$1.dmg | grep Apple_HFS | perl -e '\$_=<>; /^\\/dev\\/(disk.)/; print \$1'`
-ditto -rsrcFork "Songbee.mpkg" "/Volumes/Songbee/Songbee.mpkg"
+ditto -rsrcFork "songbee.pkg" "/Volumes/Songbee/Songbee.pkg"
 ditto -rsrcFork Songbee-Volume.icns "/Volumes/Songbee/.VolumeIcon.icns"
 /Developer/Tools/SetFile -a C "/Volumes/Songbee/"
 hdiutil detach $dev_handle

@@ -17,15 +17,10 @@ OS X
       * rm -rf songs
       * rm -rf manual (until we have Songbee display its own manual)
       * rm -rf release-manager-tools (!)
-    * Run PackageMaker on songbee.pmgproj
+    * Get a recent xulrunner
+    * Open songbee.pmdoc
+    * Update the location of xulrunner
     * Update the build number, and hit build! - this creates songbee.pkg
-
-    Step 2:
-
-    * Put xulrunner.pkg and songbee.pkg into 
-      release-manager-tools/Songbee.mpkg/Contents/Packages
-      * They need to have those exact names
-      * Steal the xulrunner package from Mozilla's .dmg and rename it
     * Run "sh build-dmg.sh songbee-0.1alpha Songbee" to produce a .dmg file
 
 Windows
