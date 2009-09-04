@@ -2,21 +2,7 @@ BUILDING THE RELEASE
 --------------------
 
 OS X
-
-    The plan is this: package up Songbee.app with PackageMaker. Create a
-    metapackage with the PackageMaker to bundle Songbee.app and the XUL
-    framework together.
-
-    Step 1:
-
-    * rm -rf ~/songbee/dist/
-    * mkdir -p ~/songbee/dist/Applications/
-    * ditto Songbee.app ~/songbee/dist/Applications/Songbee.app
-    * Check svn status in it, delete anything unnecessary (PackageMaker
-      will take care of the .svn directories)
-      * rm -rf songs
-      * rm -rf manual (until we have Songbee display its own manual)
-      * rm -rf release-manager-tools (!)
+    * make dist-osx
     * Get a recent xulrunner
     * Open songbee.pmdoc
     * Update the location of xulrunner

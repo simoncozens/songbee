@@ -17,6 +17,14 @@ checklist:
 
 release : release-osx release-win release-unix
 
+release-osx : dist-osx
+
+dist-osx:
+	rm -rf ~/songbee/dist
+	mkdir -p ~/songbee/dist/Applications/
+	ditto ~/songbee/Songbee.app ~/songbee/dist/Applications/Songbee.app
+	cd ~/songbee/dist/Applications/Songbee.app/; rm -rf **/.git **/.work Contents/Resources/songs Contents/Resources/release-manager-tools Contents/Resources/manual
+
 release-win : checkout-pristine create-clean-dist get-xulrunner add-icon make-installer
 
 release-unix : checkout-pristine create-clean-dist zip-dist
