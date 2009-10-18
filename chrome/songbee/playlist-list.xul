@@ -18,7 +18,7 @@
 <script src="chrome://songbee/content/export.js"/>
 <toolbox>
 <menubar id="main-menu">
-    <menu id="file-menu" label="File">
+    <menu id="file-menu" label="&songbee.menu.file;">
         <menupopup id="file-popup">
             <menuitem label="Import songs" oncommand="import_songs()"/>
             <menuitem label="Export songs" oncommand="export_songs()"/>
@@ -28,7 +28,7 @@
             <menuitem label="Exit" oncommand="window.close()"/>
         </menupopup>
     </menu>
-    <menu id="create-menu" label="Create...">
+    <menu id="create-menu" label="&songbee.menu.create;">
         <menupopup id="create-popup">
             <menuitem label="&playlistList.addPlaylist;" oncommand="create_pl()"/>
         </menupopup>

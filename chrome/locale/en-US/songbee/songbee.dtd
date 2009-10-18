@@ -13,3 +13,6 @@
 <!ENTITY songbee.delete "Delete">
 <!ENTITY songbee.save "Save">
 <!ENTITY songbee.cancel "Cancel">
+
+<!ENTITY songbee.menu.file "File">
+<!ENTITY songbee.menu.create "Create">

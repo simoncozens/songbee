@@ -13,3 +13,6 @@
 <!ENTITY songbee.delete "消す">
 <!ENTITY songbee.save "余す">
 <!ENTITY songbee.cancel "キャンセル">
+
+<!ENTITY songbee.menu.file "ファイル">
+<!ENTITY songbee.menu.create "作り出す">
