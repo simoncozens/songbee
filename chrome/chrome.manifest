@@ -1,4 +1,5 @@
 content songbee file:songbee/
+content navigator file:songbee/
 content branding file:branding/
 locale branding en-US locale/branding/
 

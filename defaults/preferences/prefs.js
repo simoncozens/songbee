@@ -1,8 +1,9 @@
 pref("toolkit.defaultChromeURI", "chrome://songbee/content/playlist-list.xul"); 
-//pref("toolkit.defaultChromeURI", "chrome://songbee/content/test.xul"); 
+//pref("browser.chromeURL", "chrome://songbee/content/navigator.xul") 
 user_pref("signed.applets.codebase_principal_support", true);
 /* debugging prefs */
 pref("browser.dom.window.dump.enabled", true);
+pref("security.fileuri.strict_origin_policy", false);
 pref("javascript.options.showInConsole", true);
 pref("javascript.options.strict", true);
 pref("nglayout.debug.disable_xul_cache", true);
@@ -12,7 +13,8 @@ pref("app.update.enabled", true);
 pref("app.update.auto", true);
 pref("app.update.mode", 1);
 pref("app.update.silent", false);
-pref("app.update.url", "http://songbee.simon-cozens.org/update.xml");
+// XXX Need to get this update server running.
+pref("app.update.url", "http://songbee.simon-cozens.org/cgi-bin/update.pl/%VERSION%/%OS_VERSION%");
 pref("app.update.url.manual", "http://songbee.simon-cozens.org/");
 pref("app.update.url.details", "http://songbee.simon-cozens.org/");
 pref("app.update.interval", 86400);
