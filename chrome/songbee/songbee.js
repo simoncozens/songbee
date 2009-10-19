@@ -42,8 +42,8 @@ function currentConsoleSection() { return consoleSections()[state.currentSection
 function currentProjectorSection() { return projectorSections()[state.currentSectionIndex]; }
 function projectorLines () { return currentProjectorSection().getElementsByTagName("p"); }
 function consoleLines () { return currentConsoleSection().getElementsByTagName("p"); }
-function topOf (elem) { return elem.ownerDocument.getBoxObjectFor(elem).y; }
-function bottomOf (elem) { return topOf(elem) + elem.offsetHeight; }
+function topOf (elem) { return $(elem).offset().top }
+function bottomOf (elem) { return topOf(elem) + $(elem).outerHeight(); }
 
 // Now the meat of it...
 
@@ -156,30 +156,34 @@ function highlightSection() {
     } else {
         ccs.style.backgroundColor = state.consoleColor;
     }
-    windows.thisSong.contentWindow.scrollTo(0, topOf(ccs) - 10);
+    windows.thisSong.contentWindow.scrollTo(0, topOf(ccs));
 }
 
 function firstOffscreenLine() {
-    var screenTop = windows.projector.pageYOffset;
-    var screenBottom = screenTop + windows.projector.innerHeight;
+    var screenBottom = windows.projector.innerHeight;
     var pl = projectorLines();
     for (var i = 0; i < pl.length; i++) {
         var middleOf = (topOf(pl[i]) + bottomOf(pl[i]))/2;
-        if (middleOf > screenBottom) { return i; }
+        if (middleOf > screenBottom) { 
+            jsdump("First offscreen-line is "+pl[i].innerHTML)
+            return i; 
+        }
     }
     return -1;
 }
 
 function highlightVisibleElements() {
     state.highlightingIndividualLines = 1;
-    var screenTop = windows.projector.pageYOffset;
+    var screenTop = 0; // windows.projector.pageYOffset;
     var screenBottom = screenTop + windows.projector.innerHeight;
+    jsdump("Screen Top is "+screenTop+" & Screen bottom is "+screenBottom);
 
     var pl = projectorLines();
     var cl = consoleLines();
 
     for (var i = 0; i < pl.length; i++) {
         var middleOf = (topOf(pl[i]) + bottomOf(pl[i]))/2;
+        jsdump("Top of line is at "+topOf(pl[i])+" bottom of is at "+bottomOf(pl[i])+" and line is "+pl[i].innerHTML);
         var offscreen = (middleOf > screenBottom || bottomOf(pl[i]) < screenTop);
         cl[i].style.background = offscreen ? blankColor : state.consoleColor;
     }
@@ -199,10 +203,10 @@ function findNext(searchClass) {
 }
 
 function fitsOnOnePage () {
-    var screenTop = windows.projector.pageYOffset;
-    var screenBottom = screenTop + windows.projector.innerHeight;
+    var screenBottom =  windows.projector.innerHeight;
     var lines = projectorLines();
     var itemBottom = bottomOf(lines[lines.length-1]);
+    //jsdump("Does item fit on screen? Bottom of screen is "+screenBottom+", bottom of item is "+itemBottom+" "+lines[lines.length-1].innerHTML);
     return (screenBottom >= itemBottom);
 }
 // Commands
@@ -224,7 +228,8 @@ function scrollProjectorByLine(offset) {
         state.scrolledOffset = 0;
     }
     var line = projectorLines()[state.scrolledOffset];
-    smooth_scroll(topOf(line));
+    jsdump("Scrolling to line: "+line.innerHTML);
+    $(windows.projector).scrollTo(windows.projector.pageYOffset + topOf(line), {axis: "y", duration: 500, onAfter: highlightVisibleElements});
 }
 
 function changeSection(sectionIndex) {
