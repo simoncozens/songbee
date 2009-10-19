@@ -214,12 +214,31 @@ function fitsOnOnePage () {
 function togglePaused() {
     state.paused = !state.paused;
     if (state.paused) {
-        currentProjectorSection().style.visibility = "hidden";
-        state.consoleColor = pausedColor;
+        $(currentProjectorSection()).animate({opacity: 0},
+            { duration: 500,
+              step: function(now, fx){ currentProjectorSection().style.opacity = now; },
+              complete:  function() {
+                currentProjectorSection().style.visibility = "hidden";
+                currentProjectorSection().style.opacity = 1;
+                state.consoleColor = pausedColor;
+                highlightSection();
+              }
+           }
+        );
+        return;
     } else {
-        state.consoleColor = exposedColor;
+        currentProjectorSection().style.opacity = 0;
+        currentProjectorSection().style.visibility = "visible";
+        $(currentProjectorSection()).animate({opacity: 1},
+            { duration: 500,
+              step: function(now, fx){ currentProjectorSection().style.opacity = now; },
+              complete: function() {
+                state.consoleColor = exposedColor;
+                highlightSection();
+            }
+            }
+        );
     }
-    highlightSection();
 }
 
 function scrollProjectorByLine(offset) {
