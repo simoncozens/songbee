@@ -71,9 +71,9 @@
                 onblur="gFindBar.onFindBarBlur();"
                 oncompositionstart="gFindBar.onFindBarCompositionStart(event);"                oncompositionend="gFindBar.onFindBarCompositionEnd(event);"/>
       <spacer flex="1"/>
-    <button label="&console.prev;" oncommand="switchItem(state.currentSongIndex-1);" style="list-style-image: none"/>
+    <button label="&console.prev;" oncommand="switchItem(state.currentItemIndex-1);" style="list-style-image: none"/>
     <button label="||" oncommand="togglePaused()" style="list-style-image: none"/>
-    <button label="&console.next;" oncommand="switchItem(state.currentSongIndex+1)" style="list-style-image: none"/>
+    <button label="&console.next;" oncommand="switchItem(state.currentItemIndex+1)" style="list-style-image: none"/>
     <button label="&console.done;" oncommand="windows.projector.close(); window.close()" style="list-style-image: none"/>
     </toolbar>
 </vbox>
