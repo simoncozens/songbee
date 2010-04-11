@@ -2,22 +2,31 @@
 <!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.2//EN"
           "/sw/share/xml/dtd/docbookx/4.2.0/docbookx.dtd">
 <chapter>
-  <title>Introduction to Songbee</title>
-  <para>
+  <title lang="en">Introduction to Songbee</title>
+  <title lang="ja">ソングビー入門</title>
+  <para lang="en">
       Songbee is an application designed to be used in churches for
       the projection of worship song lyrics. Instead of using hymn
       books, churches can use a data projector and a computer running
       Songbee to display the words to hymns and songs.
   </para>
-  <para>
+  <para lang="ja">
+     「ソングビー」は教会の賛美で歌詞を映し出すためのソフトです。讃美歌やソングブックを使うよりも、でーたー•プロジェクターとコンピューターを使って賛美、聖書箇所などを映し出すことができます。
+  </para>
+  <para lang="en">
       Songbee is particularly designed for the Japanese church. It
       handles Japanese text, and particularly the display of
       <foreignphrase>furigana</foreignphrase>, in ways that other
       similar applications (Easislides, openlp.org, Opensong and
       Lyricue) do not.
   </para>
+  <para lang="ja">
+	   ソングビーは特に日本教会のために書かれています。EasislidesやOpensongが映し出せない振仮名などを取り扱います。
+  </para>
   <sect1>
-    <title>Requirements</title>
+    <title lang="en">Requirements</title>
+    <title lang="ja">システム要件</title>
+
     <para>
       In order to use Songbee, you will need to have a dual-monitor
       set up. That is to say, your computer must be able to send video
