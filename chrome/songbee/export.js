@@ -42,12 +42,12 @@ function export_songs () {
     var file = saveDialog("Songbee library file", "songbee");
     if (!file) return;
 
-    file.stream.write("<songs>\n", 12);
+    var lib = document.implementation.createDocument(null, "songs", null);
     Song.retrieveAll(function(song) { 
-        var ser = new XMLSerializer(); 
-        ser.serializeToStream(song.xmlDOM(), file.stream, "");
+        lib.documentElement.appendChild(song.xmlDOM().documentElement);
     });
-    file.stream.write("\n</songs>\n", 14);
+    var ser = new XMLSerializer(); 
+    ser.serializeToStream(lib, file.stream, "");
     file.stream.close();
     alert("Saved "+file.name.leafName);
 }
