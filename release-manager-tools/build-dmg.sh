@@ -1,7 +1,7 @@
 [ -e songbee.pkg ] || echo "You're in the wrong directory!";
 rm -rf dist
 mkdir dist
-hdiutil create dist/$1.dmg -size 21m -fs HFS+ -volname "Songbee"
+hdiutil create dist/$1.dmg -size 35m -fs HFS+ -volname "Songbee"
 dev_handle=`hdid dist/$1.dmg | grep Apple_HFS | perl -e '\$_=<>; /^\\/dev\\/(disk.)/; print \$1'`
 ditto -rsrcFork "songbee.pkg" "/Volumes/Songbee/Songbee.pkg"
 ditto -rsrcFork Songbee-Volume.icns "/Volumes/Songbee/.VolumeIcon.icns"
