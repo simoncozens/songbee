@@ -21,7 +21,8 @@ ItemTypeTable["bible"] = {
             this.data(JSON.stringify(obj));
         }
         var frag = doc.createElement("div"); 
-        frag.setAttribute("class", "bible-text");
+//        frag.setAttribute("class", "bible-text");
+        frag.setAttribute("class", "line");
         frag.innerHTML = obj.passageText;
         return frag;
     },
