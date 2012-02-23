@@ -12,7 +12,7 @@
 
 <window id="preferences" title="Preferences"
   xmlns:html="http://www.w3.org/1999/xhtml"
-  minheight="800" minwidth="600"
+  minwidth="500"
   xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
   onload="fillFontMenu(document.getElementById('.line.font-family'));addUserStylesheet(document.getElementById('preview').contentDocument);slowlyfillvalues();">
 <script src="chrome://songbee/content/dom-css.js"/>
@@ -23,19 +23,19 @@
   <key id="close_cmd" keycode="VK_ESCAPE" oncommand="window.close();"/>
 </keyset>
     <hbox flex="1">
-        <vbox flex="1">
+        <vbox flex="1" style="margin:3px">
             <html:h2> Background </html:h2>
             <label control="body.background-color">Color</label> <colorpicker id="body.background-color" type="button"/>
-            <hbox>
+            <vbox>
             <label>Image</label> 
             <box class="fileinput" onchange="setbackground(this)" id="filebox"/>
             <textbox id="body.background-image" hidden="true"/>
             <button label="Clear" oncommand="setbackground(null)"/>
-            </hbox>
+            </vbox>
             <html:h2> Text </html:h2>
-            <label control=".line.font-family">Font</label> <menulist id=".line.font-family"/>
+            <label control=".line.font-family" maxwidth="300">Font</label> <menulist id=".line.font-family"/>
             <label control=".line.font-size">Size</label> <textbox id=".line.font-size"/>
-            <label control=".line.font-family">Line Height</label> <textbox id=".line.line-height"/>
+            <label control=".line.line-height">Line Height</label> <textbox id=".line.line-height"/>
             <label control=".line.color">Color</label> <colorpicker id=".line.color" type="button"/>
             <spacer flex="1"/>
         <hbox>
