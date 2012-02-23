@@ -17,15 +17,23 @@
 <script src="chrome://songbee/content/songbee-sql.js"/>
 <script src="chrome://songbee/content/export.js"/>
 <toolbox>
+  <commandset id="main-commands">
+      <command id="cmd:quit" oncommand="quit()"/>
+  </commandset>
+  
+  <keyset id="ui-keys">
+      <key id="key:quitApp" key="Q" modifiers="accel" command="cmd:quit"/>
+      <key id="key:hideApp" key="H" modifiers="accel"/>
+      <key id="key:hideOthersApp" key="H" modifiers="accel,alt"/>
+  </keyset>
 <menubar id="main-menu">
     <menu id="file-menu" label="&songbee.menu.file;">
         <menupopup id="file-popup">
             <menuitem label="Import songs" oncommand="import_songs()"/>
             <menuitem label="Export songs" oncommand="export_songs()"/>
             <menuitem label="Song Report" oncommand="song_report()"/>
-            <menuseparator/>
             <menuitem id="aboutName" label="About" oncommand="aboutwindow()"/>
-            <menuitem label="Exit" oncommand="window.close()"/>
+          <menuitem id="menu_FileQuitItem" label="Quit" key="key:quitApp" command="cmd:quit"/>
         </menupopup>
     </menu>
     <menu id="create-menu" label="&songbee.menu.create;">
@@ -35,7 +43,7 @@
     </menu>
     <menu id="tools-menu" label="Tools">
         <menupopup id="tools-popup">
-            <menuitem label="Preferences" oncommand="preferences()"/>
+            <menuitem label="Preferences" id="menu_preferences" oncommand="preferences()"/>
             <menuitem label="Debugger" oncommand="opendebugger()"/>
             <menuitem label="Check for updates..." oncommand="checkUpdates()"/>
         </menupopup>
@@ -180,5 +188,18 @@ const Ci = Components.interfaces;
         }
 
     }
+
+function quit (aForceQuit)
+{
+  var appStartup = Components.classes['@mozilla.org/toolkit/app-startup;1'].
+    getService(Components.interfaces.nsIAppStartup);
+
+  // eAttemptQuit will try to close each XUL window, but the XUL window can cancel the quit
+  // process if there is unsaved data. eForceQuit will quit no matter what.
+  var quitSeverity = aForceQuit ? Components.interfaces.nsIAppStartup.eForceQuit :
+                                  Components.interfaces.nsIAppStartup.eAttemptQuit;
+  appStartup.quit(quitSeverity);
+}
+
 </script>
 </window>
