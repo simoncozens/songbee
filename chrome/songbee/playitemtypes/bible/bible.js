@@ -34,7 +34,7 @@ ItemTypeTable["bible"] = {
             var i = document.createElement("menuitem");
             i.setAttribute("label", "Import Bible...");
             i.setAttribute("oncommand", "importBible()");
-            importBible = function () {
+            function importBible () {
                 window.openDialog("chrome://songbee/content/playitemtypes/bible/import-bible.xul", "import-bible", "chrome, dialog,modal,resizable=no");
             };
             m.appendChild(i);
