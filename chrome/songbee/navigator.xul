@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+<!DOCTYPE window [
+<!ENTITY % SongbeeDTD SYSTEM "chrome://songbee/locale/songbee.dtd" >
+%SongbeeDTD;
+]>
+<window id="navigator" title="&songbee.appname;"
+        xmlns:html="http://www.w3.org/1999/xhtml"
+        xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+        onload="window.focus()"
+        minwidth="500"
+        minheight="300">
+
+<browser id="content" flex="1" type="content-primary"/>
+</window>
