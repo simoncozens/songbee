@@ -5,7 +5,7 @@ var dserv = Components.classes["@mozilla.org/file/directory_service;1"]
 var file = dserv.get("ProfD", Components.interfaces.nsIFile);
 file.append("workship.db");
 
-var ours = dserv.get("resource:app", Components.interfaces.nsIFile);
+var ours = dserv.get("DefRt", Components.interfaces.nsIFile).parent;
 ours.append("chrome");
 ours.append("workship.db");
 if (!file.exists()) {
