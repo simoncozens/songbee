@@ -1,0 +1,8 @@
+content songbee file:chrome/songbee/
+content navigator file:chrome/songbee/
+content branding file:chrome/branding/
+locale branding en-US chrome/locale/branding/
+
+# skin global classic/1.0 file:chrome/skin/classic/global/
+locale songbee en-US chrome/locale/en-US/songbee/
+locale songbee ja-JP chrome/locale/ja-JP/songbee/
