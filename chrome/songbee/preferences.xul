@@ -25,7 +25,7 @@
     <hbox flex="1">
         <vbox flex="1" style="margin:3px">
             <html:h2> Background </html:h2>
-            <label control="body.background-color">Color</label> <colorpicker id="body.background-color" type="button"/>
+            <label control="BODY.background-color">Color</label> <colorpicker id="BODY.background-color" type="button"/>
             <vbox>
             <label>Image</label> 
             <box class="fileinput" onchange="setbackground(this)" id="filebox"/>
