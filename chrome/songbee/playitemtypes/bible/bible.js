@@ -57,7 +57,7 @@ function buildCatalog() {
     var profile = dserv.get("ProfD", Components.interfaces.nsIFile);
     var catalog = {};
     scanVersions(profile, catalog);
-    var appdir = dserv.get("resource:app", Components.interfaces.nsIFile);
+    var appdir = dserv.get("DefRt", Components.interfaces.nsIFile).parent;
     appdir.append("chrome"); appdir.append("songbee");
     appdir.append("playitemtypes"); appdir.append("bible");
     scanVersions(appdir, catalog);
