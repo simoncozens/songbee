@@ -16,6 +16,7 @@
 onmouseup="endDrag()"
   minheight="200" minwidth="500"
   xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+<script src="chrome://songbee/content/js/songbee.js"/>
 <script src="chrome://songbee/content/playitemtypes/playitemtypes.js"/>
 <script src="chrome://songbee/content/js/songbee-sql.js"/>
 <script src="chrome://songbee/content/js/xslt.js"/>
@@ -97,10 +98,10 @@ onmouseup="endDrag()"
 
     /* Set up the Create... menu */
     var create = document.getElementById("create-popup");
-    for (var type in ItemTypeTable) {
+    for (var type in Songbee.ItemTypes) {
         var item = document.createElement("menuitem");
-        item.setAttribute("label", ItemTypeTable[type].label);
-        item.setAttribute("oncommand", "ItemTypeTable."+type+".create(pl)" );
+        item.setAttribute("label", Songbee.ItemTypes[type].label);
+        item.setAttribute("oncommand", "Songbee.ItemTypes."+type+".create(pl)" );
         create.appendChild(item);
     }
 
@@ -299,7 +300,7 @@ function deleteSong() {
 function editSong() {
     var song = selectedSong();
     if (!song) return;
-    ItemTypeTable["song"].edit(song);
+    Songbee.ItemTypes.song.edit(song);
     refreshTree();
 }
 

@@ -1,7 +1,8 @@
-var jsText = readJSFile("playitemtypes/bible/bible_ref_parsing.js");
-eval(jsText);
-
-ItemTypeTable["bible"] = {
+var mozIJSSubScriptLoader = Components.classes["@mozilla.org/moz/jssubscript-loader;1"]
+                            .getService(Components.interfaces.mozIJSSubScriptLoader);
+mozIJSSubScriptLoader.loadSubScript("chrome://songbee/content/playitemtypes/bible/bible_ref_parsing.js",
+                                    this, "UTF-8");
+Songbee.ItemTypes.bible = {
     label: "Bible passage",
     create: function () {
         var result = { catalog: buildCatalog() };

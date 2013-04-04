@@ -1,4 +1,4 @@
-ItemTypeTable["webpage"] = {
+Songbee.ItemTypes.webpage = {
     label: "Web page",
     create: function () {
         var url = prompt("Web site address?");

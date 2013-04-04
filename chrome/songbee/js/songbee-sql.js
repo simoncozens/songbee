@@ -241,7 +241,7 @@ var ActionFallbacks = {
 
 PlayItem.prototype.specialize = function () {
 	for (var handle in ActionFallbacks) {
-		this[handle] = ItemTypeTable[this.type()][handle] || ActionFallbacks[handle];
+		this[handle] = Songbee.ItemTypes[this.type()][handle] || ActionFallbacks[handle];
 	}
 }
 
