@@ -5,9 +5,9 @@ user_pref("signed.applets.codebase_principal_support", true);
 pref("browser.dom.window.dump.enabled", true);
 pref("security.fileuri.strict_origin_policy", false);
 pref("javascript.options.showInConsole", true);
-pref("javascript.options.strict", true);
 pref("nglayout.debug.disable_xul_cache", true);
 pref("nglayout.debug.disable_xul_fastload", true);
+pref("intl.locale.matchOS", "true");
 
 pref("app.update.enabled", true);
 pref("app.update.auto", true);
