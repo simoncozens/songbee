@@ -14,11 +14,13 @@
         minheight="300">
 
 <script src="chrome://songbee/content/playitemtypes/playitemtypes.js"/>
+<script src="chrome://songbee/content/js/jquery.min.js"/>
+<script src="chrome://songbee/content/js/songbee.js"/>
 <script src="chrome://songbee/content/js/songbee-sql.js"/>
 <script src="chrome://songbee/content/js/export.js"/>
 <toolbox>
   <commandset id="main-commands">
-      <command id="cmd:quit" oncommand="quit()"/>
+      <command id="cmd:quit" oncommand="Songbee.Utilities.quit()"/>
   </commandset>
   
   <keyset id="ui-keys">
@@ -44,7 +46,7 @@
     <menu id="tools-menu" label="Tools">
         <menupopup id="tools-popup">
             <menuitem label="Preferences" id="menu_preferences" oncommand="preferences()"/>
-            <menuitem label="Debugger" oncommand="opendebugger()"/>
+            <menuitem label="Debugger" oncommand="Songbee.Utilities.openDebugger()"/>
             <menuitem label="Check for updates..." oncommand="checkUpdates()"/>
         </menupopup>
     </menu>
@@ -88,18 +90,16 @@
     }
 
     function describe_playlist(playlist) {
-        var pldesc = document.getElementById("pl"+playlist.id()+"desc");
+        var pldesc = $("#pl"+playlist.id()+"desc");
         var mod = 0;
-        while (pldesc.hasChildNodes())
-            pldesc.removeChild(pldesc.firstChild());
-        var description = "";
+        pldesc.empty();
+        var description = [];
         playlist.items(
             function (item) {
-                description += item.title() + " | ";
+                description.push(item.title());
             }
         );
-        description.replace(/ \| $/, "");
-        pldesc.appendChild(document.createTextNode(description));
+        pldesc.text(description.join(" | "));
     }
 
     var playlists;
@@ -172,34 +172,6 @@
         window.openDialog("chrome://songbee/content/song-report.xul",
         "preferences", "chrome, resizable,dialog");
     }
-    function opendebugger() { 
-const Cc = Components.classes;
-const Ci = Components.interfaces;
-//Components.utils.import("resource://gre/modules/XPCOMUtils.jsm");
-        var wm = Cc["@mozilla.org/appshell/window-mediator;1"].
-                 getService(Ci.nsIWindowMediator);
-        var console = wm.getMostRecentWindow("global:console");
-        if (!console) {
-          var wwatch = Cc["@mozilla.org/embedcomp/window-watcher;1"].
-                       getService(Ci.nsIWindowWatcher);
-          wwatch.openWindow(null, "chrome://global/content/console.xul", "_blank", "chrome,dialog=no,all", null);
-        } else {
-          console.focus(); // the Error console was already open
-        }
-
-    }
-
-function quit (aForceQuit)
-{
-  var appStartup = Components.classes['@mozilla.org/toolkit/app-startup;1'].
-    getService(Components.interfaces.nsIAppStartup);
-
-  // eAttemptQuit will try to close each XUL window, but the XUL window can cancel the quit
-  // process if there is unsaved data. eForceQuit will quit no matter what.
-  var quitSeverity = aForceQuit ? Components.interfaces.nsIAppStartup.eForceQuit :
-                                  Components.interfaces.nsIAppStartup.eAttemptQuit;
-  appStartup.quit(quitSeverity);
-}
 
 </script>
 </window>

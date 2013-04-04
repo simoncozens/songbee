@@ -3,38 +3,9 @@ var JSON;
 var supportedTypes = [ "song", "bible", "noticesheet", "webpage" ];
 var ItemTypeTable = {}; // Filled in by setupType
 
-function jsdump(str) {
-    Components.classes['@mozilla.org/consoleservice;1']
-              .getService(Components.interfaces.nsIConsoleService)
-              .logStringMessage(str);
-}
-
 function bug(str) {
     alert("BUG! "+str);
-    jsdump(str+"\n\n"+ stackTrace(arguments.callee));
-}
-
-function getSignature(theFunction) { 
-    var signature = theFunction.name; 
-    signature += "("; 
-    for(var x=0; x<theFunction.arguments.length; x++) { 
-    // trim long arguments 
-        var nextArgument = theFunction.arguments[x]; 
-        if(nextArgument.length > 30) nextArgument = nextArgument.substring(0, 30) + "..."; 
-        signature += "'" + nextArgument + "'"; 
-        if(x < theFunction.arguments.length - 1) signature += ", "; 
-    } 
-    signature += ")"; 
-    return signature; 
-}
-
-function stackTrace(startingPoint) { 
-    var stackTraceMessage = "Stack trace: \n"; 
-    var nextCaller = startingPoint; 
-    do {
-        stackTraceMessage += getSignature(nextCaller) + "\n"; 
-    } while (nextCaller = nextCaller.caller); 
-    return stackTraceMessage + "\n";
+    Songbee.Utilities.jsdump(str+"\n\n"+ Songbee.Utilities.stackTrace(arguments.callee));
 }
 
 function readJSFile (filename) {
