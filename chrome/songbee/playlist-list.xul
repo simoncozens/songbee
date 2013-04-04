@@ -9,7 +9,7 @@
 <window id="playlist-list" title="&songbee.appname;"
         xmlns:html="http://www.w3.org/1999/xhtml"
         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
-        onload="runFixups();"
+        onload="Songbee.runFixups();"
         minwidth="500"
         minheight="300">
 

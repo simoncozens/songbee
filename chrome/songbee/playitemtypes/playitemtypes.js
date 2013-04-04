@@ -1,30 +1,3 @@
-/* Watch me pull a rabbit from out of my... */
-var JSON;
-var supportedTypes = [ "song", 
-    "bible", 
-    // "noticesheet", 
-    "webpage" ];
-
-function bug(str) {
-    alert("BUG! "+str);
-    Songbee.Utilities.jsdump(str+"\n\n"+ Songbee.Utilities.stackTrace(arguments.callee));
-}
-
-var mozIJSSubScriptLoader = Components.classes["@mozilla.org/moz/jssubscript-loader;1"]
-                            .getService(Components.interfaces.mozIJSSubScriptLoader);
-
-Songbee.ItemTypes = {};
-supportedTypes.forEach(function(type) {
-    mozIJSSubScriptLoader.loadSubScript("chrome://songbee/content/playitemtypes/"+type+"/"+type+".js",
-                                    this, "UTF-8");
-});
-
-function runFixups() {
-    for (var a in Songbee.ItemTypes) {
-        if (Songbee.ItemTypes[a].fixups) Songbee.ItemTypes[a].fixups();
-    }
-}
-
 
 function checkUpdates()
 {
