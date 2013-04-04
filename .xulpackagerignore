@@ -1,0 +1,4 @@
+release-manager-tools/
+^manual
+^registry
+update\.test
