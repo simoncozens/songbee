@@ -109,8 +109,8 @@ function displayItem(item) {
 	    // Set up the "natural order"
 	    state.naturalOrder = determineNaturalOrder(item);
 	    if (state.naturalOrder.length && state.naturalOrder[0] === 0) { state.naturalOrder.shift(); }
-	    //jsdump("Natural order was: ");
-	    //for (var i in state.naturalOrder) { jsdump(state.naturalOrder[i]) };		
+	    //Songbee.Utilities.jsdump("Natural order was: ");
+	    //for (var i in state.naturalOrder) { Songbee.Utilities.jsdump(state.naturalOrder[i]) };		
 	}
 
     // Scroll things back to the beginnng
@@ -165,7 +165,7 @@ function firstOffscreenLine() {
     for (var i = 0; i < pl.length; i++) {
         var middleOf = (topOf(pl[i]) + bottomOf(pl[i]))/2;
         if (middleOf > screenBottom) { 
-            jsdump("First offscreen-line is "+pl[i].innerHTML)
+            Songbee.Utilities.jsdump("First offscreen-line is "+pl[i].innerHTML)
             return i; 
         }
     }
@@ -176,14 +176,14 @@ function highlightVisibleElements() {
     state.highlightingIndividualLines = 1;
     var screenTop = 0; // windows.projector.pageYOffset;
     var screenBottom = screenTop + windows.projector.innerHeight;
-    jsdump("Screen Top is "+screenTop+" & Screen bottom is "+screenBottom);
+    Songbee.Utilities.jsdump("Screen Top is "+screenTop+" & Screen bottom is "+screenBottom);
 
     var pl = projectorLines();
     var cl = consoleLines();
 
     for (var i = 0; i < pl.length; i++) {
         var middleOf = (topOf(pl[i]) + bottomOf(pl[i]))/2;
-        jsdump("Top of line is at "+topOf(pl[i])+" bottom of is at "+bottomOf(pl[i])+" and line is "+pl[i].innerHTML);
+        Songbee.Utilities.jsdump("Top of line is at "+topOf(pl[i])+" bottom of is at "+bottomOf(pl[i])+" and line is "+pl[i].innerHTML);
         var offscreen = (middleOf > screenBottom || bottomOf(pl[i]) < screenTop);
         cl[i].style.background = offscreen ? blankColor : state.consoleColor;
     }
@@ -206,7 +206,7 @@ function fitsOnOnePage () {
     var screenBottom =  windows.projector.innerHeight;
     var lines = projectorLines();
     var itemBottom = bottomOf(lines[lines.length-1]);
-    //jsdump("Does item fit on screen? Bottom of screen is "+screenBottom+", bottom of item is "+itemBottom+" "+lines[lines.length-1].innerHTML);
+    //Songbee.Utilities.jsdump("Does item fit on screen? Bottom of screen is "+screenBottom+", bottom of item is "+itemBottom+" "+lines[lines.length-1].innerHTML);
     return (screenBottom >= itemBottom);
 }
 // Commands
@@ -247,7 +247,7 @@ function scrollProjectorByLine(offset) {
         state.scrolledOffset = 0;
     }
     var line = projectorLines()[state.scrolledOffset];
-    jsdump("Scrolling to line: "+line.innerHTML);
+    Songbee.Utilities.jsdump("Scrolling to line: "+line.innerHTML);
     $(windows.projector).scrollTo(windows.projector.pageYOffset + topOf(line), {axis: "y", duration: 500, onAfter: highlightVisibleElements});
 }
 
@@ -297,7 +297,7 @@ function pageUp() {}
 function onKeyPress(e) {
     var fe = document.commandDispatcher.focusedElement;
     if (fe && fe.tagName == "html:input") { return; }
-    jsdump("Which :"+e.which+" Alt: "+e.altKey+" Ctrl: "+e.ctrlKey+" Meta: "+e.metaKey);
+    Songbee.Utilities.jsdump("Which :"+e.which+" Alt: "+e.altKey+" Ctrl: "+e.ctrlKey+" Meta: "+e.metaKey);
     switch (e.keyCode) {
         case e.DOM_VK_UP: handleUp(); e.preventDefault(); return;
         case e.DOM_VK_DOWN: handleDown(); e.preventDefault(); return;
