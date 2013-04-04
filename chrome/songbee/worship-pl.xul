@@ -25,7 +25,7 @@
 <script src="chrome://songbee/content/js/preferences.js"/>
 <script src="chrome://songbee/content/js/jquery.min.js"/>
 <script src="chrome://songbee/content/js/jquery.scrollTo-1.4.2-min.js"/>
-<script src="chrome://songbee/content/js/songbee.js"/>
+<script src="chrome://songbee/content/js/songbee-player.js"/>
 <keyset>
 <key id="focus_search" key="f" modifiers="shift any accel" oncommand="document.getElementById('find-field').focus()"/>
 </keyset>
