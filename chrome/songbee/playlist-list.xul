@@ -15,7 +15,6 @@
 
 <script src="chrome://songbee/content/js/jquery.min.js"/>
 <script src="chrome://songbee/content/js/songbee.js"/>
-<script src="chrome://songbee/content/playitemtypes/playitemtypes.js"/>
 <script src="chrome://songbee/content/js/songbee-sql.js"/>
 <script src="chrome://songbee/content/js/export.js"/>
 <toolbox>
@@ -47,7 +46,7 @@
         <menupopup id="tools-popup">
             <menuitem label="Preferences" id="menu_preferences" oncommand="preferences()"/>
             <menuitem label="Debugger" oncommand="Songbee.Utilities.openDebugger()"/>
-            <menuitem label="Check for updates..." oncommand="checkUpdates()"/>
+            <menuitem label="Check for updates..." oncommand="Songbee.checkUpdates()"/>
         </menupopup>
     </menu>
 </menubar>
