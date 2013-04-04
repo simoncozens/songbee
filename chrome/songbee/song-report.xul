@@ -10,7 +10,7 @@
   xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
   minheight="200" minwidth="600"
 >
-<script src="chrome://songbee/content/songbee-sql.js"/>
+<script src="chrome://songbee/content/songbee.js"/>
 <script src="chrome://songbee/content/export.js"/>
 <script src="chrome://songbee/content/songtreeview.js"/>
 <keyset>

@@ -13,9 +13,7 @@
         minwidth="500"
         minheight="300">
 
-<script src="chrome://songbee/content/js/jquery.min.js"/>
 <script src="chrome://songbee/content/js/songbee.js"/>
-<script src="chrome://songbee/content/js/songbee-sql.js"/>
 <script src="chrome://songbee/content/js/export.js"/>
 <toolbox>
   <commandset id="main-commands">

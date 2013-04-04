@@ -50,3 +50,6 @@ supportedTypes.forEach(function(type) {
   Songbee.Utilities.loadJSFile("playitemtypes/"+type+"/"+type+".js", this);
 });
 
+/* Everyone gets these... */
+Songbee.Utilities.loadJSFile("js/jquery.min.js", this);
+Songbee.Utilities.loadJSFile("js/songbee-sql.js", this);

@@ -18,7 +18,6 @@
 <script src="chrome://songbee/content/playitemtypes/songbee.js"/>
 <script src="chrome://songbee/content/js/findBar.js"/>
 <script src="chrome://songbee/content/js/songtreeview.js"/>
-<script src="chrome://songbee/content/js/songbee-sql.js"/>
 <script src="chrome://songbee/content/playitemtypes/song/create-song.js"/>
    <label id="title" value="foo"/>
         <textbox id="find-field" 

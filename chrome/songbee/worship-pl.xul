@@ -17,13 +17,11 @@
     onload="my_onload()"
     xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
 <script src="chrome://songbee/content/js/songbee.js"/>
-<script src="chrome://songbee/content/js/songbee-sql.js"/>
 <script src="chrome://songbee/content/js/xslt.js"/>
 <script src="chrome://songbee/content/js/songtreeview.js"/>
 <script src="chrome://songbee/content/js/findBar.js"/>
 <script src="chrome://songbee/content/js/dom-css.js"/>
 <script src="chrome://songbee/content/js/preferences.js"/>
-<script src="chrome://songbee/content/js/jquery.min.js"/>
 <script src="chrome://songbee/content/js/jquery.scrollTo-1.4.2-min.js"/>
 <script src="chrome://songbee/content/js/songbee-player.js"/>
 <keyset>

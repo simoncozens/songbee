@@ -17,7 +17,6 @@
   onload="fillFontMenu(document.getElementById('.line.font-family'));addUserStylesheet(document.getElementById('preview').contentDocument);slowlyfillvalues();">
 <script src="chrome://songbee/content/js/dom-css.js"/>
 <script src="chrome://songbee/content/js/songbee.js"/>
-<script src="chrome://songbee/content/js/songbee-sql.js"/>
 <script src="chrome://songbee/content/js/preferences.js"/>
 <keyset>
   <key id="close_cmd" keycode="VK_ESCAPE" oncommand="window.close();"/>

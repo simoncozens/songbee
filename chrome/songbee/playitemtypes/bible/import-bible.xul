@@ -5,7 +5,6 @@
     ondialogaccept="copyToProfile()"
     xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
     <script src="chrome://songbee/content/songbee.js"/>
-    <script src="chrome://songbee/content/js/songbee-sql.js"/>
     <vbox>
       <description> Import a Bible to Songbee</description>
       <box class="fileinput" id="file"/>
