@@ -25,9 +25,9 @@ function songTreeView()
         var whereclause = this.whereClause();
         var count;
         if (whereclause) 
-            count = doSQL("SELECT COUNT(*) FROM song "+whereclause, null, null, ["%"+this.searchText+"%"]);
+            count = Songbee.SQL.exec("SELECT COUNT(*) FROM song "+whereclause, null, null, ["%"+this.searchText+"%"]);
         else 
-            count = doSQL("SELECT COUNT(*) FROM song");
+            count = Songbee.SQL.exec("SELECT COUNT(*) FROM song");
         this.rowCount            = count[0][0];
         if(this.rowCount == 0) { 
             if (this.searchColumn == "title") {
@@ -58,9 +58,9 @@ function songTreeView()
             var sql=  "SELECT * FROM song "+whereclause+" ORDER BY "+orderclause+" "+limitclause
             var res;
             if (whereclause)
-                res = doSQL(sql, Song, null, ["%"+this.searchText+"%"]);
+                res = Songbee.SQL.exec(sql, Song, null, ["%"+this.searchText+"%"]);
             else 
-                res = doSQL(sql, Song);
+                res = Songbee.SQL.exec(sql, Song);
             this.cacheRow = res[0];
             this.cacheRowNum = row;
         }

@@ -52,4 +52,4 @@ supportedTypes.forEach(function(type) {
 
 /* Everyone gets these... */
 Songbee.Utilities.loadJSFile("js/jquery.min.js", this);
-Songbee.Utilities.loadJSFile("js/songbee-sql.js", this);
+Songbee.Utilities.loadJSFile("js/songbee-sql.js", Songbee);

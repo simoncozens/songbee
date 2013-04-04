@@ -58,7 +58,7 @@ function my_onload() {
     windows.projector.fullScreen = true;
 
     windows.console.addEventListener("keypress", onKeyPress,  false);
-    plData.playlist = Playlist.retrieve(window.arguments[0]);
+    plData.playlist = Songbee.Playlist.retrieve(window.arguments[0]);
     plData.items = plData.playlist.items(function(s) {
         var li = document.createElementNS(htmlNS, "html:li");
         var label = document.createElement("label");

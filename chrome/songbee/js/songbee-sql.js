@@ -1,54 +1,73 @@
-var schemaVersion = 2;
-var dserv = Components.classes["@mozilla.org/file/directory_service;1"] 
-                     .getService(Components.interfaces.nsIProperties);
+var SQL = {
+  currentSchemaVersion: 2,
+  dbh: function() {
+    var dserv = Components.classes["@mozilla.org/file/directory_service;1"] 
+    .getService(Components.interfaces.nsIProperties);
+    var file = dserv.get("ProfD", Components.interfaces.nsIFile);
+    file.append("workship.db");
+    var ours = dserv.get("DefRt", Components.interfaces.nsIFile).parent;
+    ours.append("chrome");
+    ours.append("workship.db");
+    if (!file.exists()) {
+      if (!ours.exists()) { alert("Oops, I can't find my own database in "+ours.path) }
+        ours.copyTo(dserv.get("ProfD", Components.interfaces.nsIFile), "workship.db");
+    }
 
-var file = dserv.get("ProfD", Components.interfaces.nsIFile);
-file.append("workship.db");
+    var storageService = Components.classes["@mozilla.org/storage/service;1"]
+    .getService(Components.interfaces.mozIStorageService);
 
-var ours = dserv.get("DefRt", Components.interfaces.nsIFile).parent;
-ours.append("chrome");
-ours.append("workship.db");
-if (!file.exists()) {
-    if (!ours.exists()) { alert("Oops, I can't find my own database in "+ours.path) }
-    ours.copyTo(dserv.get("ProfD", Components.interfaces.nsIFile), "workship.db");
-}
-
-var storageService = Components.classes["@mozilla.org/storage/service;1"]
-                        .getService(Components.interfaces.mozIStorageService);
-
-var mDBConn = storageService.openDatabase(file);
-
-/* Songbee 2 SQLite Schema
-
-songbee_system : schema_version
-play_item : id, playlist, song, position, type, data 
-playlist     : id, name, css
-song          : id, song_key, title, first_line, xml, age, playcount
-
-WARNING : "song_key" is now redundant.
-*/
-
-// Various functions to upgrade the schema on changes
-if (schema_version() < 2) {
-	alert("Upgrading Songbee database to version 2.0");
-	doSQLStatement("CREATE TABLE IF NOT EXISTS songbee_system (schema_version)");
-	doSQLStatement("INSERT INTO songbee_system (schema_version) VALUES (2.0)");
-	doSQLStatement("ALTER TABLE play_item ADD COLUMN type");
-	doSQLStatement("UPDATE play_item SET type='song'");
-	doSQLStatement("ALTER TABLE play_item ADD COLUMN data");
-	doSQLStatement("ALTER TABLE playlist ADD COLUMN css");
-	
-}
-
-function schema_version () { 
-	try {
-		var statement = mDBConn.createStatement("SELECT schema_version FROM songbee_system");
-		statement.executeStep();
-        var ver = statement.getString(0);
-        statement.reset();
-		return ver; 
-	} catch (e) { return 1 }
-}
+    return storageService.openDatabase(file);
+  },
+  schemaVersion: function() {
+    try {
+      var statement = mDBConn.createStatement("SELECT schema_version FROM songbee_system");
+      statement.executeStep();
+      var ver = statement.getString(0);
+      statement.reset();
+      return ver; 
+    } catch (e) { return 1 }
+  },
+  setupStatement: function (sql,params) {
+    var statement;
+    try {
+      statement = Songbee.SQL.dbh().createStatement(sql);
+    } catch (e) {
+      Songbee.Utilities.bug("Bad SQL: "+sql);
+      return;
+    }
+    if (params) {
+      for (var i =0; i < params.length; i++) 
+        statement.bindStringParameter(i, params[i]);
+    }
+    return statement;
+  },
+  exec: function (sql, targetClass, callback, params) {
+    var object = function (o) { function F() {} F.prototype = o; return new F(); };
+    var rv = [];
+    var statement = Songbee.SQL.setupStatement(sql, params);
+    while (statement.executeStep()) {
+      var c;
+      var thisArray = [];
+      for (c=0; c< statement.numEntries; c++) {
+        thisArray.push(statement.getString(c));
+      }
+      if (targetClass) {
+        var thing = new targetClass(thisArray);
+        for(var i=0; i < thing.columns.length; i++)
+          thing["_"+thing.columns[i]] = thisArray[i];
+        if (callback) { callback(thing); } 
+        rv.push(thing);
+      } else { rv.push(thisArray); } 
+    }
+    statement.reset();
+    return rv;
+  }, 
+  doSQLStatement: function (sql, params) {
+    var statement = Songbee.SQL.setupStatement(sql, params);
+    statement.execute();
+    statement.reset();
+  },
+};
 
 function databaseClass (where, table, cols) {
     where.prototype.init = function (values) {
@@ -68,16 +87,16 @@ function databaseClass (where, table, cols) {
 
     where.prototype.select_clause = "SELECT "+cols.join(", ")+" FROM "+table; 
     where.retrieveAll = function (callback)  {
-        return doSQL(this.prototype.select_clause, this, callback)
+        return Songbee.SQL.exec(this.prototype.select_clause, this, callback)
     }
     where.retrieve = function (id)  {
-        var a = doSQL(this.prototype.select_clause + " WHERE id = "+id, this);
+        var a = Songbee.SQL.exec(this.prototype.select_clause + " WHERE id = "+id, this);
         if (a) { return a[0] }
     }
     // delete was a reserved word in JS 1.5
     where.prototype.drop = function ()  {
         if (this.tidy_up) { this.tidy_up() } 
-        doSQLStatement("DELETE FROM "+table+" WHERE id="+this.id());
+        Songbee.SQL.doSQLStatement("DELETE FROM "+table+" WHERE id="+this.id());
     }
     where.prototype.set = function (name, val) {
         doSQLStatement("UPDATE "+table+" SET "+name+" = (?1) WHERE id="+this.id(), [val]);
@@ -95,47 +114,6 @@ function databaseClass (where, table, cols) {
     }
 };
 
-function doSQL(sql, targetClass, callback, params) {
-    var rv = new Array;
-    var statement;
-    try {
-        statement = mDBConn.createStatement(sql);
-    } catch (e) {
-        jsdump("Bad SQL: "+sql);
-        return;
-    }
-    if (params) {
-        for (var i =0; i < params.length; i++) 
-            statement.bindStringParameter(i, params[i]);
-    }
-    while (statement.executeStep()) {
-        var c;
-        var thisArray = new Array;
-        for (c=0; c< statement.numEntries; c++) {
-            thisArray.push(statement.getString(c));
-        }
-        if (targetClass) {
-            var thing = new targetClass(thisArray);
-            for(var i=0; i < thing.columns.length; i++)
-                thing["_"+thing.columns[i]] = thisArray[i];
-            if (callback) { callback(thing) } 
-            rv.push(thing)
-        } else { rv.push(thisArray) } 
-    }
-	statement.reset();
-    return rv;
-}
-
-function doSQLStatement(sql, params) {
-    var statement;
-	try	{ statement = mDBConn.createStatement(sql); } catch (e) { alert("SQL setup failed: "+sql); }
-    if (params) {
-        for (var i =0; i < params.length; i++) 
-            statement.bindStringParameter(i, params[i]);
-    }
-    statement.execute();
-	statement.reset();
-}
 
 function auto_increment_value () { return mDBConn.lastInsertRowID; }
 
@@ -144,17 +122,17 @@ function PlayItem () {}; databaseClass(PlayItem, "play_item", [ "id", "playlist"
 function Song () {}; databaseClass(Song, "song", [ "id", "song_key", "title", "first_line", "xml", "age", "playcount" ]);
 
 Song.ageAll = function () {
-    doSQLStatement("UPDATE song SET age = 0 WHERE age IS NULL");
-    doSQLStatement("UPDATE song SET age = age + 1");
+    Songbee.SQL.doSQLStatement("UPDATE song SET age = 0 WHERE age IS NULL");
+    Songbee.SQL.doSQLStatement("UPDATE song SET age = age + 1");
 }
 
 Song.prototype.played = function () {
-    doSQLStatement("UPDATE song SET playcount = 0 WHERE playcount IS NULL");
-    doSQLStatement("UPDATE song SET playcount = playcount + 1 WHERE id = "+this.id());
+    Songbee.SQL.doSQLStatement("UPDATE song SET playcount = 0 WHERE playcount IS NULL");
+    Songbee.SQL.doSQLStatement("UPDATE song SET playcount = playcount + 1 WHERE id = "+this.id());
 }
 
 Song.resetAllPlaycounts = function () {
-    doSQLStatement("UPDATE song SET playcount = 0");
+    Songbee.SQL.doSQLStatement("UPDATE song SET playcount = 0");
 };
 
 Song.prototype.xmlDOM = function () {
@@ -210,23 +188,23 @@ Song.prototype.setMetadata = function (o) {
 }
 
 Playlist.prototype.items = function (callback) {
-    return doSQL("SELECT id, playlist, song, position, type, data FROM play_item WHERE play_item.playlist = "+this._id+" ORDER BY position ", PlayItem, function (pi) { pi.specialize(); if (callback) callback(pi); });
+    return Songbee.SQL.exec("SELECT id, playlist, song, position, type, data FROM play_item WHERE play_item.playlist = "+this._id+" ORDER BY position ", PlayItem, function (pi) { pi.specialize(); if (callback) callback(pi); });
 };
 
 Playlist.prototype.tidy_up = function () {
-    doSQLStatement("DELETE FROM play_item WHERE playlist= (?1)", [this._id]);
+    Songbee.SQL.doSQLStatement("DELETE FROM play_item WHERE playlist= (?1)", [this._id]);
 };
 
 Playlist.prototype.add_item = function(song, position, type, data) {
 	if (!type) type = "song";
 	if (!data) data = "";
 	if (type == "song" && !song) { bug("No song ID given for song item."); return; }
-    doSQLStatement("INSERT INTO play_item (playlist, song, position, type, data) VALUES ((?1), (?2), (?3),(?4),(?5))", [this._id, song, position, type, data]);
+    Songbee.SQL.doSQLStatement("INSERT INTO play_item (playlist, song, position, type, data) VALUES ((?1), (?2), (?3),(?4),(?5))", [this._id, song, position, type, data]);
 };
 
 PlayItem.prototype.song = function() {
 	if (this.type() != "song") { bug("song called on playitem "+this._id+" which has type ["+this.type()+"]"); }
-	var songlist = doSQL("SELECT song.id, song_key, title, first_line, xml FROM song  WHERE id = "+this._song, Song);
+	var songlist = Songbee.SQL.exec("SELECT song.id, song_key, title, first_line, xml FROM song  WHERE id = "+this._song, Song);
 	if (songlist.length < 1 )  { alert("Retrieving song not in database: has it been deleted?"); }
 	return songlist[0]
 }
