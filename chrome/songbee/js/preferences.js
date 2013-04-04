@@ -65,7 +65,7 @@ function reset() {
 function savechanges(where) { 
 	var css = dumpCSS();
 	if (where) { // Saving to database
-		Playlist.retrieve(where[0]).css(css);
+		Songbee.Playlist.retrieve(where[0]).css(css);
 	} else { // Global settings, saving to file.
 		var file = userCSS();
 		var foStream = Components.classes["@mozilla.org/network/file-output-stream;1"] 

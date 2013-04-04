@@ -14,7 +14,7 @@ Songbee.ItemTypes.song = {
         while (trans.firstChild) trans.removeChild(trans.firstChild);
         if (tArray && tArray.length > 0) {
             for (var i in tArray) {
-                var song = Song.retrieve(tArray[i]);
+                var song = Songbee.Song.retrieve(tArray[i]);
                 if (!song) continue;
                 var lang = song.metadataAsObject().language[0];
                 var button = document.createElement("toolbarbutton");

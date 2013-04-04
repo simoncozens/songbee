@@ -94,7 +94,7 @@
         if (promptService.confirm(window, "&playlistList.deletePlaylist;", "&playlistList.permanentDelete;")) {
             target.removeChild(pl);
             if (pldesc) { target.removeChild(pldesc); }
-            var pl = Playlist.retrieve(id);
+            var pl = Songbee.Playlist.retrieve(id);
             pl.drop();
         }
     }

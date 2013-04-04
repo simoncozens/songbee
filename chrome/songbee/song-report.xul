@@ -26,7 +26,7 @@
     <treechildren context="songpopup"/>
     </tree>
     <hbox>
-    <button label="Export to CSV" oncommand="export_songreport()"/>
+    <button label="Export to CSV" oncommand="Songbee.Export.export_songreport()"/>
     <button label="Clear data" oncommand="clearAll()"/>
     </hbox>
     <script> 

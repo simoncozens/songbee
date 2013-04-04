@@ -392,7 +392,7 @@ function determineNaturalOrder(song) {
 
 function displaySong(song) {
     // Come up with a playitem for a song that's not on the playlist
-    var item = new PlayItem;
+    var item = new Songbee.PlayItem;
     item["song"] = function () { return song }; 
     item["type"] = function () { return "song"; }
     item.specialize();
