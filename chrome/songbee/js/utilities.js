@@ -9,11 +9,8 @@ var Utilities = {
   },  
 
   windowOpener: function (name, args) {
-    return function() {
-      if (!args) {args = [];}
-      window.openDialog("chrome://songbee/content/"+name+".xul",
-        name, "chrome, dialog");
-    }
+    if (!args) {args = [];}
+    window.openDialog("chrome://songbee/content/"+name+".xul", name, "chrome, dialog");
   },
 
   quit: function (aForceQuit) {

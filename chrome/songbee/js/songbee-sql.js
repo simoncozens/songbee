@@ -202,6 +202,35 @@ Playlist.prototype.add_item = function(song, position, type, data) {
     Songbee.SQL.doSQLStatement("INSERT INTO play_item (playlist, song, position, type, data) VALUES ((?1), (?2), (?3),(?4),(?5))", [this._id, song, position, type, data]);
 };
 
+Playlist.prototype.toLI = function () {
+  var li = document.createElementNS(hns, "html:li");
+  li.setAttribute("id", "playlist"+this.id());
+  var label = document.createElement("label");
+  label.setAttribute("value", this.name());
+
+  li.appendChild(label);
+
+  var worship = document.createElement("button");
+  worship.setAttribute("id", "worship"+this.id());
+  worship.setAttribute("oncommand", "worship("+this.id()+")");
+  worship.setAttribute("label", "&playlistList.worship;");
+  li.appendChild(worship);
+
+  var edit = document.createElement("button");
+  edit.setAttribute("id", "edit"+this.id());
+  edit.setAttribute("oncommand", "edit_pl("+this.id()+")");
+  edit.setAttribute("label", "&songbee.edit;");
+  li.appendChild(edit);
+
+  var delbut = document.createElement("button");
+  delbut.setAttribute("id", "delete"+this.id());
+  delbut.setAttribute("oncommand", "delete_pl("+this.id()+")");
+  delbut.setAttribute("label", "&songbee.delete;");
+  li.appendChild(delbut);
+
+  return li;
+}
+
 PlayItem.prototype.song = function() {
 	if (this.type() != "song") { bug("song called on playitem "+this._id+" which has type ["+this.type()+"]"); }
 	var songlist = Songbee.SQL.exec("SELECT song.id, song_key, title, first_line, xml FROM song  WHERE id = "+this._song, Song);

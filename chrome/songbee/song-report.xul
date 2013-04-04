@@ -10,9 +10,8 @@
   xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
   minheight="200" minwidth="600"
 >
-<script src="chrome://songbee/content/songbee.js"/>
-<script src="chrome://songbee/content/export.js"/>
-<script src="chrome://songbee/content/songtreeview.js"/>
+<script src="chrome://songbee/content/js/songbee.js"/>
+<script src="chrome://songbee/content/js/songtreeview.js"/>
 <keyset>
   <key id="close_cmd" keycode="VK_ESCAPE" oncommand="window.close();"/>
 </keyset>

@@ -28,10 +28,10 @@
 <menubar id="main-menu">
     <menu id="file-menu" label="&songbee.menu.file;">
         <menupopup id="file-popup">
-            <menuitem label="Import songs" oncommand="import_songs()"/>
-            <menuitem label="Export songs" oncommand="export_songs()"/>
+            <menuitem label="Import songs" oncommand="Songbee.Utilities.import()"/>
+            <menuitem label="Export songs" oncommand="Songbee.Export.exportSongs()"/>
             <menuitem label="Song Report" oncommand="song_report()"/>
-            <menuitem id="aboutName" label="About" oncommand="aboutwindow()"/>
+            <menuitem id="aboutName" label="About" oncommand="Songbee.about()"/>
           <menuitem id="menu_FileQuitItem" label="Quit" key="key:quitApp" command="cmd:quit"/>
         </menupopup>
     </menu>
@@ -42,7 +42,7 @@
     </menu>
     <menu id="tools-menu" label="Tools">
         <menupopup id="tools-popup">
-            <menuitem label="Preferences" id="menu_preferences" oncommand="preferences()"/>
+            <menuitem label="Preferences" id="menu_preferences" oncommand="Songbee.preferences()"/>
             <menuitem label="Debugger" oncommand="Songbee.Utilities.openDebugger()"/>
             <menuitem label="Check for updates..." oncommand="Songbee.checkUpdates()"/>
         </menupopup>
@@ -57,60 +57,18 @@
     var hns = "http://www.w3.org/1999/xhtml";
     var target = document.getElementById("playlist-list-ul");
 
-    function playlistLI (pl) {
-        var li = document.createElementNS(hns, "html:li");
-        li.setAttribute("id", "playlist"+pl.id());
-        var label = document.createElement("label");
-        label.setAttribute("value", pl.name());
-
-        li.appendChild(label);
-
-        var worship = document.createElement("button");
-        worship.setAttribute("id", "worship"+pl.id());
-        worship.setAttribute("oncommand", "worship("+pl.id()+")");
-        worship.setAttribute("label", "&playlistList.worship;");
-        li.appendChild(worship);
-
-        var edit = document.createElement("button");
-        edit.setAttribute("id", "edit"+pl.id());
-        edit.setAttribute("oncommand", "edit_pl("+pl.id()+")");
-        edit.setAttribute("label", "&songbee.edit;");
-        li.appendChild(edit);
-
-        var delbut = document.createElement("button");
-        delbut.setAttribute("id", "delete"+pl.id());
-        delbut.setAttribute("oncommand", "delete_pl("+pl.id()+")");
-        delbut.setAttribute("label", "&songbee.delete;");
-        li.appendChild(delbut);
-
-        return li;
-    }
-
-    function describe_playlist(playlist) {
-        var pldesc = $("#pl"+playlist.id()+"desc");
-        var mod = 0;
-        pldesc.empty();
-        var description = [];
-        playlist.items(
-            function (item) {
-                description.push(item.title());
-            }
-        );
-        pldesc.text(description.join(" | "));
-    }
-
     var playlists;
     window.setup = function () { 
         while (target.firstChild) { target.removeChild(target.firstChild); }
         playlists = Songbee.Playlist.retrieveAll(
         function (playlist) { 
-            target.appendChild( playlistLI( playlist ));
+            target.appendChild( playlist.toLI() );
             var pldesc = document.createElementNS(hns,"html:p");
             pldesc.setAttribute("id", "pl"+playlist.id()+"desc");
             pldesc.setAttribute("flex", "1");
             pldesc.setAttribute("style", "border:1px solid black; background: #eee; padding: 5px;");
             target.appendChild(pldesc);
-            describe_playlist(playlist);
+            Songbee.describePlaylist(playlist);
         }
         );
     };
@@ -119,9 +77,9 @@
     function create_pl () {
         var name = prompt("&playlistList.newPlaylistName;");
         if (!name) { return };
-        var playlist = Playlist.create(["name", name]);
+        var playlist = Songbee.Playlist.create(["name", name]);
         // Age the songs:
-        Song.ageAll();
+        Songbee.Song.ageAll();
         target.appendChild( playlistLI( playlist ));
         edit_pl(playlist.id());
     }
@@ -141,7 +99,6 @@
         }
     }
 
-
    function worship (id) {
         window.openDialog("chrome://songbee/content/worship-pl.xul",
         "worship-pl", "chrome, dialog, resizable", id);
@@ -151,20 +108,6 @@
         "edit-pl", "chrome, resizable", id, window);
    }
 
-   function import_songs() {
-        window.openDialog("chrome://songbee/content/import.xul",
-        "import-songs", "chrome, dialog");
-   }
-
-   function preferences() {
-        window.openDialog("chrome://songbee/content/preferences.xul",
-        "preferences", "chrome, dialog");
-    }
-
-    function aboutwindow() {
-        window.openDialog("chrome://songbee/content/about-window.xul",
-        "preferences", "chrome, dialog");
-    }
     function song_report() {
         window.openDialog("chrome://songbee/content/song-report.xul",
         "preferences", "chrome, resizable,dialog");

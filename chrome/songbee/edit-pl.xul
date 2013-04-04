@@ -91,7 +91,7 @@ onmouseup="endDrag()"
     </vbox>
         </stack>
 <script>
-    var pl = Playlist.retrieve(window.arguments[0]);
+    var pl = Songbee.Playlist.retrieve(window.arguments[0]);
     var target = document.getElementById("playlistlist");
 
     /* Set up the Create... menu */
@@ -172,7 +172,7 @@ function itemToListItem(song, type, data, label) {
 	li.piData = data;
 	if (type == "song") {
         if (!song) return;
-		var s = Song.retrieve(song); 
+		var s = Songbee.Song.retrieve(song); 
 		li.setAttribute("label", s.title());
 		if (!s) { alert("Bug: Couldn't get a song we've clicked on") }
 		li.piSong = s.id();

@@ -1,4 +1,5 @@
-function saveDialog(classname, extension) {
+var Export = {
+  saveDialog: function (classname, extension) {
     var nsIFilePicker = Components.interfaces.nsIFilePicker;
     var fp = Components.classes["@mozilla.org/filepicker;1"].createInstance(nsIFilePicker);
 
@@ -16,10 +17,10 @@ function saveDialog(classname, extension) {
                  .createInstance(Components.interfaces.nsIFileOutputStream);
     foStream.init(thefile, 0x02 | 0x08 | 0x20, 0664, 0); 
     return {name: thefile, stream: foStream};
-}
+  },
 
-function saveDOC() {
-    var file = saveDialog("Word document", "doc");
+  saveDOC: function () {
+    var file = Songbee.Export.saveDialog("Word document", "doc");
     if (!file) return;
     // We cheat, using the hidden iframe trick.
     var save = document.getElementById("save").contentDocument;
@@ -36,26 +37,26 @@ function saveDOC() {
     song_place.innerHTML = "";
     file.stream.close();
     alert("Saved "+file.name.leafName);
-}
+  },
 
-function export_songs () {
-    var file = saveDialog("Songbee library file", "songbee");
+  exportSongs: function  () {
+    var file = Songbee.Export.saveDialog("Songbee library file", "songbee");
     if (!file) return;
 
     var lib = document.implementation.createDocument(null, "songs", null);
-    Song.retrieveAll(function(song) { 
+    Songbee.Song.retrieveAll(function(song) { 
         lib.documentElement.appendChild(song.xmlDOM().documentElement);
     });
     var ser = new XMLSerializer(); 
     ser.serializeToStream(lib, file.stream, "");
     file.stream.close();
     alert("Saved "+file.name.leafName);
-}
+  },
 
-function csvQuote(x) { return '"'+x.replace(/"/g, '""')+'"'; }
+  export_songreport: function() {
+    var csvQuote = function (x) { return '"'+x.replace(/"/g, '""')+'"'; }
 
-function export_songreport() {
-    var file = saveDialog("Comma-separated variable file", "csv");
+    var file = Songbee.Export.saveDialog("Comma-separated variable file", "csv");
     if (!file) return;
     var header = '"Title","First line","Play count"\n';
     file.stream.write(header, header.length);
@@ -67,4 +68,5 @@ function export_songreport() {
     });
     file.stream.close();
     alert("Saved "+file.name.leafName);
-}
+  }
+};

@@ -1,4 +1,16 @@
 var Songbee = {
+  preferences: function () { Songbee.Utilities.windowOpener("preferences"); },
+  about: function () { Songbee.Utilities.windowOpener("about-window"); },
+  import: function () { Songbee.Utilities.windowOpener("import"); },
+
+  describePlaylist: function(playlist) {
+    var pldesc = $("#pl"+playlist.id()+"desc");
+    pldesc.empty();
+    var description = [];
+    playlist.items( function (item) { description.push(item.title()); } );
+    pldesc.text(description.join(" | "));    
+  },
+
   runFixups: function() {
     for (var a in Songbee.ItemTypes) {
         if (Songbee.ItemTypes[a].fixups) Songbee.ItemTypes[a].fixups();
@@ -53,3 +65,4 @@ supportedTypes.forEach(function(type) {
 /* Everyone gets these... */
 Songbee.Utilities.loadJSFile("js/jquery.min.js", this);
 Songbee.Utilities.loadJSFile("js/songbee-sql.js", Songbee);
+Songbee.Utilities.loadJSFile("js/export.js", Songbee);

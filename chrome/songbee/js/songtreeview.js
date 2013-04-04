@@ -58,9 +58,9 @@ function songTreeView()
             var sql=  "SELECT * FROM song "+whereclause+" ORDER BY "+orderclause+" "+limitclause
             var res;
             if (whereclause)
-                res = Songbee.SQL.exec(sql, Song, null, ["%"+this.searchText+"%"]);
+                res = Songbee.SQL.exec(sql, Songbee.Song, null, ["%"+this.searchText+"%"]);
             else 
-                res = Songbee.SQL.exec(sql, Song);
+                res = Songbee.SQL.exec(sql, Songbee.Song);
             this.cacheRow = res[0];
             this.cacheRowNum = row;
         }
@@ -96,7 +96,7 @@ function updatePreview() {
 
     var sid = selectedSong();
     if (!sid) return;
-    var song = Song.retrieve(sid);
+    var song = Songbee.Song.retrieve(sid);
     var frag = transformDOM(song.xmlDOM(), stylesheet, preview);
     song_place.appendChild(frag);
 }
