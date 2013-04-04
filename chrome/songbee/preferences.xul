@@ -15,10 +15,10 @@
   minwidth="500"
   xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
   onload="fillFontMenu(document.getElementById('.line.font-family'));addUserStylesheet(document.getElementById('preview').contentDocument);slowlyfillvalues();">
-<script src="chrome://songbee/content/dom-css.js"/>
+<script src="chrome://songbee/content/js/dom-css.js"/>
 <script src="chrome://songbee/content/playitemtypes/playitemtypes.js"/>
-<script src="chrome://songbee/content/songbee-sql.js"/>
-<script src="chrome://songbee/content/preferences.js"/>
+<script src="chrome://songbee/content/js/songbee-sql.js"/>
+<script src="chrome://songbee/content/js/preferences.js"/>
 <keyset>
   <key id="close_cmd" keycode="VK_ESCAPE" oncommand="window.close();"/>
 </keyset>

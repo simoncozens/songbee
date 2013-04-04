@@ -4,8 +4,8 @@
 <window
     xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
     <script src="chrome://songbee/content/playitemtypes/playitemtypes.js"/>
-<script src="chrome://songbee/content/songbee-sql.js"/>
-<script src="chrome://songbee/content/import.js"/>
+<script src="chrome://songbee/content/js/songbee-sql.js"/>
+<script src="chrome://songbee/content/js/import.js"/>
     <vbox>
       <description> Pick file for uploading</description>
       <box class="fileinput" id="file"/>

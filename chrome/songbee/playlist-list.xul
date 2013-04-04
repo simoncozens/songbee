@@ -14,8 +14,8 @@
         minheight="300">
 
 <script src="chrome://songbee/content/playitemtypes/playitemtypes.js"/>
-<script src="chrome://songbee/content/songbee-sql.js"/>
-<script src="chrome://songbee/content/export.js"/>
+<script src="chrome://songbee/content/js/songbee-sql.js"/>
+<script src="chrome://songbee/content/js/export.js"/>
 <toolbox>
   <commandset id="main-commands">
       <command id="cmd:quit" oncommand="quit()"/>

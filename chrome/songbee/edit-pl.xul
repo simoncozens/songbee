@@ -17,11 +17,11 @@ onmouseup="endDrag()"
   minheight="200" minwidth="500"
   xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
 <script src="chrome://songbee/content/playitemtypes/playitemtypes.js"/>
-<script src="chrome://songbee/content/songbee-sql.js"/>
-<script src="chrome://songbee/content/xslt.js"/>
-<script src="chrome://songbee/content/songtreeview.js"/>
-<script src="chrome://songbee/content/findBar.js"/>
-<script src="chrome://songbee/content/export.js"/>
+<script src="chrome://songbee/content/js/songbee-sql.js"/>
+<script src="chrome://songbee/content/js/xslt.js"/>
+<script src="chrome://songbee/content/js/songtreeview.js"/>
+<script src="chrome://songbee/content/js/findBar.js"/>
+<script src="chrome://songbee/content/js/export.js"/>
 <keyset>
   <key id="close_cmd" keycode="VK_ESCAPE" oncommand="escapeOut();"/>
   <key id="focus_search" key="f" modifiers="shift any accel" oncommand="document.getElementById('find-field').focus()"/>
