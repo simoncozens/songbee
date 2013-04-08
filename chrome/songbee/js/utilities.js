@@ -6,7 +6,9 @@ var Utilities = {
       .getService(Components.interfaces.mozIJSSubScriptLoader);
     Songbee.Utilities.jsdump("Loading chrome://songbee/content/"+path);
     mozIJSSubScriptLoader.loadSubScript("chrome://songbee/content/"+path, context, "UTF-8");
-  },  
+  },
+
+  localisedString: function (key) { return document.getElementById("strings").getString(key); },
 
   windowOpener: function (name, args) {
     if (!args) {args = [];}

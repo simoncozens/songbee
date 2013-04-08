@@ -213,19 +213,19 @@ Playlist.prototype.toLI = function () {
   var worship = document.createElement("button");
   worship.setAttribute("id", "worship"+this.id());
   worship.setAttribute("oncommand", "worship("+this.id()+")");
-  worship.setAttribute("label", "&playlistList.worship;");
+  worship.setAttribute("label", Songbee.Utilities.localisedString("worship"));
   li.appendChild(worship);
 
   var edit = document.createElement("button");
   edit.setAttribute("id", "edit"+this.id());
   edit.setAttribute("oncommand", "edit_pl("+this.id()+")");
-  edit.setAttribute("label", "&songbee.edit;");
+  edit.setAttribute("label", Songbee.Utilities.localisedString("edit"));
   li.appendChild(edit);
 
   var delbut = document.createElement("button");
   delbut.setAttribute("id", "delete"+this.id());
   delbut.setAttribute("oncommand", "delete_pl("+this.id()+")");
-  delbut.setAttribute("label", "&songbee.delete;");
+  delbut.setAttribute("label", Songbee.Utilities.localisedString("delete"));
   li.appendChild(delbut);
 
   return li;

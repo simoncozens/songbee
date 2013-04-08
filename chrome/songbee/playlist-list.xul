@@ -13,8 +13,11 @@
         minwidth="500"
         minheight="300">
 
+<stringbundleset id="stringbundleset">
+<stringbundle id="strings" src="chrome://songbee/locale/songbee.properties"/>
+</stringbundleset>
+
 <script src="chrome://songbee/content/js/songbee.js"/>
-<script src="chrome://songbee/content/js/export.js"/>
 <toolbox>
   <commandset id="main-commands">
       <command id="cmd:quit" oncommand="Songbee.Utilities.quit()"/>
