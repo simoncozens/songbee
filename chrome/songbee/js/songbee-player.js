@@ -5,7 +5,7 @@ var htmlNS = "http://www.w3.org/1999/xhtml";
 var pausedColor = "#dddd00";
 var exposedColor = "#00dddd";
 var blankColor = "";
-var allowScrollBackUp = 0; // is a matter of taste
+var allowScrollBackUp = 1; // is a matter of taste
 
 var state = {
     paused: 0,
