@@ -8,7 +8,8 @@ Songbee.ItemTypes.bible = {
         var result = { catalog: buildCatalog() };
         window.openDialog("chrome://songbee/content/playitemtypes/bible/choosepassage.xul", "", "chrome, dialog, modal, resizable=no", result).focus();
         if (!result.passage) return;
-        var obj = { passage: result.passage, version: result.version, db: result.catalog[result.version].target };
+        Songbee.Utilities.jsdump("Result "+result.version+ " Cat file "+result.catalog[result.version]);
+        var obj = { passage: result.passage, version: result.version, db: result.catalog[result.version].path };
         addToPlaylist(null, "bible", JSON.stringify(obj), "Bible passage: "+obj.passage+" ("+obj.version+")");
     },
     title: function () {
@@ -86,10 +87,10 @@ function getVersionName(file) {
 function verseText(reference, version) {
     var file = Components.classes['@mozilla.org/file/local;1']  
                .createInstance(Components.interfaces.nsILocalFile);  
-    jsdump(version);
+    Songbee.Utilities.jsdump(version);
     file.initWithPath(version);  
     var handle = storageService.openDatabase(file);
-    jsdump(handle);
+    Songbee.Utilities.jsdump(handle);
     if (!handle) return "";
     var iter = reference.iterator();
     var sql = "SELECT content FROM bible WHERE book = (?1) AND chapter = (?2) AND verse = (?3)";

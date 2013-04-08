@@ -99,7 +99,7 @@ function databaseClass (where, table, cols) {
         Songbee.SQL.doSQLStatement("DELETE FROM "+table+" WHERE id="+this.id());
     }
     where.prototype.set = function (name, val) {
-        doSQLStatement("UPDATE "+table+" SET "+name+" = (?1) WHERE id="+this.id(), [val]);
+        Songbee.SQL.doSQLStatement("UPDATE "+table+" SET "+name+" = (?1) WHERE id="+this.id(), [val]);
         this["_"+name] = val;
     }
 
@@ -109,7 +109,7 @@ function databaseClass (where, table, cols) {
         var cc = "INSERT INTO "+table+" ("+cols.join(", ")+") VALUES (";
         for (var i=1;  i <= cols.length; i++) { cc += "(?"+i+"), "; }
         cc = cc.replace(/, $/, ")");
-        doSQLStatement(cc, values);
+        Songbee.SQL.doSQLStatement(cc, values);
         return where.retrieve(auto_increment_value());
     }
 };
