@@ -29,6 +29,14 @@
             <label>Image</label> 
             <box class="fileinput" onchange="setbackground(this)" id="filebox"/>
             <textbox id="body.background-image" hidden="true"/>
+            <label control="body.background-size">Background size</label>
+            <menulist id="body.background-size">
+                <menupopup>
+                    <menuitem label="Auto" value="auto"/>
+                    <menuitem label="Cover" value="cover"/>
+                    <menuitem label="Contain" value="contain"/>
+                </menupopup>
+            </menulist>
             <button label="Clear" oncommand="setbackground(null)"/>
             </vbox>
             <html:h2> Text </html:h2>

@@ -24,15 +24,17 @@ function fillvalues(which) {
             var selector = rule.selectorText;
             var formElem = findElem(selector + "." + thing );
             if (!formElem) {return}
-            //jsdump("Looking for an element for "+selector+"."+thing);
+            Songbee.Utilities.jsdump("Looking for an element for "+selector+"."+thing);
             var domname = domNameFor(thing);
-            //jsdump("value is "+rule.style[domname]);
+            Songbee.Utilities.jsdump("value is "+rule.style[domname]);
             if (formElem.tagName == "colorpicker") 
                 formElem.color = rule.style[domname];
             else
                 formElem.value = rule.style[domname];
-            formElem.onchange = function () { editcss(this); }
     }, which);
+    $("textbox,menulist,colorpicker").change( function () { editcss(this); } );
+    $("menulist").attr("oncommand", "editcss(this)");
+
 }
 
 function domNameFor(css) {
@@ -52,6 +54,7 @@ function findElem (name) {
 
 function editcss(control) {
     var parsedName = control.id.match(/^(.*)\.(.*)$/);
+    Songbee.Utilities.jsdump("Editing "+control.id);
     var style = cssObj();
     var rules = style.cssRules;
     var value = control.color ? control.color : control.value;
