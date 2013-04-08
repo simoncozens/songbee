@@ -92,6 +92,9 @@ function displayItem(item) {
     putItemInDoc(item, windows.projector.document);
     if (item.type() == "song") 
         cleanProjectorWindow(); // Do this as quickly as possible
+    // Fixup height XXX
+    $(windows.projector.document.body).find(".container").css("height", windows.projector.innerHeight+"px");
+
     putItemInDoc(item, windows.thisSong.contentDocument);
     putItemInDoc(nextItem(), windows.nextSong.contentDocument);
 

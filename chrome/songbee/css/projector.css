@@ -8,8 +8,8 @@ BODY {
 }
 
 .content { padding: 15pt; }
-.chorusdiv,.verse,.bridge { position:absolute; width:100% }
-.container { display: table; margin-left: auto; margin-right: auto;}
+.chorusdiv,.verse,.bridge { position:absolute; display:table; width:100% }
+.container { display: table-cell; vertical-align: middle; margin-left: auto; margin-right: auto;}
 .bridge { font-style: italic }
 /* ruby { border: 1px solid red; } */
 .line { font-size: 40pt; font-weight: bold; 
